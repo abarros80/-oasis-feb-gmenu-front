@@ -1,0 +1,57 @@
+.content {
+  width: 90%;
+  margin: 1.4rem auto auto auto;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.title h1 {
+  font-size: 2rem;
+  color:darkgrey;
+}
+
+.table {
+  width: 100%;
+}
+
+.edit {
+  color: rgb(167, 72, 5);
+}
+
+.delete {
+  color: rgb(216, 53, 12);
+  margin-left: 1rem;
+}
+
+.mat-header{
+  width: 10rem;
+
+}
+
+.filhos {
+  color: rgb(27, 23, 20);
+}
+
+form {
+  text-align: left;
+  width: 70%;
+  margin: 2rem auto 0 auto;
+}
+
+.form-element {
+  width: 100%;
+}
+
+.buttons{
+  width: 100%;
+  text-align: start;
+}
+
+button{
+  margin-right: 5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}

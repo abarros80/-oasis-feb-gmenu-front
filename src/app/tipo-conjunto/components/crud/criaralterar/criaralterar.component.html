@@ -1,0 +1,57 @@
+
+<div class="content">
+  <div class="title">
+    <h1>{{ accao }}</h1>
+  </div>
+
+  <form [formGroup]="formConjunto" (ngSubmit)="onSubmit" class="form-container">
+    <mat-card>
+
+
+      <mat-card-content>
+
+      <div class="row">
+        <div class="col-md-12">
+          <mat-form-field class="form-element" >
+            <input formControlName="nome" matInput  placeholder="Nome Grupo">
+            <mat-error *ngIf="getNome.invalid && (getNome.dirty || getNome.touched)">
+              <span *ngIf="getNome.errors.required">Nome is required.</span>
+              <span *ngIf="getNome.errors.minlength">Nome must be at least 3 characters long.</span>
+              <span *ngIf="getNome.errors.maxlength">Nome must be at least 10 characters long.</span>
+              <span *ngIf="getNome.errors.forbiddenName">Nome cannot be Bob..</span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-md-12">
+          <p><mat-checkbox formControlName="activo">Ativo</mat-checkbox></p>
+        </div>
+      </div>
+
+      </mat-card-content>
+      <mat-card-actions class="buttons">
+        <button (click)="onSubmit()" mat-raised-button color="primary" >{{ accao }}</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+
+  <!--div class="jumbotron">
+    <p>
+      Form Status: {{ formConjunto.status }}
+    </p>
+  </div -->
+
+  <!--div class="jumbotron">
+    <p>
+      Form Value: {{ formConjunto.value | json }}
+    </p>
+  </div -->
+
+
+
+  </div>
+
+
