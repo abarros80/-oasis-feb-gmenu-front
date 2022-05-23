@@ -6,9 +6,9 @@ import { PaginaNaoEncontradoComponent } from './my-shared/modules/components/pag
 const routes: Routes = [
 
 
-  { path: 'guest', loadChildren: () => import('./guest/guest.module').then(m => m.GuestModule) },
+  { path: 'guest', loadChildren: () => import('./modules/guest/guest.module').then(m => m.GuestModule) },
 
-  { path: 'oa-admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
+  { path: 'oa-admin', loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule) },
 
 
 

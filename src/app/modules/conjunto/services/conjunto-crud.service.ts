@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { catchError, map, take, tap, delay } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 
-import { ApiCrudService } from '../../my-core/services/api-crud.service';
+import { ApiCrudService } from '../../../my-core/services/api-crud.service';
 
 import { Conjunto } from '../models/conjunto';
 

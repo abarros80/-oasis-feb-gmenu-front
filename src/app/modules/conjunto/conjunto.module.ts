@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 
-import { WebSharedModule } from '../my-shared/modules/web-shared/web-shared.module';
-import { MaterialSharedModule } from '../my-shared/modules/material-shared/material-shared.module';
+import { WebSharedModule } from '../../my-shared/modules/web-shared/web-shared.module';
+import { MaterialSharedModule } from '../../my-shared/modules/material-shared/material-shared.module';
 
 
-import { TipoConjuntoRoutingModule } from './tipo-conjunto-routing.module';
 
-import { TipoConjuntoComponent } from './tipo-conjunto.component';
+import { ConjuntoRoutingModule } from './conjunto-routing.module';
+
+import { ConjuntoComponent } from './conjunto.component';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
 import { ListarComponent } from './components/crud/listar/listar.component';
 import { ApagarComponent } from './components/crud/apagar/apagar.component';
@@ -14,32 +15,28 @@ import { CriaralterarComponent } from './components/crud/criaralterar/criaralter
 import { DetalheComponent } from './components/crud/detalhe/detalhe.component';
 import { ResumeComponent } from './components/resume/resume.component';
 
-import { TipoConjuntoCrudService } from './services/tipo-conjunto-crud.service';
-import { ListarfilhosComponent } from './components/listarfilhos/listarfilhos.component';
-import { ConjuntoModule } from '../conjunto/conjunto.module';
 
+import { ConjuntoCrudService } from './services/conjunto-crud.service';
 
 
 
 @NgModule({
   declarations: [
-    TipoConjuntoComponent,
+    ConjuntoComponent,
     MainMenuComponent,
     ListarComponent,
     ApagarComponent,
     CriaralterarComponent,
     DetalheComponent,
-    ResumeComponent,
-    ListarfilhosComponent
+    ResumeComponent
   ],
   imports: [
     WebSharedModule,
     MaterialSharedModule,
-    TipoConjuntoRoutingModule,
-    ConjuntoModule
+    ConjuntoRoutingModule
   ],
   providers: [
-    TipoConjuntoCrudService
+    ConjuntoCrudService
   ]
 })
-export class TipoConjuntoModule { }
+export class ConjuntoModule { }

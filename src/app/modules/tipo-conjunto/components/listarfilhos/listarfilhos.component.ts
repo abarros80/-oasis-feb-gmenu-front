@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ConjuntoCrudService } from './../../../conjunto/services/conjunto-crud.service';
-import { Conjunto } from './../../../conjunto/models/conjunto';
+import { ConjuntoCrudService } from './../../../../modules/conjunto/services/conjunto-crud.service';
+import { Conjunto } from './../../../../modules/conjunto/models/conjunto';
 
 
 import { map, tap } from 'rxjs/operators';

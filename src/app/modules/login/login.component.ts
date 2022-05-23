@@ -3,8 +3,8 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { map, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
-import { LoginService } from '../my-core/services/login.service';
-import { Login } from '../my-shared/models/login';
+import { LoginService } from '../../my-core/services/login.service';
+import { Login } from '../../my-shared/models/login';
 
 
 @Component({
