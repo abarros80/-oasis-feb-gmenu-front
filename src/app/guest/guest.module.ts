@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { WebSharedModule } from '../my-shared/modules/web-shared/web-shared.module';
+import { MaterialSharedModule } from '../my-shared/modules/material-shared/material-shared.module';
 
 import { GuestRoutingModule } from './guest-routing.module';
 import { GuestComponent } from './guest.component';
@@ -10,7 +11,8 @@ import { GuestComponent } from './guest.component';
     GuestComponent
   ],
   imports: [
-    CommonModule,
+    WebSharedModule,
+    MaterialSharedModule,
     GuestRoutingModule
   ]
 })

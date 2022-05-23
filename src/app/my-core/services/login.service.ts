@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Router } from '@angular/router';
 
 import { environment } from 'src/environments/environment.prod';
-import { Login } from '../models/login';
+import { Login } from '../../my-shared/models/login';
 
 
 const httpOptions = {
@@ -16,9 +16,7 @@ const httpOptions = {
   })
 };
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class LoginService {
 
   //headers = new HttpHeaders().set('Content-Type', 'application/json');

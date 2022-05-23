@@ -9,9 +9,6 @@ import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [],
-  imports: [
-
-  ],
   exports: [
     CommonModule,
     HttpClientModule,

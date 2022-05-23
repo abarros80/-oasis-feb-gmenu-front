@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { LoginService } from '../login/services/login.service';
+import { LoginService } from './login.service';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+
+@Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
 
   constructor(private authenticationService: LoginService) { }
@@ -17,6 +16,8 @@ export class HttpInterceptorService implements HttpInterceptor {
     let aaaa: boolean = this.authenticationService.isUserLoggedIn();
     sessionStorage.getItem("authenticatedUser")
 
+    console.log("HttpInterceptorService, username: ", this.authenticationService.username);
+    console.log("HttpInterceptorService,  password: ", this.authenticationService.password);
     //console.log("Intercept isUserLoggedIn? : ", aaaa);
     //console.log("Intercept isUserLoggedIn - USER_NAME_SESSION_ATTRIBUTE_NAME : ", sessionStorage.getItem("authenticatedUser"));
     //console.log("Intercept isUserLoggedIn - USER_PASSWD_SESSION_ATTRIBUTE_NAME : ", sessionStorage.getItem("authenticatedUserPWD"));

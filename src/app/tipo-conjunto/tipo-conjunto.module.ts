@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
-import { WebSharedModule } from '../shared/web-shared/web-shared.module';
-import { MaterialSharedModule } from '../shared/material-shared/material-shared.module';
+import { WebSharedModule } from '../my-shared/modules/web-shared/web-shared.module';
+import { MaterialSharedModule } from '../my-shared/modules/material-shared/material-shared.module';
 
 
 import { TipoConjuntoRoutingModule } from './tipo-conjunto-routing.module';
@@ -16,6 +16,7 @@ import { ResumeComponent } from './components/resume/resume.component';
 
 import { TipoConjuntoCrudService } from './services/tipo-conjunto-crud.service';
 import { ListarfilhosComponent } from './components/listarfilhos/listarfilhos.component';
+import { ConjuntoModule } from '../conjunto/conjunto.module';
 
 
 
@@ -32,10 +33,10 @@ import { ListarfilhosComponent } from './components/listarfilhos/listarfilhos.co
     ListarfilhosComponent
   ],
   imports: [
-    TipoConjuntoRoutingModule,
+    WebSharedModule,
     MaterialSharedModule,
-    WebSharedModule
-
+    TipoConjuntoRoutingModule,
+    ConjuntoModule
   ],
   providers: [
     TipoConjuntoCrudService

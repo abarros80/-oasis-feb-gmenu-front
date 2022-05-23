@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { PaginaNaoEncontradoComponent } from './components/pagina-nao-encontrado/pagina-nao-encontrado.component';
-import { InicioComponent } from './components/inicio/inicio.component';
+import { PaginaNaoEncontradoComponent } from './my-shared/modules/components/pagina-nao-encontrado/pagina-nao-encontrado.component';
 
 const routes: Routes = [
 

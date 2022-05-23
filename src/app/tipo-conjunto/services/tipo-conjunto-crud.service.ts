@@ -3,12 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { catchError, map, take, tap, delay } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 
-import { ApiCrudService } from './../../services/api-crud.service';
+import { ApiCrudService } from '../../my-core/services/api-crud.service';
 import { TipoConjunto } from '../models/tipo-conjunto';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class TipoConjuntoCrudService  extends  ApiCrudService<TipoConjunto>{
 
   constructor(protected override  http: HttpClient) {

@@ -25,9 +25,6 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [],
-  imports: [
-
-  ],
   exports: [
     MatToolbarModule,
     MatSidenavModule,
@@ -45,7 +42,6 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatButtonModule,
     MatCheckboxModule,
     MatSnackBarModule
-
   ]
 })
 export class MaterialSharedModule { }
