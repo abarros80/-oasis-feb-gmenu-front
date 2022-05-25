@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { WebSharedModule } from '../../my-shared/modules/web-shared/web-shared.module';
 import { MaterialSharedModule } from '../../my-shared/modules/material-shared/material-shared.module';
 
+import { ComponentsSharedModule } from '../../my-shared/modules/components-shared/components-shared.module';
+
 
 import { TipoConjuntoRoutingModule } from './tipo-conjunto-routing.module';
 
@@ -14,9 +16,13 @@ import { CriaralterarComponent } from './components/crud/criaralterar/criaralter
 import { DetalheComponent } from './components/crud/detalhe/detalhe.component';
 import { ResumeComponent } from './components/resume/resume.component';
 
+import { ConjuntoModule } from '../../modules/conjunto/conjunto.module';
+
 import { TipoConjuntoCrudService } from './services/tipo-conjunto-crud.service';
 import { ListarfilhosComponent } from './components/listarfilhos/listarfilhos.component';
-import { ConjuntoModule } from '../../modules/conjunto/conjunto.module';
+
+
+
 
 
 
@@ -36,7 +42,8 @@ import { ConjuntoModule } from '../../modules/conjunto/conjunto.module';
     WebSharedModule,
     MaterialSharedModule,
     TipoConjuntoRoutingModule,
-    ConjuntoModule
+    ConjuntoModule,
+    ComponentsSharedModule
   ],
   providers: [
     TipoConjuntoCrudService

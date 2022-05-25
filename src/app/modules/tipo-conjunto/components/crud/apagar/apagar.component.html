@@ -27,7 +27,8 @@
 
       </mat-card-content>
       <mat-card-actions class="buttons">
-        <button (click)="onSubmit()" mat-raised-button color="primary" >Apagar</button>
+        <button (click)="onSubmit()" mat-raised-button color="primary"  [disabled]="!formConjunto.valid">Apagar</button>
+        <button mat-raised-button type="button" routerLink="../../listar">Cancelar</button>
       </mat-card-actions>
     </mat-card>
   </form>

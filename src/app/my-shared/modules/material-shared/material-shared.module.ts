@@ -21,6 +21,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import {MatCheckboxModule} from '@angular/material/checkbox';
 
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 
 @NgModule({
@@ -41,7 +43,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatNativeDateModule,
     MatButtonModule,
     MatCheckboxModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
   ]
 })
 export class MaterialSharedModule { }

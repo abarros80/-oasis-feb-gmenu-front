@@ -7,13 +7,11 @@ import { TipoConjunto } from './../../../models/tipo-conjunto';
 import { TipoConjuntoCrudService } from '../../../services/tipo-conjunto-crud.service';
 
 
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { map, tap } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-
-import {ErrorStateMatcher} from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DialogoConfirmacaoComponent } from '../../../../../my-shared/modules/components-shared/dialogo-confirmacao/dialogo-confirmacao.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-apagar',
@@ -45,7 +43,8 @@ export class ApagarComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private tipoconjuntoCrudService: TipoConjuntoCrudService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    public matdialog: MatDialog
   ) {}
 
 
@@ -98,18 +97,27 @@ export class ApagarComponent implements OnInit {
       //FAZER UPDATE TCONJUNTO -------
       if(this.formConjunto.value.id){
 
-        if (confirm("Confirma remoção do item??")) {
+        const dialogoReferencia = this.matdialog.open(DialogoConfirmacaoComponent);
+
+        dialogoReferencia.afterClosed().subscribe(resposta => {
+          console.log("valor resposta: ", resposta);
+          if(resposta){
             this.tipoconjuntoCrudService.deleteData(Number(this.formConjunto.value.id)).subscribe(
               () => {
                 this.msgSnackBar("Tipo Conjunto apagado");
                 this.router.navigate(['/oa-admin/gestao/tconjunto/listar']);
               },
               error => {
-                //alert("Erro ao apagar Tipo Conjunto \n"+error);
+                alert("Erro ao apagar Tipo Conjunto \n"+error);
               },
               () => console.log('request completo')
             );
-        }
+
+          }
+
+        });
+
+        //if (confirm("Confirma remoção do item "+this.formConjunto.value.nome+"??")) {}
       }
 
     //FORM INVALIDO
