@@ -25,13 +25,34 @@ export class TipoConjuntoCrudService  extends  ApiCrudService<TipoConjunto>{
       catchError(this.errorMgmt));
   }
 
-
   findByNomeIgnoreCaseOrderByNome(nome: string): Observable<TipoConjunto> {
 
     let url = `${super.getAPIURL}/search/findByNomeIgnoreCaseOrderByNome?nome=${nome}`;
     return this.http.get<TipoConjunto>(url, {headers: super.getheaders}).pipe(
       take(1),
       catchError(this.errorMgmt));
+  }
+
+
+  findByNomeContainingIgnoreCaseAndActivoOrderByNome(nome: string, activo: boolean, page: number, size: number, sort: string, ordem: string): Observable<ResponsePageableTipoConjunto> {
+
+    let myactivo = activo? 1: 0;
+
+    let url = `${super.getAPIURL}/search/findByNomeContainingIgnoreCaseAndActivoOrderByNome?nome=${nome}&activo=${myactivo}&page=${page}&size=${size}&sort=${sort},${ordem}`;
+    return this.http.get<ResponsePageableTipoConjunto>(url, {headers: super.getheaders}).pipe(
+      take(1),
+      catchError(this.errorMgmt));
+  }
+
+
+  findByActivoOrderByNome(activo: boolean, page: number, size: number, sort: string, ordem: string): Observable<ResponsePageableTipoConjunto> {
+    let myactivo = activo? 1: 0;
+
+    let url = `${super.getAPIURL}/search/findByActivoOrderByNome?activo=${myactivo}&page=${page}&size=${size}&sort=${sort},${ordem}`;
+    return this.http.get<ResponsePageableTipoConjunto>(url, {headers: super.getheaders}).pipe(
+      take(1),
+      catchError(this.errorMgmt));
+
   }
 
   findByTipoConjuntoId(id: number): Observable<TipoConjunto> {

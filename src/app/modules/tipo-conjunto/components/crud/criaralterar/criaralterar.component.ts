@@ -1,4 +1,3 @@
-import { environment } from 'src/environments/environment.prod';
 import { Component, OnInit } from '@angular/core';
 
 import { Router, ActivatedRoute } from '@angular/router';
@@ -8,12 +7,8 @@ import { TipoConjunto } from './../../../models/tipo-conjunto';
 import { TipoConjuntoCrudService } from '../../../services/tipo-conjunto-crud.service';
 
 
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { map, tap } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-
-import {ErrorStateMatcher} from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({

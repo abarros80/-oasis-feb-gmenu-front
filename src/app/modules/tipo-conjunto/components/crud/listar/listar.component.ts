@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { map, tap } from 'rxjs/operators';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { TipoConjuntoCrudService } from './../../../services/tipo-conjunto-crud.service';
 import { TipoConjunto } from '../../../models/tipo-conjunto';
@@ -8,6 +8,7 @@ import { ResponsePageableTipoConjunto } from './../../../interfaces/response-pag
 import { MyPages } from '../../../../../my-shared/interfaces-shared/my-pages';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
+import { Observable } from 'rxjs/internal/Observable';
 
 const ELEMENT_DATA: TipoConjunto[] = [
   // {id: 1, nome: 'Hydrogen', tipoConjunto_id: 1, activo: true}
@@ -28,22 +29,23 @@ export class ListarComponent implements OnInit {
   haErroMsg: boolean = false;
   requestCompleto = false;
 
+  carregando: boolean = false;
+
+  //PAGINAÇÃO
   mypages?: MyPages;
 
 
   totalElements: number =0;
-  sizeInicial: number =1;
+  sizeInicial: number =3;
   sort: string ="nome";
   direccaoOrdem: string ="asc";
 
   pageSizeOptions: number[] = [1, 2, 5, 10];
 
-  // MatPaginator Output
   pageEvent?: PageEvent;
 
+  //SORT
   sortEvent?: Sort;
-
-  carregando: boolean = false;
 
   setPageSizeOptions(setPageSizeOptionsInput: string) {
     if (setPageSizeOptionsInput) {
@@ -51,7 +53,17 @@ export class ListarComponent implements OnInit {
     }
   }
 
+  //FILTRO
+  submitted = false;
+
+  //CRIAR FORMULARIO
+  formPesquisa: FormGroup = this.formBuilder.group({
+    nome: [null],
+    activo: [true]
+  });
+
   constructor(
+    private formBuilder: FormBuilder,
     private tipoConjuntoCrudService: TipoConjuntoCrudService
     ) { }
 
@@ -69,9 +81,20 @@ export class ListarComponent implements OnInit {
     this.sort = this.sortEvent? this.sortEvent.active : "nome";
     this.direccaoOrdem = this.sortEvent? this.sortEvent.direction : "asc";
 
-    this.tipoConjuntoCrudService.findAll(pageIndex, pageSize, this.sort, this.direccaoOrdem)
+    let myObservablePesquisa$: Observable<ResponsePageableTipoConjunto>;
 
-    .subscribe(
+    if(this.formPesquisa.value.nome && this.submitted){
+      myObservablePesquisa$ = this.tipoConjuntoCrudService.findByNomeContainingIgnoreCaseAndActivoOrderByNome(this.formPesquisa.value.nome, this.formPesquisa.value.activo, pageIndex, pageSize, this.sort, this.direccaoOrdem)
+
+    }else if(this.submitted){
+      myObservablePesquisa$ = this.tipoConjuntoCrudService.findByActivoOrderByNome(this.formPesquisa.value.activo, pageIndex, pageSize, this.sort, this.direccaoOrdem);
+    }else{
+      myObservablePesquisa$ = this.tipoConjuntoCrudService.findAll(pageIndex, pageSize, this.sort, this.direccaoOrdem);
+    }
+
+
+
+    myObservablePesquisa$.subscribe(
       (data: ResponsePageableTipoConjunto) => {
         console.log('Foi lido os seguintes dados, tipo conjuntos: ', data._embedded.tipoconjuntos);
        this.listaTipoConjunto = data._embedded.tipoconjuntos;
@@ -90,6 +113,19 @@ export class ListarComponent implements OnInit {
       },
       () => { this.requestCompleto = true; }
     );
+
+
+  }
+
+  //ONSUBMIT
+  onSubmit() {
+    this.submitted = true;
+    this.readAll();
+  }
+
+  limparPesquisa() {
+    this.submitted = false;
+    this.formPesquisa.reset();
   }
 
 }
