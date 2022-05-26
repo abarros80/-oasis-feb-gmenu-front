@@ -51,7 +51,8 @@ export class ApiCrudService<T> {
   }
 
   // Get all Data
-  getAllData(): Observable<T[]> {
+  //getAllData(): Observable<T[]> {
+    getAllData(): Observable<T[]> {
     console.log('URL: ', this.API_URL);
     return this.http.get<T[]>( `${this.API_URL}`).pipe(
       //delay(2000), //para remover em produção

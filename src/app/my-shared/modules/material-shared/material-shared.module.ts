@@ -23,6 +23,12 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import {MatDialogModule} from '@angular/material/dialog';
 
+import {MatPaginatorModule} from '@angular/material/paginator';
+
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
+import {MatSortModule} from '@angular/material/sort';
+
 
 
 @NgModule({
@@ -44,7 +50,10 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatButtonModule,
     MatCheckboxModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatSortModule
   ]
 })
 export class MaterialSharedModule { }

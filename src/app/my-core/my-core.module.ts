@@ -5,6 +5,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpInterceptorService } from './services/http-interceptor.service';
 import { ApiCrudService } from './services/api-crud.service';
 import { LoginService } from './services/login.service';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { PaginatorPtIntl } from './services/paginator-pt-intl';
 
 
 
@@ -16,6 +18,10 @@ import { LoginService } from './services/login.service';
       provide: HTTP_INTERCEPTORS,
       useClass: HttpInterceptorService,
       multi: true
+    },
+    {
+      provide: MatPaginatorIntl,
+      useClass: PaginatorPtIntl
     },
     ApiCrudService,
     LoginService
