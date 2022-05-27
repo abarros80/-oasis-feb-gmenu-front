@@ -6,33 +6,34 @@
   <div class="mat-elevation-z8 content-table">
 
     <form [formGroup]="formPesquisa" (ngSubmit)="onSubmit" class="form-container">
-      <mat-card>
-        <mat-card-content>
-        <div class="row">
-          <div class="col-md-12">
+
+      <div class="container"
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutAlign="start center"
+      fxLayoutGap="10px"
+      >
+
+          <div class="item item-1" fxFlex="none">
             <mat-form-field class="form-element" >
               <input formControlName="nome" matInput  placeholder="Nome:">
             </mat-form-field>
           </div>
-        </div>
 
-
-        <div class="row">
-          <div class="col-md-12">
-            <p><mat-checkbox formControlName="activo">Ativo</mat-checkbox></p>
+          <div class="item item-1"fxFlex="none">
+            <mat-checkbox formControlName="activo">Ativo</mat-checkbox>
           </div>
-        </div>
 
-        </mat-card-content>
-        <mat-card-actions class="buttons">
-          <button (click)="onSubmit()" mat-raised-button color="primary" >Pesquisa</button>
-          <button mat-raised-button type="button" (click)="limparPesquisa()"  >Limpar</button>
+          <div class="item item-1"fxFlex="none">
+            <button (click)="onSubmit()" mat-raised-button color="primary" class="mybutton">Pesquisa</button>
+            <button mat-raised-button type="button" (click)="limparPesquisa()"  >Limpar</button>
+          </div>
+          <div class="item item-1"fxFlex></div>
 
-
-
-        </mat-card-actions>
-      </mat-card>
+      </div>
     </form>
+
+
 
 
     <table mat-table [dataSource]="listaTipoConjunto" class="table" matSort (matSortChange)="sortEvent = $event; readAll()">

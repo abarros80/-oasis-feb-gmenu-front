@@ -1,6 +1,16 @@
-.content {
-  width: 90%;
-  margin: 1.4rem auto auto auto;
+.content .form-container {
+  width: 100%;
+  padding-left: 10px;
+  padding-top: 50px;
+
+}
+
+.item{
+  padding: 0px;
+}
+
+.mybutton{
+  margin-right: 10px;
 }
 
 .title {
