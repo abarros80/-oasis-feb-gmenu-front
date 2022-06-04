@@ -1,0 +1,103 @@
+
+<!-- Logo -->
+<div class="container container-logo"
+    fxLayout="column" fxLayoutAlign="center center"
+
+>
+
+    <h1>{{ restNome }}</h1>
+
+    <h3 >Aproveite o fim de tarde sobre a falésia e sobre o mar, acompanhado de uma música e de um agradável cocktail no Bar Panorama.</h3>
+
+</div>
+
+<!-- Contacto -->
+<div class="container container-contacto" fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="space-evenly stretch"   fxLayoutGap="10px"  >
+
+  <div class="item-contacto item" fxLayout="column"  fxLayoutAlign="start center"  fxFlex style="background-color:aqua;" >
+    <span>
+      <mat-icon inline>schedule</mat-icon><br/>
+      {{ restHorario }}
+    </span>
+  </div>
+
+  <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start center" fxFlex style="background-color:rgb(223, 149, 11);">
+    <span >
+      <mat-icon inline>settings_phone</mat-icon><br/>
+      {{ hotelTelefone }}
+    </span>
+  </div>
+
+</div>
+
+<!-- Menu -->
+<div class="container container-menu"
+    fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="10px grid"
+
+    fxLayoutGap.sm="5px grid"
+
+    fxLayout.lt-sm="column"
+    fxLayoutAlign.lt-sm="start"
+    fxLayoutGap.lt-sm="0px"
+>
+
+    <div *ngFor="let onecard of listCardapios" fxFlex="20%" fxLayoutAlign="center center">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>{{ onecard.nomePt }}</mat-card-title>
+          <mat-card-subtitle>{{ onecard.nomeIng }}</mat-card-subtitle>
+          <mat-card-subtitle>{{ onecard.nomeFr }}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="{{ onecard.imagem }}" alt="Praiamar Panorama Tapas">
+      </mat-card>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+<!-- Conteudo 1 -->
+
+<div *ngFor="let itemcardapio of listCardapiosItens" class="container container-conteudo" style="width: 100%;" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly center" >
+
+
+  <!-- Conteudo Grupo-->
+  <div class="conteudo-grupo item item-2" style="width: 100%;" fxLayout="column" fxLayoutAlign="center center"  >
+    <h1>{{itemcardapio.cardapio.nomePt}}</h1>
+    <img src="assets/img/ondinhas.png" alt="Logo Oasis">
+  </div>
+
+
+  <!-- Conteudo Itens Menu-->
+
+
+
+  <div *ngFor="let item of itemcardapio.listaitens" class="conteudo" style="width: 100%; background-color: #f4efea" fxLayout="row" fxLayoutAlign="space-between center" >
+    <div class="conteudo-descricao item item-2" fxLayout="column" fxLayoutAlign="start start"  >
+      <h1>{{item.nomePt}}</h1>
+      <h2>{{item.nomeIng}}</h2>
+      <h3>{{item.nomeFr}}</h3>
+      <p>{{item.descPt}}</p>
+      <p>{{item.descIng}}</p>
+      <p>{{item.descFr}}</p>
+    </div>
+
+    <div class="conteudo-preco item item-2" fxLayout="column" fxLayoutAlign="start end" >
+      <p>
+        {{item.preco}}$00
+      </p>
+    </div>
+  </div>
+
+
+
+</div>
+
+
+
+
+

@@ -5,11 +5,14 @@ import { MyCoreModule } from './my-core/my-core.module';
 
 import { FormsModule } from '@angular/forms';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginModule } from './modules/login/login.module';
 import { ComponentsSharedModule } from './my-shared/modules/components-shared/components-shared.module';
+
+
 
 
 
@@ -23,6 +26,7 @@ import { ComponentsSharedModule } from './my-shared/modules/components-shared/co
     FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+
     LoginModule,
     ComponentsSharedModule
 

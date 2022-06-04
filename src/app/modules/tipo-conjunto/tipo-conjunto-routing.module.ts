@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { TipoConjuntoComponent } from './tipo-conjunto.component';
 
 import { ApagarComponent } from './components/crud/apagar/apagar.component';

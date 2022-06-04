@@ -1,0 +1,139 @@
+.container {
+  margin: 10px;
+}
+
+.container-logo{
+
+  background: url("https://caboverde-praiamar.oasisatlantico.com/wp-content/uploads/sites/27/2019/08/Rest.jpg?id=137") no-repeat center center fixed;
+  background-size: cover; /*Css padrão*/
+  -webkit-background-size: cover; /*Css safari e chrome*/
+  -moz-background-size: cover; /*Css firefox*/
+  -ms-background-size: cover; /*Css IE não use mer#^@%#*/
+  -o-background-size: cover; /*Css Opera*/
+
+  height: 100vh;
+
+  padding: 5px;
+
+}
+
+
+.container-logo h1{
+  font-family: AllerRg, Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif !important;
+
+  color: aliceblue;
+  font-weight:bolder;
+  font-size: 10vmin;
+  line-height: 12vmin;
+  margin-bottom: 15px;
+}
+
+.container-logo h3{
+  font-family: AllerRg, Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif !important;
+  font-weight:bold;
+  color: aliceblue;
+  font-size: 4vmin;
+  line-height: 5vmin;
+  text-align: center;
+}
+
+.item-contacto span{
+  font-family: AllerRg, Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif !important;
+  font-weight:bold;
+  color: aliceblue;
+  font-size: 4vmin;
+  line-height: 5vmin;
+  text-align: center;
+
+}
+
+
+
+.item {
+  border-radius: .2em;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-size: 2em;
+  padding: 1em 1em;
+
+}
+
+.item-menu {
+  background-color: #009169;
+  margin-bottom: 10px;
+}
+
+.conteudo-grupo h1{
+  font-family: AllerRg, Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif !important;
+  font-weight:bold;
+  color: #006068;
+}
+
+.conteudo {
+  margin-bottom: 20px;
+}
+
+
+.conteudo-descricao h1{
+  font-family: AllerRg, Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif !important;
+
+  color: #666666;
+  font-size: 4vmin;
+  line-height: 5vmin;
+
+}
+
+.conteudo-descricao p{
+  font-family: AllerRg, Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif !important;
+
+  color: #939393;
+  font-size: 2vmin;
+  line-height: 3vmin;
+
+}
+
+.conteudo-preco p{
+  font-family: AllerRg, Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif !important;
+
+  color: #666666;
+  font-size: 4vmin;
+  line-height: 5vmin;
+
+}
+
+mat-card{
+  margin-bottom: 10px;
+}
+
+.mat-card-header .mat-card-title{
+  font-size: 1.8vmax;
+}
+
+
+/* XS: lt-sm */
+@media only screen and (max-width: 599px) {
+  .example {background: red;}
+}
+
+/* XS e SM: lt-md */
+@media only screen and (max-width: 959px) {
+  .mat-card-header .mat-card-title{
+    font-size: 1.4vmax;
+  }
+}
+
+/* XS, SM e MD: lt-lg */
+@media only screen and (max-width: 1279px) {
+  .example {background: red;}
+}
+
+/* XS, SM, MD e LG: lt-xl */
+@media only screen and (max-width: 1919px) {
+  .example {background: red;}
+}
+
+/* XS, SM, MD, LG e XL */
+@media only screen and (max-width: 4999px) {
+  .example {background: red;}
+}
+

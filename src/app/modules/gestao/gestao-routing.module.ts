@@ -15,7 +15,9 @@ const routes: Routes = [
 
     { path: 'item', loadChildren: () => import('../item/item.module').then(m => m.ItemModule) },
 
-    { path: 'consulta', loadChildren: () => import('../consulta/consulta.module').then(m => m.ConsultaModule) }
+    { path: 'consulta', loadChildren: () => import('../consulta/consulta.module').then(m => m.ConsultaModule) },
+
+    { path: 'entidades', loadChildren: () => import('../admin/entidades/entidades.module').then(m => m.EntidadesModule) }
 
   ] },
 
