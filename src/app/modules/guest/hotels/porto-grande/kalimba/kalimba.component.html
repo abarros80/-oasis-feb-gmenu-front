@@ -41,14 +41,18 @@
     fxLayoutGap.lt-sm="0px"
 >
 
-    <div *ngFor="let onecard of listCardapios" fxFlex="20%" fxLayoutAlign="center center">
+    <div id="listCardapios" *ngFor="let onecard of listCardapios" fxFlex="20%" fxLayoutAlign="center center">
       <mat-card class="example-card">
         <mat-card-header>
           <mat-card-title>{{ onecard.nomePt }}</mat-card-title>
           <mat-card-subtitle>{{ onecard.nomeIng }}</mat-card-subtitle>
           <mat-card-subtitle>{{ onecard.nomeFr }}</mat-card-subtitle>
         </mat-card-header>
-        <img mat-card-image src="{{ onecard.imagem }}" alt="Praiamar Panorama Tapas">
+
+
+        <a (click)="jumTo(onecard.codigoReduzido)" routerLink="{{ location.path() }}/" fragment="{{ onecard.codigoReduzido }}"><img mat-card-image src="{{ onecard.imagem }}" alt="Praiamar Panorama Tapas"></a>
+
+
       </mat-card>
     </div>
 
@@ -67,7 +71,7 @@
 
   <!-- Conteudo Grupo-->
   <div class="conteudo-grupo item item-2" style="width: 100%;" fxLayout="column" fxLayoutAlign="center center"  >
-    <h1>{{itemcardapio.cardapio.nomePt}}</h1>
+    <h1 id="{{itemcardapio.cardapio.codigoReduzido}}">{{itemcardapio.cardapio.nomePt}}</h1>
     <img src="assets/img/ondinhas.png" alt="Logo Oasis">
   </div>
 
@@ -95,6 +99,13 @@
 
 
 
+</div>
+
+<!--IMAGEM COM LINK PA MENU DOS CARDAPIOS -->
+<div class="icon_search">
+  <a (click)="jumTo('listCardapios')"  routerLink="{{ location.path() }}/" fragment="listCardapios">
+    <img src="https://caboverde-porto-grande.oasisatlantico.com/wp-content/uploads/sites/26/2020/07/icon_menu-1-150x150.png">
+  </a>
 </div>
 
 

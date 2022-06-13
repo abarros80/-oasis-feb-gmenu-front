@@ -109,6 +109,20 @@ mat-card{
   font-size: 1.8vmax;
 }
 
+.icon_search {
+  position: fixed;
+  bottom: 50px;
+  right: 25px;
+  width: 50px;
+  z-index: 100;
+}
+
+.icon_search img{
+  max-width: 50px;
+  width: 20vw;
+
+}
+
 
 /* XS: lt-sm */
 @media only screen and (max-width: 599px) {

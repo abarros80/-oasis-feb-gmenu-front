@@ -1,1 +1,217 @@
-<p>criaralterar works!</p>
+
+  <div class="title content">
+    <h1>{{ accao }}</h1>
+  </div>
+
+
+  <!-- SELECT HOTEL/RESTAURANTE/CARDAPIO-->
+  <div class="container container-contacto" fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="space-evenly stretch"   fxLayoutGap="10px"  >
+
+    <div class="item-contacto item" fxLayout="column"  fxLayoutAlign="start center"  fxFlex >
+
+      <!-- SELECT HOTEL-->
+      <mat-form-field appearance="fill">
+        <mat-label>Hotel</mat-label>
+        <mat-select [formControl]="hoteisControl" required [disabled]="disableHoteis">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let hotel of hoteis" [value]="hotel">
+            {{hotel.nome}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="hoteisControl.hasError('required')">Seleciona um hotel</mat-error>
+      </mat-form-field>
+
+    </div>
+
+    <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start center" fxFlex >
+
+      <mat-form-field appearance="fill">
+        <mat-label>Restaurante</mat-label>
+        <mat-select [formControl]="restaurantesControl" required [disabled]="disableRestaurantes">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let restaurante of restaurantes" [value]="restaurante">
+            {{restaurante.nome}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="restaurantesControl.hasError('required')">Seleciona um restaurante</mat-error>
+      </mat-form-field>
+
+    </div>
+
+    <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start center" fxFlex >
+
+      <mat-form-field appearance="fill">
+        <mat-label>Cardapio</mat-label>
+        <mat-select [formControl]="cardapiosControl" required [disabled]="disableCardapios">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let cardapio of cardapios" [value]="cardapio">
+            {{ cardapio.nome }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="cardapiosControl.hasError('required')">Seleciona um cardapio</mat-error>
+      </mat-form-field>
+
+    </div>
+
+  </div>
+
+
+  <!-- NOME PT/NOME ING/NOME FR-->
+  <div class="container container-contacto" fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="space-evenly stretch"   fxLayoutGap="10px"  >
+
+    <div class="item-contacto item" fxLayout="column"  fxLayoutAlign="start center"  fxFlex  >
+
+      <mat-form-field appearance="fill">
+        <mat-label>Nome PT</mat-label>
+        <input matInput [formControl]="nomePTControl" required>
+        <mat-error *ngIf="nomePTControl.hasError('required')">Seleciona um nome PT</mat-error>
+      </mat-form-field>
+
+    </div>
+
+    <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start center" fxFlex >
+
+      <mat-form-field appearance="fill">
+        <mat-label>Nome ING</mat-label>
+        <input matInput>
+      </mat-form-field>
+
+    </div>
+
+    <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start center" fxFlex >
+
+      <mat-form-field appearance="fill">
+        <mat-label>Nome FR</mat-label>
+        <input matInput>
+      </mat-form-field>
+
+    </div>
+
+  </div>
+
+  <!-- COMPOSICAO PT/COMPOSICAO ING/COMPOSICAO FR-->
+  <div class="container container-contacto" fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="space-evenly stretch"   fxLayoutGap="10px"  >
+
+    <div class="item-contacto item" fxLayout="column"  fxLayoutAlign="start center"  fxFlex  >
+
+      <mat-form-field appearance="fill">
+        <mat-label>Textarea</mat-label>
+        <textarea matInput rows="5" placeholder="Ex. It makes me feel..."></textarea>
+      </mat-form-field>
+
+    </div>
+
+    <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start center" fxFlex >
+
+      <mat-form-field appearance="fill">
+        <mat-label>Textarea</mat-label>
+        <textarea matInput rows="5" placeholder="Ex. It makes me feel..."></textarea>
+      </mat-form-field>
+
+    </div>
+
+    <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start center" fxFlex >
+
+      <mat-form-field appearance="fill">
+        <mat-label>Textarea</mat-label>
+        <textarea matInput rows="5" placeholder="Ex. It makes me feel..."></textarea>
+      </mat-form-field>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- QUANTIDADE/UNIDADE -->
+  <div class="container container-contacto" fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="space-evenly stretch"   fxLayoutGap="10px"  >
+
+    <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start center" fxFlex >
+
+      <mat-form-field appearance="fill">
+        <mat-label>Quantidade</mat-label>
+        <input matInput type="number">
+      </mat-form-field>
+
+    </div>
+
+    <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start center" fxFlex >
+
+      <mat-form-field appearance="fill">
+        <mat-label>Unidade</mat-label>
+        <mat-select value="option1">
+          <mat-option>None</mat-option>
+          <mat-option value="option1">Option 1</mat-option>
+          <mat-option value="option2">Option 2</mat-option>
+          <mat-option value="option3">Option 3</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+
+  </div>
+
+  <!-- PREÇO/ATIVO -->
+  <div class="container container-contacto" fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="space-evenly stretch"   fxLayoutGap="10px"  >
+
+    <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start center" fxFlex >
+
+      <mat-form-field appearance="fill" floatLabel="always" >
+        <mat-label>Preço</mat-label>
+        <input matInput type="number" class="example-right-align" placeholder="0" step="0.01">
+        <span matSuffix >$&nbsp;</span>
+      </mat-form-field>
+
+    </div>
+
+    <div  fxLayout="column" fxLayoutAlign="start end" fxFlex >
+
+
+      <div flex>
+        <mat-checkbox  >Ativar</mat-checkbox >
+
+      </div>
+
+
+
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+  <!-- Menu -->
+  <div class="container container-menu"
+      fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="10px grid"
+
+      fxLayoutGap.sm="5px grid"
+
+      fxLayout.lt-sm="column"
+      fxLayoutAlign.lt-sm="start"
+      fxLayoutGap.lt-sm="0px"
+  >
+
+  <mat-card-actions class="buttons">
+    <button (click)="onSubmit()" mat-raised-button color="primary">Criar</button>
+    <button mat-raised-button type="button" routerLink="../listar" *ngIf="accao == 'Criar'">Cancelar</button>
+    <button mat-raised-button type="button" routerLink="../../listar" *ngIf="accao == 'Editar'">Cancelar</button>
+  </mat-card-actions>
+
+
+  </div>
+
+
+
+
+
+
+
+
+
+

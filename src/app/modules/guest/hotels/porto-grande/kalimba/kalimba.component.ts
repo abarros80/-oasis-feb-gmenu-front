@@ -1,4 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+
+import { ActivatedRoute } from '@angular/router';
+
+import { Location } from '@angular/common';
 import { MediaObserver, MediaChange } from '@angular/flex-layout'
 import { Subscription } from 'rxjs';
 import { HotelCrudService } from '../../../../admin/entidades/hotel/services/hotel-crud.service';
@@ -15,6 +19,7 @@ import { ItemCrudService } from '../../../../admin/entidades/item/services/item-
 import { IResponsePageableItem } from '../../../../admin/entidades/item/interfaces/i-response-pageable-item';
 
 
+
 @Component({
   selector: 'app-kalimba',
   templateUrl: './kalimba.component.html',
@@ -22,19 +27,18 @@ import { IResponsePageableItem } from '../../../../admin/entidades/item/interfac
 })
 export class KalimbaComponent implements OnInit , OnDestroy {
 
+  //Dados tipo layout
+  public mediaSub: Subscription;
+  public deviceXs: boolean = false;
+
+  private ancuraAtual?: Subscription;
+
 
   //DADOS INICIAIS, consoante hotel e restaurante
   private readonly const_hotelID: number = 1;
   private readonly const_hotelACTIVO: boolean = true;
   private readonly const_restauranteID: number = 1;
   private readonly const_restauranteACTIVO: boolean = true;
-
-
-
-
-
-  public mediaSub: Subscription
-  public deviceXs: boolean = false;
 
   //DADOS HOTEL
   public hotelNome?: string;
@@ -60,6 +64,8 @@ export class KalimbaComponent implements OnInit , OnDestroy {
 
 
   constructor(
+    private activatedRoute: ActivatedRoute,
+    public location: Location,
     public mediaObserver: MediaObserver,
     private hotelCrudService: HotelCrudService,
     private restauranteCrudService: RestauranteCrudService,
@@ -70,6 +76,8 @@ export class KalimbaComponent implements OnInit , OnDestroy {
     this.mediaSub = this.mediaObserver.media$.subscribe((result:MediaChange)=>{
       console.log(result.mqAlias);
       this.deviceXs = result.mqAlias === 'xs' ? true : false;
+
+      console.log(this.location.path())
 
     });
    }
@@ -141,10 +149,33 @@ export class KalimbaComponent implements OnInit , OnDestroy {
       () => { console.log("Recebeu dados do Restaurante");}
     );
 
+
+    //ESCUTAR MUDANÇA DE ANCURA/FRAGMENT
+    this.subscreverNosFragment();
+
+  }
+
+
+
+  //DETECTAR MUDANÇA DO FRAGMENT/ANCURA
+  subscreverNosFragment(){
+    this.ancuraAtual = this.activatedRoute.fragment.subscribe((value) => {
+      console.log(value);
+      this.jumTo(value);
+
+    });
+
+  }
+
+  jumTo(section: any){
+    console.log(section);
+    document.getElementById(section)?.scrollIntoView({behavior: 'smooth'});
+
   }
 
   ngOnDestroy(): void {
     this.mediaSub.unsubscribe();
+    this.ancuraAtual?.unsubscribe();
   }
 
 

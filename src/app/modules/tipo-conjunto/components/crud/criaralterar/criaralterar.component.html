@@ -32,13 +32,13 @@
       </div>
 
       </mat-card-content>
+
       <mat-card-actions class="buttons">
         <button (click)="onSubmit()" mat-raised-button color="primary" [disabled]="!formConjunto.valid || !formConjunto.dirty">{{ accao }}</button>
         <button mat-raised-button type="button" routerLink="../listar" *ngIf="accao == 'Criar'">Cancelar</button>
         <button mat-raised-button type="button" routerLink="../../listar" *ngIf="accao == 'Editar'">Cancelar</button>
-
-
       </mat-card-actions>
+
     </mat-card>
   </form>
 

@@ -24,6 +24,8 @@ export class LoginComponent implements OnInit {
 
   login = new Login();
 
+  hide = true;
+
   constructor(
     private formBuilder: FormBuilder,
     private loginService: LoginService,

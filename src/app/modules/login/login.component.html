@@ -3,7 +3,7 @@
     <mat-card>
       <mat-card-title>Login</mat-card-title>
     <mat-card-content>
-    <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+    <form [formGroup]="formLogin">
     <p>
       <mat-form-field>
         <input type="text" matInput placeholder="Username" formControlName="usernameOrEmail">
@@ -17,7 +17,10 @@
 
     <p>
       <mat-form-field>
-        <input type="password" matInput placeholder="Password" formControlName="password">
+        <input matInput [type]="hide ? 'password' : 'text'" matInput placeholder="Password" formControlName="password">
+        <button  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
         <mat-error *ngIf="getPassword.invalid && (getPassword.dirty || getPassword.touched)">
           <span *ngIf="getPassword.errors.required">Password obrigatorio.</span>
           <span *ngIf="getPassword.errors.minlength">Password must be at least 3 characters long.</span>
@@ -31,7 +34,7 @@
     </p>
 
     <div class="button">
-      <button type="submit" mat-button>Login</button>
+      <button (click)="onSubmit()"  mat-raised-button color="primary">Login</button>
     </div>
 
     </form>
