@@ -55,10 +55,20 @@ export class HotelCrudService  extends  ApiCrudService<IHotel> {
       catchError(this.errorMgmt));
   }
 
-  findByActivoOrderByNome(activo: boolean, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableHotel> {
+  findByActivoOrderByNomeActivoPage(activo: boolean, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableHotel> {
     let myactivo = activo? 1: 0;
 
     let url = `${super.getAPIURL}/search/findByActivoOrderByNome?activo=${myactivo}&page=${page}&size=${size}&sort=${sort},${ordem}`;
+    return this.http.get<IResponsePageableHotel>(url, {headers: super.getheaders}).pipe(
+      take(1),
+      catchError(this.errorMgmt));
+
+  }
+
+  findByActivoOrderByNomeActivo(activo: boolean): Observable<IResponsePageableHotel> {
+    let myactivo = activo? 1: 0;
+
+    let url = `${super.getAPIURL}/search/findByActivoOrderByNome?activo=${myactivo}`;
     return this.http.get<IResponsePageableHotel>(url, {headers: super.getheaders}).pipe(
       take(1),
       catchError(this.errorMgmt));

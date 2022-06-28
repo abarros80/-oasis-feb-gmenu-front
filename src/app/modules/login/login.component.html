@@ -3,9 +3,9 @@
     <mat-card>
       <mat-card-title>Login</mat-card-title>
     <mat-card-content>
-    <form [formGroup]="formLogin">
+    <form [formGroup]="formLogin" autocomplete="off">
     <p>
-      <mat-form-field>
+      <mat-form-field appearance="legacy">
         <input type="text" matInput placeholder="Username" formControlName="usernameOrEmail">
         <mat-error *ngIf="getUsernameOrEmail.invalid && (getUsernameOrEmail.dirty || getUsernameOrEmail.touched)">
           <span *ngIf="getUsernameOrEmail.errors.required">Username obrigatorio.</span>
@@ -16,7 +16,7 @@
     </p>
 
     <p>
-      <mat-form-field>
+      <mat-form-field appearance="legacy">
         <input matInput [type]="hide ? 'password' : 'text'" matInput placeholder="Password" formControlName="password">
         <button  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>

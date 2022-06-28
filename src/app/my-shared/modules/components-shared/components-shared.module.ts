@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 
-import { InicioComponent } from './inicio/inicio.component';
-import { PaginaNaoEncontradoComponent } from './pagina-nao-encontrado/pagina-nao-encontrado.component';
 import { WebSharedModule } from '../web-shared/web-shared.module';
 import { MaterialSharedModule } from '../material-shared/material-shared.module';
+
+import { InicioComponent } from './inicio/inicio.component';
+import { PaginaNaoEncontradoComponent } from './pagina-nao-encontrado/pagina-nao-encontrado.component';
 import { DialogoConfirmacaoComponent } from './dialogo-confirmacao/dialogo-confirmacao.component';
 
 
@@ -18,7 +19,6 @@ import { DialogoConfirmacaoComponent } from './dialogo-confirmacao/dialogo-confi
   ],
   imports: [
     WebSharedModule,
-    MaterialSharedModule,
     MaterialSharedModule
   ],
   exports: [

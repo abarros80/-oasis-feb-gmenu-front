@@ -12,9 +12,4 @@ export class CriaralterarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
-
-
-
-
 }

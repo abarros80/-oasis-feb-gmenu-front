@@ -31,6 +31,8 @@ import {MatSortModule} from '@angular/material/sort';
 
 
 
+
+
 @NgModule({
   declarations: [],
   exports: [
@@ -54,6 +56,7 @@ import {MatSortModule} from '@angular/material/sort';
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatSortModule
+
   ]
 })
 export class MaterialSharedModule { }

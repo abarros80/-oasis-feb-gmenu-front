@@ -9,7 +9,9 @@ const routes: Routes = [
   { path: 'item', loadChildren: () => import('./item/item.module').then(m => m.ItemModule) },
   { path: 'restaurante', loadChildren: () => import('./restaurante/restaurante.module').then(m => m.RestauranteModule) },
   { path: 'cardapio', loadChildren: () => import('./cardapio/cardapio.module').then(m => m.CardapioModule) },
-  { path: 'titem', loadChildren: () => import('./titem/titem.module').then(m => m.TitemModule) }
+  { path: 'titem', loadChildren: () => import('./titem/titem.module').then(m => m.TitemModule) },
+  { path: 'user', loadChildren: () => import('./user/user.module').then(m => m.UserModule) },
+  { path: 'role', loadChildren: () => import('./role/role.module').then(m => m.RoleModule) }
 ];
 
 @NgModule({

@@ -21,7 +21,9 @@ export class LoginService {
 
   //headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-  USER_NAME_SESSION_ATTRIBUTE_NAME = 'authenticatedUser'
+
+  USER_ID_SESSION_ATTRIBUTE_NAME = 'authenticatedUserID'
+  USER_NAME_SESSION_ATTRIBUTE_NAME = 'authenticatedUserName'
   USER_PASSWD_SESSION_ATTRIBUTE_NAME = 'authenticatedUserPWD'
 
   public username: String | null  = "";
@@ -72,12 +74,15 @@ export class LoginService {
     return 'Basic ' + window.btoa(username + ":" + password)
   }
 
-  registerSuccessfulLogin(username: string, password: string) {
+  registerSuccessfulLogin(userid:number, username: string, password: string) {
+    sessionStorage.setItem(this.USER_ID_SESSION_ATTRIBUTE_NAME, userid+"");
     sessionStorage.setItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME, username);
     sessionStorage.setItem(this.USER_PASSWD_SESSION_ATTRIBUTE_NAME, password)
+
   }
 
   logout() {
+    sessionStorage.removeItem(this.USER_ID_SESSION_ATTRIBUTE_NAME);
     sessionStorage.removeItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME);
     sessionStorage.removeItem(this.USER_PASSWD_SESSION_ATTRIBUTE_NAME);
     this.username = null;
@@ -95,6 +100,11 @@ export class LoginService {
     let user = sessionStorage.getItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME)
     if (user === null) return ''
     return user
+  }
+  getLoggedInID() {
+    let id = sessionStorage.getItem(this.USER_ID_SESSION_ATTRIBUTE_NAME)
+    if (id === null) return ''
+    return id
   }
 
 }

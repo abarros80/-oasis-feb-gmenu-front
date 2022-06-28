@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from '../../my-core/services/login.service';
 import { Login } from '../../my-shared/models/login';
+import { UserCrudService } from '../admin/entidades/user/services/user-crud.service';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private loginService: LoginService,
+    private userCrudService: UserCrudService,
     private route: ActivatedRoute,
     private router: Router,
   ) { }
@@ -63,21 +65,42 @@ export class LoginComponent implements OnInit {
 
         this.loginService.login(this.crearObjecto()).subscribe(
           success => {
-            //alert("Sucesso");
-            //console.log('sucesso')
-            this.haErroMsg = false;
-            this.erroMsg = "";
-            this.loginService.registerSuccessfulLogin(this.formLogin.value.usernameOrEmail, this.formLogin.value.password);
-            this.router.navigate(['/oa-admin/gestao']);
+
+
+            this.userCrudService.findByUsername(this.formLogin.value.usernameOrEmail).subscribe(
+              success => {
+
+                //alert("Sucesso");
+                //console.log('sucesso')
+                this.haErroMsg = false;
+                this.erroMsg = "";
+                this.loginService.registerSuccessfulLogin(success.id, this.formLogin.value.usernameOrEmail, this.formLogin.value.password);
+                this.router.navigate(['/oa-admin/gestao']);
+
+              },
+              error => {
+
+                this.haErroMsg = true;
+                this.erroMsg ="Não foi possivel fazer login";
+                //alert("Erro ao inserir Tipo Conjunto \n"+error);
+                //console.error('error')
+
+              },
+
+              () => console.log('request completo1')
+            );
+
           },
           error => {
+
             this.haErroMsg = true;
             this.erroMsg ="Não foi possivel fazer login";
             //alert("Erro ao inserir Tipo Conjunto \n"+error);
             //console.error('error')
+
           },
 
-          () => console.log('request completo')
+          () => console.log('request completo2')
         );
 
         // Usar o método reset para limpar os controles na tela
