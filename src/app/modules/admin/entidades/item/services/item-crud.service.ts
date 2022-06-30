@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, take, tap, delay } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 
@@ -8,6 +8,7 @@ import { ApiCrudService } from '../../../../../my-core/services/api-crud.service
 import { IItem } from '../interfaces/i-item';
 import { IResponsePageableItem } from '../interfaces/i-response-pageable-item';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,6 +16,16 @@ export class ItemCrudService extends  ApiCrudService<IItem> {
 
   constructor(protected override  http: HttpClient) {
     super(http, "itens");
+  }
+
+  // Create
+  createItemFromIReqItem(record: any) {
+    let url = `${super.getAPIURL}`;
+    return this.http.post(url, record,  { headers: super.getheaders })
+      .pipe(
+        take(1), //depois da resposta ele faz unsubscribe automaticamente
+        catchError(this.errorMgmt)
+      );
   }
 
   findById(id: number): Observable<IItem> {
@@ -27,38 +38,42 @@ export class ItemCrudService extends  ApiCrudService<IItem> {
   }
 
   findAll(page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableItem> {
+    console.log("ENTROU");
 
     //http://localhost:8686/xxxxxx?page=0&size=2&sort=nome,asc
 
+
+
+
     let url = `${super.getAPIURL}?page=${page}&size=${size}&sort=${sort},${ordem}`;
-    return this.http.get<IResponsePageableItem>(url, {headers: super.getheaders}).pipe(
+    return this.http.get<IResponsePageableItem>(url, {'headers': super.headers}).pipe(
       delay(2000),
       take(1),
       catchError(this.errorMgmt));
   }
 
-  findByNomeIgnoreCaseOrderByNome(nome: string): Observable<IItem> {
+  findByNomePtIgnoreCaseOrderByNomePt(nome: string): Observable<IItem> {
 
-    let url = `${super.getAPIURL}/search/findByNomeIgnoreCaseOrderByNome?nome=${nome}`;
+    let url = `${super.getAPIURL}/search/findByNomePtIgnoreCaseOrderByNomePt?nome=${nome}`;
     return this.http.get<IItem>(url, {headers: super.getheaders}).pipe(
       take(1),
       catchError(this.errorMgmt));
   }
 
-  findByNomeContainingIgnoreCaseAndActivoOrderByNome(nome: string, activo: boolean, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableItem> {
+  findByNomePtContainingIgnoreCaseAndActivoOrderByNomePt(nome: string, activo: boolean, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableItem> {
 
     let myactivo = activo? 1: 0;
 
-    let url = `${super.getAPIURL}/search/findByNomeContainingIgnoreCaseAndActivoOrderByNome?nome=${nome}&activo=${myactivo}&page=${page}&size=${size}&sort=${sort},${ordem}`;
+    let url = `${super.getAPIURL}/search/findByNomePtContainingIgnoreCaseAndActivoOrderByNomePt?nome=${nome}&activo=${myactivo}&page=${page}&size=${size}&sort=${sort},${ordem}`;
     return this.http.get<IResponsePageableItem>(url, {headers: super.getheaders}).pipe(
       take(1),
       catchError(this.errorMgmt));
   }
 
-  findByActivoOrderByNome(activo: boolean, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableItem> {
+  findByActivoOrderByNomePt(activo: boolean, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableItem> {
     let myactivo = activo? 1: 0;
 
-    let url = `${super.getAPIURL}/search/findByActivoOrderByNome?activo=${myactivo}&page=${page}&size=${size}&sort=${sort},${ordem}`;
+    let url = `${super.getAPIURL}/search/findByActivoOrderByNomePt?activo=${myactivo}&page=${page}&size=${size}&sort=${sort},${ordem}`;
     return this.http.get<IResponsePageableItem>(url, {headers: super.getheaders}).pipe(
       take(1),
       catchError(this.errorMgmt));

@@ -3,207 +3,220 @@
     <h1>{{ accao }}</h1>
   </div>
 
+  <form [formGroup]="formItem" (ngSubmit)="onSubmit">
 
+      <div fxLayout="column" fxLayoutAlign="start stretch" >
 
-  <form [formGroup]="formItem" (ngSubmit)="onSubmit" class="form-container">
+      <!-- SELECT HOTEL/TIPO ITEM-->
+      <div  fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="start stretch"   fxLayoutGap="10px"  >
 
-  <!-- SELECT HOTEL/RESTAURANTE/CARDAPIO-->
-  <div class="container container-contacto" fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="space-evenly stretch"   fxLayoutGap="10px"  >
+        <div class="item-contacto item" fxLayout="column"  fxLayoutAlign="start stretch"  fxFlex >
 
-    <div class="item-contacto item" fxLayout="column"  fxLayoutAlign="start center"  fxFlex >
+          <!-- SELECT HOTEL-->
+          <mat-form-field appearance="fill">
+            <mat-label>Hotel</mat-label>
+            <mat-select formControlName="hotel" required >
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let itemhotel of hoteis" [value]="itemhotel.id">
+                {{itemhotel.nome}}
+              </mat-option>
+            </mat-select>
 
-      <!-- SELECT HOTEL-->
-      <mat-form-field appearance="fill">
-        <mat-label>Hotel</mat-label>
-        <mat-select formControlName="hotel" required [disabled]="disableHoteis">
-          <mat-option>None</mat-option>
-          <mat-option *ngFor="let itemhotel of hoteis" [value]="itemhotel.id">
-            {{itemhotel.nome}}
-          </mat-option>
-        </mat-select>
+            <mat-error *ngIf="getHotel.errors?.required">
+              <span>Seleciona Hotel</span>
+            </mat-error>
 
-        <mat-error *ngIf="getHotel.errors?.required">
-          <span>Seleciona um hotel</span>
-        </mat-error>
+          </mat-form-field>
 
-      </mat-form-field>
+        </div>
 
-    </div>
+        <!-- SELECT TIPO ITEM-->
+        <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start stretch" fxFlex >
 
-    <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start center" fxFlex >
+          <mat-form-field appearance="fill">
+            <mat-label>Tipo de Item</mat-label>
+            <mat-select formControlName="tipoItem" required >
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let _tipoItem of tipoItens" [value]="_tipoItem.id">
+                {{_tipoItem.nome}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="getTipoItem.errors?.required">
+              <span>Seleciona Tipo Item</span>
+            </mat-error>
+          </mat-form-field>
 
-      <mat-form-field appearance="fill">
-        <mat-label>Tipo de Item</mat-label>
-        <mat-select formControlName="tipoItem" required [disabled]="disableTipoItems">
-          <mat-option>None</mat-option>
-          <mat-option *ngFor="let _tipoItem of tipoItems" [value]="_tipoItem.id">
-            {{_tipoItem.nome}}
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="getTipoItem.errors?.required">
-          <span>Seleciona um Tipo Item</span>
-        </mat-error>
-      </mat-form-field>
+        </div>
 
-    </div>
-
-
-
-  </div>
-
-
-  <!-- NOME PT/NOME ING/NOME FR-->
-  <div class="container container-contacto" fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="space-evenly stretch"   fxLayoutGap="10px"  >
-
-    <div class="item-contacto item" fxLayout="column"  fxLayoutAlign="start center"  fxFlex  >
-
-      <mat-form-field appearance="fill">
-        <mat-label>Nome PT</mat-label>
-        <input matInput formControlName="nomePt" required>
-        <mat-error *ngIf="getNomePt.errors?.required">Seleciona um nome PT</mat-error>
-      </mat-form-field>
-
-    </div>
-
-    <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start center" fxFlex >
-
-      <mat-form-field appearance="fill">
-        <mat-label>Nome ING</mat-label>
-        <input matInput formControlName="nomeIng" required>
-        <mat-error *ngIf="getNomeIng.errors?.required">Seleciona um nome ING</mat-error>
-      </mat-form-field>
-
-    </div>
-
-    <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start center" fxFlex >
-
-      <mat-form-field appearance="fill">
-        <mat-label>Nome FR</mat-label>
-        <input matInput formControlName="nomeFr" required>
-        <mat-error *ngIf="getNomeFr.errors?.required">Seleciona um nome FR</mat-error>
-      </mat-form-field>
-
-    </div>
-
-  </div>
-
-  <!-- COMPOSICAO PT/COMPOSICAO ING/COMPOSICAO FR-->
-  <div class="container container-contacto" fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="space-evenly stretch"   fxLayoutGap="10px"  >
-
-    <div class="item-contacto item" fxLayout="column"  fxLayoutAlign="start center"  fxFlex  >
-
-      <mat-form-field appearance="fill">
-        <mat-label>Descrição PT</mat-label>
-        <textarea matInput rows="5" placeholder="..." formControlName="descPt"></textarea>
-        <mat-error *ngIf="getDescPt.errors?.required">Seleciona um nome PT</mat-error>
-      </mat-form-field>
-
-    </div>
-
-    <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start center" fxFlex >
-
-      <mat-form-field appearance="fill">
-        <mat-label>Descrição ING</mat-label>
-        <textarea matInput rows="5" placeholder="..." formControlName="descIng"></textarea>
-        <mat-error *ngIf="getDescIng.errors?.required">Seleciona um nome ING</mat-error>
-      </mat-form-field>
-
-    </div>
-
-    <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start center" fxFlex >
-
-      <mat-form-field appearance="fill">
-        <mat-label>Descrição FR</mat-label>
-        <textarea matInput rows="5" placeholder="..." formControlName="descFr"></textarea>
-        <mat-error *ngIf="getDescFr.errors?.required">Seleciona um nome FR</mat-error>
-      </mat-form-field>
-
-    </div>
-
-  </div>
-
-
-
-  <!-- QUANTIDADE/UNIDADE -->
-  <div class="container container-contacto" fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="space-evenly stretch"   fxLayoutGap="10px"  >
-
-    <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start center" fxFlex >
-
-      <mat-form-field appearance="fill">
-        <mat-label>Quantidade</mat-label>
-        <input matInput formControlName="quantidade" required>
-        <mat-error *ngIf="getQuantidade.errors?.required">Seleciona uma Quantidade</mat-error>
-      </mat-form-field>
-
-    </div>
-
-    <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start center" fxFlex >
-
-      <mat-form-field appearance="fill">
-        <mat-label>Unidade</mat-label>
-        <mat-select formControlName="unidadeMedidaEnum">
-          <mat-option>None</mat-option>
-
-          <mat-option *ngFor="let _tipoEnumUnidade of eUnidadesMedida  | keyvalue" [value]="_tipoEnumUnidade.value">
-            {{_tipoEnumUnidade.value}}
-          </mat-option>
-
-        </mat-select>
-        <mat-error *ngIf="getUnidadeMedidaEnum.errors?.required">
-          <span>Seleciona um unidadeMedidaEnum</span>
-        </mat-error>
-
-      </mat-form-field>
-
-    </div>
-
-  </div>
-
-  <!-- PREÇO/ATIVO -->
-  <div class="container container-contacto" fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="space-evenly stretch"   fxLayoutGap="10px"  >
-
-    <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start center" fxFlex >
-
-      <mat-form-field appearance="fill" floatLabel="always" >
-        <mat-label>Preço</mat-label>
-        <input matInput  type="number" class="example-right-align" placeholder="0" step="0.01" formControlName="preco" required>
-        <span matSuffix >$&nbsp;</span>
-        <mat-error *ngIf="getPreco.errors?.required">Seleciona Preço</mat-error>
-      </mat-form-field>
-
-    </div>
-
-    <div  fxLayout="column" fxLayoutAlign="start end" fxFlex >
-      <div flex>
-        <mat-checkbox formControlName="activo" >Ativar</mat-checkbox >
       </div>
-    </div>
-
-  </div>
 
 
-  <!-- Menu -->
-  <div class="container container-menu"
-      fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="10px grid"
+      <!-- NOME PT/NOME ING/NOME FR-->
+      <div class="container container-contacto" fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="space-evenly stretch"   fxLayoutGap="10px"  >
 
-      fxLayoutGap.sm="5px grid"
+        <!-- NOME PT -->
+        <div class="item-contacto item" fxLayout="column"  fxLayoutAlign="start stretch"  fxFlex  >
 
-      fxLayout.lt-sm="column"
-      fxLayoutAlign.lt-sm="start"
-      fxLayoutGap.lt-sm="0px"
-  >
+          <mat-form-field appearance="fill">
+            <mat-label>Nome PT</mat-label>
+            <input matInput formControlName="nomePt" required>
+            <mat-error *ngIf="getNomePt.errors?.required">Introduz nome PT</mat-error>
+          </mat-form-field>
 
-  <mat-card-actions class="buttons">
+        </div>
+
+        <!-- NOME ING -->
+        <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start stretch" fxFlex >
+
+          <mat-form-field appearance="fill">
+            <mat-label>Nome ING</mat-label>
+            <input matInput formControlName="nomeIng" required>
+            <mat-error *ngIf="getNomeIng.errors?.required">Introduz nome ING</mat-error>
+          </mat-form-field>
+
+        </div>
+
+        <!-- NOME FR -->
+        <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start stretch" fxFlex >
+
+          <mat-form-field appearance="fill">
+            <mat-label>Nome FR</mat-label>
+            <input matInput formControlName="nomeFr" required>
+            <mat-error *ngIf="getNomeFr.errors?.required">Introduz nome FR</mat-error>
+          </mat-form-field>
+
+        </div>
+
+      </div>
+
+      <!-- COMPOSICAO PT/COMPOSICAO ING/COMPOSICAO FR-->
+      <div class="container container-contacto" fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="start stretch"   fxLayoutGap="10px"  >
+
+        <!-- COMPOSICAO PT -->
+        <div class="item-contacto item" fxLayout="column"  fxLayoutAlign="start stretch"  fxFlex  >
+
+          <mat-form-field appearance="fill">
+            <mat-label>Descrição PT</mat-label>
+            <textarea matInput rows="5" placeholder="..." formControlName="descPt"></textarea>
+            <mat-error *ngIf="getDescPt.errors?.required">Introduz descrição PT</mat-error>
+          </mat-form-field>
+
+        </div>
+
+        <!-- COMPOSICAO ING -->
+        <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start stretch" fxFlex >
+
+          <mat-form-field appearance="fill">
+            <mat-label>Descrição ING</mat-label>
+            <textarea matInput rows="5" placeholder="..." formControlName="descIng"></textarea>
+            <mat-error *ngIf="getDescIng.errors?.required">Introduz descrição ING</mat-error>
+          </mat-form-field>
+
+        </div>
+
+        <!-- COMPOSICAO FR -->
+        <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start stretch" fxFlex >
+
+          <mat-form-field appearance="fill">
+            <mat-label>Descrição FR</mat-label>
+            <textarea matInput rows="5" placeholder="..." formControlName="descFr"></textarea>
+            <mat-error *ngIf="getDescFr.errors?.required">Introduz descrição FR</mat-error>
+          </mat-form-field>
+
+        </div>
+
+      </div>
 
 
-    <button (click)="onSubmit()" mat-raised-button color="primary" [disabled]="!formItem.valid || !formItem.dirty">{{ accao }}</button>
-    <button mat-raised-button type="button" routerLink="../listar" *ngIf="accao == 'Criar'">Cancelar</button>
-        <button mat-raised-button type="button" routerLink="../../listar" *ngIf="accao == 'Editar'">Cancelar</button>
 
-  </mat-card-actions>
+      <!-- QUANTIDADE/UNIDADE/PREÇO/ -->
+      <div  fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="start stretch"   fxLayoutGap="10px"  >
+
+        <!-- QUANTIDADE -->
+        <div  fxLayout="column" fxLayoutAlign="start stretch" fxFlex="none" fxFlex.lt-md >
+
+          <mat-form-field appearance="fill">
+            <mat-label>Quantidade</mat-label>
+            <input matInput formControlName="quantidade" required>
+            <mat-error *ngIf="getQuantidade.errors?.required">Introduz Quantidade</mat-error>
+          </mat-form-field>
+
+        </div>
+
+        <!-- UNIDADE -->
+        <div   fxLayout="column" fxLayoutAlign="start stretch" fxFlex="none" fxFlex.lt-md>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Unidade</mat-label>
+            <mat-select formControlName="unidadeMedidaEnum">
+              <mat-option>None</mat-option>
+
+              <mat-option *ngFor="let _tipoEnumUnidade of eUnidadesMedida  | keyvalue" [value]="_tipoEnumUnidade.key">
+                {{_tipoEnumUnidade.value}}
+              </mat-option>
+
+            </mat-select>
+            <mat-error *ngIf="getUnidadeMedidaEnum.errors?.required">
+              <span>Seleciona Unidade Medida</span>
+            </mat-error>
+
+          </mat-form-field>
+
+        </div>
+
+        <!-- PREÇO -->
+        <div  fxLayout="column" fxLayoutAlign="start stretch" fxFlex="none" fxFlex.lt-md>
+
+          <mat-form-field appearance="fill" floatLabel="always" >
+            <mat-label>Preço</mat-label>
+            <input matInput  type="number" class="example-right-align" placeholder="0" step="0.01" formControlName="preco" required>
+            <span matSuffix >$&nbsp;</span>
+            <mat-error *ngIf="getPreco.errors?.required">Introduz Preço</mat-error>
+          </mat-form-field>
+
+        </div>
+
+      </div>
+
+      <!-- ATIVO -->
+      <div class="container container-contacto" fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="start  stretch"   fxLayoutGap="10px"  >
+
+        <div  fxLayoutAlign="start start" fxFlex="none" >
+            <mat-checkbox formControlName="activo" >Ativar</mat-checkbox >
+        </div>
+
+      </div>
 
 
-  </div>
+      <!-- BOTÃO -->
+      <div
+          fxLayout="row " fxLayoutAlign="start center" fxLayoutGap="10px grid"
+
+          fxLayoutGap.sm="5px grid"
+
+          fxLayout.lt-sm="column"
+          fxLayoutAlign.lt-sm="start"
+          fxLayoutGap.lt-sm="0px"
+      >
+
+        <div  fxLayoutAlign="start start" fxFlex="none" >
+
+          <mat-card-actions class="buttons">
+
+            <button (click)="onSubmit()" mat-raised-button color="primary" [disabled]="!formItem.valid || !formItem.dirty">{{ accao }}</button>
+            <button mat-raised-button type="button" routerLink="../listar" *ngIf="accao == 'Criar'">Cancelar</button>
+            <button mat-raised-button type="button" routerLink="../../listar" *ngIf="accao == 'Editar'">Cancelar</button>
+
+          </mat-card-actions>
+
+        </div>
+
+      </div>
+
+
+</div>
+</form>
+
 
 
 
@@ -220,7 +233,6 @@
   </div>
 
 
-</form>
 
 
 

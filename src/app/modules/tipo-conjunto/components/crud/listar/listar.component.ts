@@ -92,8 +92,6 @@ export class ListarComponent implements OnInit {
       myObservablePesquisa$ = this.tipoConjuntoCrudService.findAll(pageIndex, pageSize, this.sort, this.direccaoOrdem);
     }
 
-
-
     myObservablePesquisa$.subscribe(
       (data: ResponsePageableTipoConjunto) => {
         console.log('Foi lido os seguintes dados, tipo conjuntos: ', data._embedded.tipoconjuntos);
@@ -113,7 +111,6 @@ export class ListarComponent implements OnInit {
       },
       () => { this.requestCompleto = true; }
     );
-
 
   }
 

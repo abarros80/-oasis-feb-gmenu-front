@@ -16,7 +16,7 @@ import { IResponsePageableTitem } from '../interfaces/i-response-pageable-titem'
 export class TitemCrudService extends  ApiCrudService<ITitem> {
 
   constructor(protected override  http: HttpClient) {
-    super(http, "restaurantes");
+    super(http, "tipoitens");
   }
 
   findById(id: number): Observable<ITitem> {
@@ -57,10 +57,20 @@ export class TitemCrudService extends  ApiCrudService<ITitem> {
       catchError(this.errorMgmt));
   }
 
-  findByActivoOrderByNome(activo: boolean, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableTitem> {
+  findByActivoOrderByNomePAGE(activo: boolean, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableTitem> {
     let myactivo = activo? 1: 0;
 
     let url = `${super.getAPIURL}/search/findByActivoOrderByNome?activo=${myactivo}&page=${page}&size=${size}&sort=${sort},${ordem}`;
+    return this.http.get<IResponsePageableTitem>(url, {headers: super.getheaders}).pipe(
+      take(1),
+      catchError(this.errorMgmt));
+
+  }
+
+  findByActivoOrderByNomeLIST(activo: boolean): Observable<IResponsePageableTitem> {
+    let myactivo = activo? 1: 0;
+
+    let url = `${super.getAPIURL}/search/findByActivoOrderByNome?activo=${myactivo}`;
     return this.http.get<IResponsePageableTitem>(url, {headers: super.getheaders}).pipe(
       take(1),
       catchError(this.errorMgmt));

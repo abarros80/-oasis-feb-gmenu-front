@@ -4,13 +4,6 @@ import { catchError, map, take, tap, delay } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment.prod';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin':'*',
-    'responseType': 'text'
-  })
-};
 
 
 
@@ -21,7 +14,11 @@ const httpOptions = {
 export class ApiCrudService<T> {
 
 
-  headers = new HttpHeaders().set('Content-Type', 'application/json').set('Access-Control-Allow-Origin','*');
+  headers= new HttpHeaders()
+  .set('content-type', 'application/json')
+  .set('Access-Control-Allow-Origin', '*');
+
+
 
   private  API_URL: String;
 

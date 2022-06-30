@@ -12,6 +12,7 @@ import { ListarComponent } from './components/crud/listar/listar.component';
 import { ApagarComponent } from './components/crud/apagar/apagar.component';
 import { CriaralterarComponent } from './components/crud/criaralterar/criaralterar.component';
 import { DetalheComponent } from './components/crud/detalhe/detalhe.component';
+import { UserCrudService } from './services/user-crud.service';
 
 
 
@@ -30,6 +31,9 @@ import { DetalheComponent } from './components/crud/detalhe/detalhe.component';
     MaterialSharedModule,
     ComponentsSharedModule,
     UserRoutingModule
+  ],
+  providers: [
+    UserCrudService
   ]
 })
 export class UserModule { }

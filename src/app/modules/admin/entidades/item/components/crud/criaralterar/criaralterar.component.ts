@@ -1,26 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { IReqItem } from '../../../interfaces/i-req-item';
 import { ItemCrudService } from '../../../services/item-crud.service';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { IItem } from '../../../interfaces/i-item';
 import { UnidadeMedidaEnum } from '../../../enums/unidade-medida-enum';
 import { LoginService } from '../../../../../../../my-core/services/login.service';
-
-interface Hotel {
-  id: number;
-  nome: string;
-}
-
-interface TipoItem {
-  id: number;
-  nome: string;
-}
+import { HotelCrudService } from '../../../../hotel/services/hotel-crud.service';
+import { TitemCrudService } from '../../../../titem/services/titem-crud.service';
+import { IHotel } from '../../../../hotel/interfaces/i-hotel';
+import { ITitem } from '../../../../titem/interfaces/i-titem';
+import { IReqItem } from '../../../interfaces/i-req-item';
 
 
 @Component({
@@ -30,47 +24,114 @@ interface TipoItem {
 })
 export class CriaralterarComponent implements OnInit {
 
-
   disableHoteis = false;
-  hoteisControl = new FormControl(null, Validators.required);
-  hoteis: Hotel[] = [
-    {id: 1, nome: 'Porto Grande'},
-    {id: 2, nome: 'Praiamar'},
-    {id: 3, nome: 'Belorizonte'},
-    {id: 4, nome: 'Salinas Sea'},
-  ];
+  hoteis: IHotel[] = [];
 
-  disableTipoItems = false;
-  tipoItemsControl = new FormControl(null, Validators.required);
-  tipoItems: TipoItem[] = [
-    {id: 1, nome: 'Kalimba'},
-    {id: 2, nome: 'Restaurante'},
-    {id: 3, nome: 'Lobby'},
-  ];
+  disableTipoItens = false;
+  tipoItens: ITitem[] = [];
 
-  // Make a variable reference to our Enum
+  //Variavel que representa o Enum: UnidadeMedidaEnum
   eUnidadesMedida = UnidadeMedidaEnum;
 
-
-   //OBJECTO QUE REPRESENTA O FORMULARIO
-
-   //private novoItemReq?: IReqItem ={...};
-
-   readonly USERID = this.loginService.getLoggedInID();
+  //ID DO USER LOGADO
+  readonly USERID = this.loginService.getLoggedInID();
 
 
-   //VARIAVEIS para controlo
+  //VARIAVEIS para controlo
    submitted = false;
    erroMsg?: string;
-   haErroMsg: boolean = false;
+   hasErroMsg: boolean = false;
    requestCompleto = false;
    accao: string = "Criar";
 
-   //CRIAR FORMULARIO
-   formItem: FormGroup = this.formBuilder.group({});
+  //CRIAR FORMULARIO
+  formItem: FormGroup = this.formBuilder.group({});
 
-   //METODOS GETs
-   get getNomePt(): any {
+  constructor(
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private itemCrudService: ItemCrudService,
+    private _snackBar: MatSnackBar,
+    private loginService: LoginService,
+    private hotelCrudService: HotelCrudService,
+    private titemCrudService: TitemCrudService,
+    private router: Router
+  ) {}
+
+
+   ngOnInit(): void {
+
+     this.preencherFormulario();
+     this.inicializarHoteis();
+     this.inicializarTipoItens();
+
+   }
+
+   inicializarHoteis(): void{
+    console.log("IDUSER: ", this.USERID);
+    this.hotelCrudService.findByActivoAndUsersIdOrderByNome(true, Number(this.USERID)).subscribe(
+      success => {
+        this.hoteis = success._embedded.hoteis;
+      },
+      error => {
+        this.hoteis = [];
+      }
+    );
+
+   }
+
+   inicializarTipoItens(): void{
+    //let idhotel = this.formItem?.get('hotel')?.value;
+    //if(idhotel != null){ }
+    this.titemCrudService.findByActivoOrderByNomeLIST(true).subscribe(
+      success => {
+        this.tipoItens = success._embedded.tipoitens;
+      },
+      error => {
+        this.tipoItens = [];
+      }
+    );
+   }
+
+   preencherFormulario(): void {
+
+     //LER DADOS URL: SABER ID e ACCAO
+     this.route.params.subscribe((params: any) =>{
+       //console.log(params);
+       const id = params['id'];
+       if(id){
+        this.preencherFormularioUpdate(id);
+       }else{
+         this.preencherFormularioCreate();
+       }
+     });
+
+   }
+
+   incializarFormItem(): void {
+    this.formItem = this.formBuilder.group({
+
+      id: [null],
+
+      nomePt: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
+      nomeIng: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
+      nomeFr: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
+      activo: [null],
+      fotoPath: ["..."],
+      descPt: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
+      descFr: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
+      descIng: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
+      preco: [null],
+      quantidade: [null],
+      unidadeMedidaEnum: [null, Validators.required],
+      idUser: [this.USERID, Validators.required],
+      tipoItem: [{value: null,  disabled: this.disableTipoItens}, Validators.required],
+      hotel: [{value: null,  disabled: this.disableHoteis}, Validators.required],
+    });
+  }
+
+  //METODOS GETs
+  get getNomePt(): any {
     return this.formItem?.get('nomePt');
   }
   get getNomeIng(): any {
@@ -115,70 +176,22 @@ export class CriaralterarComponent implements OnInit {
   }
 
 
-   constructor(
-     private formBuilder: FormBuilder,
-     private route: ActivatedRoute,
-     private router: Router,
-     private itemCrudService: ItemCrudService,
-     private _snackBar: MatSnackBar,
-     private loginService: LoginService
-   ) {}
 
 
 
-   ngOnInit(): void {
-
-     this.preencherFormulario();
-
-   }
-
-   preencherFormulario(): void {
-
-     //LER DADOS URL: SABER ID e ACCAO
-     this.route.params.subscribe((params: any) =>{
-
-       console.log(params);
-       const id = params['id'];
-
-       if(id){
-        this.preencherFormularioUpdate(id);
-       }else{
-         this.preencherFormularioCreate();
-       }
-     });
-
-   }
-
+   //INCIALIZAR FORM COM DADOS DE OBJECTO
    preencherFormularioCreate(): void {
 
     this.accao="Criar";
     console.log("ACCAO: ", this.accao);
     //this.novoItemReq?.fotoPath = "...";
 
-    this.formItem = this.formBuilder.group({
-
-
-
-      nomePt: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
-      nomeIng: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
-      nomeFr: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
-      activo: [null],
-      fotoPath: ["..."],
-      descPt: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
-      descFr: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
-      descIng: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
-      preco: [null],
-      quantidade: [null],
-      unidadeMedidaEnum: [null, Validators.required],
-      idUser: [this.USERID, Validators.required],
-      tipoItem: [null, Validators.required],
-      hotel: [null, Validators.required],
-    });
-
+    this.incializarFormItem();
 
    }
 
 
+   //CARREGAR FORM COM DADOS DE OBJECTO
    preencherFormularioUpdate(id: number): void {
 
     const item$ = this.itemCrudService.getData(id);
@@ -203,9 +216,11 @@ export class CriaralterarComponent implements OnInit {
 
   }
 
-  //CARREGAR FORM COM DADOS DE OBJECTO
-  updateFormFromOBJ(item: IItem){
-    //DADOS SINCRONOS
+  //METODO AUX CARREGAR FORM COM DADOS DE OBJECTO
+  updateFormFromOBJ(item: IItem): void{
+
+    this.incializarFormItem();
+
     this.formItem?.patchValue({
 
      id: item.id,
@@ -225,10 +240,8 @@ export class CriaralterarComponent implements OnInit {
      hotel: 1, //fazer metodo para devolver ID HOTEL
 
     });
+
   }
-
-
-
 
 
    //ONSUBMIT
@@ -279,31 +292,31 @@ export class CriaralterarComponent implements OnInit {
        }else{
 
         console.log("ONSUBMIT CREATE ITEM");
-        /*
+
          console.log("crearObjecto", this.crearObjectoFromFROM());
 
-         this.tipoconjuntoCrudService.createData(this.crearObjectoFromFROM()).subscribe(
+         this.itemCrudService.createItemFromIReqItem(this.crearObjectoFromFROM()).subscribe(
            success => {
-             this.haErroMsg = false;
-             this.msgSnackBar("Tipo Conjunto criado");
-             console.log('CRIADO TCONJUNTO: sucesso');
-             this.router.navigate(['/oa-admin/gestao/tconjunto/listar']);
+             this.hasErroMsg = false;
+             this.msgSnackBar("ITEM criado");
+             console.log('CRIADO ITEM: sucesso');
+             this.router.navigate(['/oa-admin/gestao/entidades/item/listar']);
            },
            error => {
-             this.haErroMsg = true;
-             this.erroMsg = "CRIAR TCONJUNTO: Erro no Update Tipo Conjunto \n"+error;
+             this.hasErroMsg = true;
+             this.erroMsg = "CRIADO ITEM: Erro no Create Item \n"+error;
              this.requestCompleto = false;
              console.log(this.erroMsg);
              alert(this.erroMsg);
            },
 
            () => {
-             console.log('CRIAR TCONJUNTO: request completo');
+             console.log('CRIAR ITEM: request completo');
              this.requestCompleto = true;
            }
          );
 
-         */
+
 
          // Usar o método reset para limpar os controles na tela
          //this.formConjunto.reset(new TipoConjunto());
@@ -315,7 +328,7 @@ export class CriaralterarComponent implements OnInit {
      //FORM INVALIDO
      } else {
 
-       this.haErroMsg = true;
+       this.hasErroMsg = true;
        this.erroMsg = "formulario invalido";
        this.requestCompleto = false;
        console.log(this.erroMsg);
@@ -329,10 +342,13 @@ export class CriaralterarComponent implements OnInit {
 
 
    //CRIAR OBJECTO COM OS DADOS DE FORMULARIO, S/ ID, PARA SER ENVIADO NO PEDIDO
-   crearObjectoFromFROM(){
+   crearObjectoFromFROM(): IReqItem{
      //let API_URL = environment.API;
      return {
-       "nomePt": this.formItem?.value.nomePt,
+      "id": this.formItem?.value.id,
+
+      "nomePt": this.formItem?.value.nomePt,
+
        "nomeIng": this.formItem?.value.nomeIng,
        "nomeFr": this.formItem?.value.nomeFr,
 
@@ -348,13 +364,13 @@ export class CriaralterarComponent implements OnInit {
        "unidadeMedidaEnum": this.formItem?.value.unidadeMedidaEnum,
 
        "idUser": this.formItem?.value.idUser,
-       "tipoItem": this.formItem?.value.tipoItem,
-       "hotel": this.formItem?.value.hotel,
+       "tipoItem": "/tipoitens/"+this.formItem?.value.tipoItem,
+       "hotel": "/hotels/"+this.formItem?.value.hotel,
      }
    }
 
    //CRIAR OBJECTO COM OS DADOS DE FORMULARIO, C/ ID, PARA SER ENVIADO NO PEDIDO
-   updateObjectoFromFORM(){
+   updateObjectoFromFORM(): IReqItem{
      //let API_URL = environment.API;
      return {
        "id": this.formItem?.value.id,
@@ -374,8 +390,8 @@ export class CriaralterarComponent implements OnInit {
        "unidadeMedidaEnum": this.formItem?.value.unidadeMedidaEnum,
 
        "idUser": this.formItem?.value.idUser,
-       "tipoItem": this.formItem?.value.tipoItem,
-       "hotel": this.formItem?.value.hotel,
+       "tipoItem": "/tipoitens/"+this.formItem?.value.tipoItem,
+       "hotel": "/hotels/"+this.formItem?.value.hotel,
      }
    }
 

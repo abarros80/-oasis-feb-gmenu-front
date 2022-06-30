@@ -14,7 +14,7 @@ import { IHotel } from '../interfaces/i-hotel';
 export class HotelCrudService  extends  ApiCrudService<IHotel> {
 
   constructor(protected override  http: HttpClient) {
-    super(http, "hotels");
+    super(http, "hoteis");
   }
 
   findById(id: number): Observable<IHotel> {
@@ -55,7 +55,7 @@ export class HotelCrudService  extends  ApiCrudService<IHotel> {
       catchError(this.errorMgmt));
   }
 
-  findByActivoOrderByNomeActivoPage(activo: boolean, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableHotel> {
+  findByActivoOrderByNomePAGE(activo: boolean, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableHotel> {
     let myactivo = activo? 1: 0;
 
     let url = `${super.getAPIURL}/search/findByActivoOrderByNome?activo=${myactivo}&page=${page}&size=${size}&sort=${sort},${ordem}`;
@@ -65,10 +65,20 @@ export class HotelCrudService  extends  ApiCrudService<IHotel> {
 
   }
 
-  findByActivoOrderByNomeActivo(activo: boolean): Observable<IResponsePageableHotel> {
+  findByActivoOrderByNomeLIST(activo: boolean): Observable<IResponsePageableHotel> {
     let myactivo = activo? 1: 0;
 
     let url = `${super.getAPIURL}/search/findByActivoOrderByNome?activo=${myactivo}`;
+    return this.http.get<IResponsePageableHotel>(url, {headers: super.getheaders}).pipe(
+      take(1),
+      catchError(this.errorMgmt));
+
+  }
+
+  findByActivoAndUsersIdOrderByNome(activo: boolean, id: number): Observable<IResponsePageableHotel> {
+    let myactivo = activo? 1: 0;
+
+    let url = `${super.getAPIURL}/search/findByActivoAndUsersIdOrderByNome?activo=${myactivo}&id=${id}`;
     return this.http.get<IResponsePageableHotel>(url, {headers: super.getheaders}).pipe(
       take(1),
       catchError(this.errorMgmt));

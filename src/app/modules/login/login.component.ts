@@ -83,7 +83,7 @@ export class LoginComponent implements OnInit {
                 this.haErroMsg = true;
                 this.erroMsg ="Não foi possivel fazer login";
                 //alert("Erro ao inserir Tipo Conjunto \n"+error);
-                //console.error('error')
+                console.error('error login1')
 
               },
 
@@ -96,7 +96,7 @@ export class LoginComponent implements OnInit {
             this.haErroMsg = true;
             this.erroMsg ="Não foi possivel fazer login";
             //alert("Erro ao inserir Tipo Conjunto \n"+error);
-            //console.error('error')
+            console.error('error login2')
 
           },
 
