@@ -13,7 +13,7 @@
         <div class="item-contacto item" fxLayout="column"  fxLayoutAlign="start stretch"  fxFlex >
 
           <!-- SELECT HOTEL-->
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="outline">
             <mat-label>Hotel</mat-label>
             <mat-select formControlName="hotel" required >
               <mat-option>None</mat-option>
@@ -33,7 +33,7 @@
         <!-- SELECT TIPO ITEM-->
         <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start stretch" fxFlex >
 
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="outline">
             <mat-label>Tipo de Item</mat-label>
             <mat-select formControlName="tipoItem" required >
               <mat-option>None</mat-option>
@@ -57,7 +57,7 @@
         <!-- NOME PT -->
         <div class="item-contacto item" fxLayout="column"  fxLayoutAlign="start stretch"  fxFlex  >
 
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="outline">
             <mat-label>Nome PT</mat-label>
             <input matInput formControlName="nomePt" required>
             <mat-error *ngIf="getNomePt.errors?.required">Introduz nome PT</mat-error>
@@ -68,7 +68,7 @@
         <!-- NOME ING -->
         <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start stretch" fxFlex >
 
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="outline">
             <mat-label>Nome ING</mat-label>
             <input matInput formControlName="nomeIng" required>
             <mat-error *ngIf="getNomeIng.errors?.required">Introduz nome ING</mat-error>
@@ -79,7 +79,7 @@
         <!-- NOME FR -->
         <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start stretch" fxFlex >
 
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="outline">
             <mat-label>Nome FR</mat-label>
             <input matInput formControlName="nomeFr" required>
             <mat-error *ngIf="getNomeFr.errors?.required">Introduz nome FR</mat-error>
@@ -95,7 +95,7 @@
         <!-- COMPOSICAO PT -->
         <div class="item-contacto item" fxLayout="column"  fxLayoutAlign="start stretch"  fxFlex  >
 
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="outline">
             <mat-label>Descrição PT</mat-label>
             <textarea matInput rows="5" placeholder="..." formControlName="descPt"></textarea>
             <mat-error *ngIf="getDescPt.errors?.required">Introduz descrição PT</mat-error>
@@ -106,7 +106,7 @@
         <!-- COMPOSICAO ING -->
         <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start stretch" fxFlex >
 
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="outline">
             <mat-label>Descrição ING</mat-label>
             <textarea matInput rows="5" placeholder="..." formControlName="descIng"></textarea>
             <mat-error *ngIf="getDescIng.errors?.required">Introduz descrição ING</mat-error>
@@ -117,7 +117,7 @@
         <!-- COMPOSICAO FR -->
         <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start stretch" fxFlex >
 
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="outline">
             <mat-label>Descrição FR</mat-label>
             <textarea matInput rows="5" placeholder="..." formControlName="descFr"></textarea>
             <mat-error *ngIf="getDescFr.errors?.required">Introduz descrição FR</mat-error>
@@ -135,7 +135,7 @@
         <!-- QUANTIDADE -->
         <div  fxLayout="column" fxLayoutAlign="start stretch" fxFlex="none" fxFlex.lt-md >
 
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="outline">
             <mat-label>Quantidade</mat-label>
             <input matInput formControlName="quantidade" required>
             <mat-error *ngIf="getQuantidade.errors?.required">Introduz Quantidade</mat-error>
@@ -146,7 +146,7 @@
         <!-- UNIDADE -->
         <div   fxLayout="column" fxLayoutAlign="start stretch" fxFlex="none" fxFlex.lt-md>
 
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="outline">
             <mat-label>Unidade</mat-label>
             <mat-select formControlName="unidadeMedidaEnum">
               <mat-option>None</mat-option>
@@ -167,7 +167,7 @@
         <!-- PREÇO -->
         <div  fxLayout="column" fxLayoutAlign="start stretch" fxFlex="none" fxFlex.lt-md>
 
-          <mat-form-field appearance="fill" floatLabel="always" >
+          <mat-form-field appearance="outline" floatLabel="always" >
             <mat-label>Preço</mat-label>
             <input matInput  type="number" class="example-right-align" placeholder="0" step="0.01" formControlName="preco" required>
             <span matSuffix >$&nbsp;</span>
@@ -203,9 +203,11 @@
 
           <mat-card-actions class="buttons">
 
-            <button (click)="onSubmit()" mat-raised-button color="primary" [disabled]="!formItem.valid || !formItem.dirty">{{ accao }}</button>
+            <button (click)="onSubmit()" mat-raised-button color="primary" [disabled]="!formItem.valid">{{ accao }}</button>
             <button mat-raised-button type="button" routerLink="../listar" *ngIf="accao == 'Criar'">Cancelar</button>
             <button mat-raised-button type="button" routerLink="../../listar" *ngIf="accao == 'Editar'">Cancelar</button>
+
+
 
           </mat-card-actions>
 
@@ -217,6 +219,20 @@
 </div>
 </form>
 
+<div class="jumbotron">
+  <p>
+    <button mat-raised-button (click)="yesNoDialog()">yesNoDialog</button>
+    <button mat-raised-button (click)="yesNoDialog2()">yesNoDialog2</button>
+    <button mat-raised-button (click)="confirmCancelDialog()">confirmCancelDialog</button>
+    <button mat-raised-button (click)="yesNoSure()">yesNoSure</button>
+
+    <button mat-raised-button (click)="alertDialog()">alertDialog</button>
+    <button mat-raised-button (click)="alertDialog2()">alertDialog2</button>
+
+
+
+  </p>
+</div>
 
 
 

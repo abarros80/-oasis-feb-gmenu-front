@@ -56,6 +56,7 @@ export class LoginService {
         take(1), //depois da resposta ele faz unsubscribe automaticamente
         catchError(this.errorMgmt)
       );
+
   }
 
   // Error handling
@@ -83,26 +84,30 @@ export class LoginService {
 
   }
 
+
+
   logout() {
     sessionStorage.removeItem(this.USER_ID_SESSION_ATTRIBUTE_NAME);
     sessionStorage.removeItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME);
     sessionStorage.removeItem(this.USER_PASSWD_SESSION_ATTRIBUTE_NAME);
+    sessionStorage.clear();
     this.username = null;
     this.password = null;
     this.router.navigate(['/oa-admin/login']);
   }
 
   isUserLoggedIn() {
-    let user = sessionStorage.getItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME)
+    let user = sessionStorage.getItem(this.USER_ID_SESSION_ATTRIBUTE_NAME)
     if (user === null || user == "") return false
     return true
   }
 
   getLoggedInUserName() {
-    let user = sessionStorage.getItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME)
+    let user = sessionStorage.getItem(this.USER_ID_SESSION_ATTRIBUTE_NAME)
     if (user === null) return ''
     return user
   }
+
   getLoggedInID() {
     let id = sessionStorage.getItem(this.USER_ID_SESSION_ATTRIBUTE_NAME)
     if (id === null) return ''

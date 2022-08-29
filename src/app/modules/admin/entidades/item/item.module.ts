@@ -8,6 +8,8 @@ import { ComponentsSharedModule } from './../../../../my-shared/modules/componen
 import { ItemRoutingModule } from './item-routing.module';
 
 import { ItemCrudService } from './services/item-crud.service';
+import { ItemGuard } from './guards/item.guard';
+import { ItemDesactivateGuard } from './guards/item-desactivate.guard';
 
 import { ItemComponent } from './item.component';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
@@ -15,6 +17,9 @@ import { ListarComponent } from './components/crud/listar/listar.component';
 import { ApagarComponent } from './components/crud/apagar/apagar.component';
 import { CriaralterarComponent } from './components/crud/criaralterar/criaralterar.component';
 import { DetalheComponent } from './components/crud/detalhe/detalhe.component';
+import { ApiCrudService } from '../../../../my-core/services/api-crud.service';
+
+
 
 
 
@@ -34,7 +39,9 @@ import { DetalheComponent } from './components/crud/detalhe/detalhe.component';
     ItemRoutingModule
   ],
   providers: [
-    ItemCrudService
+    ItemCrudService,
+    ItemGuard,
+    ItemDesactivateGuard
   ]
 })
 export class ItemModule { }

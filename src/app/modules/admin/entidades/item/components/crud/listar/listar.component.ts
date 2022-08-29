@@ -55,7 +55,7 @@ export class ListarComponent implements OnInit {
   //-----FORM PESQUISA
   submitted = false;
 
-  //CRIAR FORMULARIO
+  //CRIAR FORMULARIO PESQUISA
   formPesquisa: FormGroup = this.formBuilder.group({
     nome: [null],
     activo: [true]
@@ -71,8 +71,10 @@ export class ListarComponent implements OnInit {
   }
 
   readAll() {
-    //PAGINAÇÃO
+
     this.carregando = true;
+
+    //PAGINAÇÃO
     let pageIndex = this.pageEvent? this.pageEvent.pageIndex: 0;
     let pageSize = this.pageEvent? this.pageEvent.pageSize: this.sizeInicial;
 
@@ -92,7 +94,7 @@ export class ListarComponent implements OnInit {
 
     myObservablePesquisa$.subscribe(
       (data: IResponsePageableItem) => {
-        console.log('Foi lido os seguintes dados, item: ', data._embedded.itens);
+        console.log('COMPONENTE LISTAR - Foi lido os seguintes dados, item: ', data._embedded.itens);
         this.dataSource = data._embedded.itens;
         this.mypages = data.page;
         this.totalElements = this.mypages.totalElements;
@@ -101,7 +103,7 @@ export class ListarComponent implements OnInit {
       error => {
         this.erroMsg = error;
         this.haErroMsg = true;
-        console.error('ERROR: ', error);
+        console.error('COMPONENTE LISTAR - ERROR: ', error);
       },
       () => { this.requestCompleto = true; }
     );

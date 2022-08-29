@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-pagina-nao-encontrado',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaginaNaoEncontradoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private location: Location) { }
 
   ngOnInit(): void {
+  }
+
+  voltar() {
+    this.location.back(); // <-- go back to previous location on cancel
   }
 
 }

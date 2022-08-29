@@ -1,0 +1,80 @@
+<mat-sidenav-container class="container">
+  <mat-sidenav mode="side" opened>
+
+
+    <mat-card>
+      <mat-card-title>
+        <mat-icon>account_circle</mat-icon>
+      </mat-card-title>
+      <mat-card-subtitle>
+        {{ username }}
+      </mat-card-subtitle>
+      <mat-card-actions>
+        <app-logout mat-list-item></app-logout>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-nav-list>
+
+      <i mat-list-item>
+
+
+      </i>
+
+      <a routerLink="./" mat-list-item>
+        <i class="material-icons">home</i>
+        Home
+      </a>
+
+      <a mat-list-item
+      [routerLink]="['./entidades/hotel']" routerLinkActive="active"
+      >
+        Hoteis
+      </a>
+
+      <a mat-list-item
+      [routerLink]="['./entidades/restaurante']" routerLinkActive="active"
+      >
+        Restaurantes
+      </a>
+
+      <a mat-list-item
+      [routerLink]="['./entidades/cardapio']" routerLinkActive="active"
+      >
+        Cardapios
+      </a>
+
+      <a mat-list-item
+      [routerLink]="['./entidades/titem']" routerLinkActive="active"
+      >
+        Tipo Item
+      </a>
+
+      <a mat-list-item
+      [routerLink]="['./entidades/item']" routerLinkActive="active"
+      >
+        Item
+      </a>
+
+      <a mat-list-item
+      [routerLink]="['./consulta']" routerLinkActive="active"
+      >
+        Relatorios
+      </a>
+
+
+
+
+    </mat-nav-list>
+
+  </mat-sidenav>
+
+
+  <mat-sidenav-content>
+
+
+    <router-outlet></router-outlet>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './my-core/guards/auth.guard';
 
 import { PaginaNaoEncontradoComponent } from './my-shared/modules/components-shared/pagina-nao-encontrado/pagina-nao-encontrado.component';
 

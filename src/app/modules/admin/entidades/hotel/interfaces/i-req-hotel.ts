@@ -6,5 +6,5 @@ export interface IReqHotel {
   imagemLogo: string;
   activo: boolean;
   idUser: number,
-  _links: {};
+
 }

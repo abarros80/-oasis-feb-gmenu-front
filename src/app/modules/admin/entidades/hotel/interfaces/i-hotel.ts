@@ -5,7 +5,8 @@ export interface IHotel {
   telefone: string;
   email: string;
   imagemLogo: string;
-  activo: boolean;
+  activo: true;
+
   log: ILog;
   _links: {};
 }

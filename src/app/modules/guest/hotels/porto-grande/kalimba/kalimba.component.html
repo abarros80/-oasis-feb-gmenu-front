@@ -41,7 +41,7 @@
     fxLayoutGap.lt-sm="0px"
 >
 
-    <div id="listCardapios" *ngFor="let onecard of listCardapios" fxFlex="20%" fxLayoutAlign="center center">
+    <div class="pointer" id="listCardapios" *ngFor="let onecard of listCardapios" fxFlex="20%" fxLayoutAlign="center center" (click)="jumTo(onecard.codigoReduzido)">
       <mat-card class="example-card">
         <mat-card-header>
           <mat-card-title>{{ onecard.nomePt }}</mat-card-title>

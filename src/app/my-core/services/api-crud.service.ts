@@ -18,9 +18,8 @@ export class ApiCrudService<T> {
   .set('content-type', 'application/json')
   .set('Access-Control-Allow-Origin', '*');
 
-
-
   private  API_URL: String;
+
 
   get getheaders(): any {
     return this.headers;
@@ -33,14 +32,14 @@ export class ApiCrudService<T> {
 
   constructor(protected  http: HttpClient, private URI: String) {
     this.API_URL = environment.API+URI;
-    console.log("API_URL: "+this.API_URL);
+    console.log(URI+"Service - API_URL: "+this.API_URL);
     }
 
 
   // Create
   createData(record: T) {
     let url = `${this.API_URL}`;
-    return this.http.post(url, record,  { headers: this.headers })
+    return this.http.post(url, record,  { 'headers': this.headers })
       .pipe(
         take(1), //depois da resposta ele faz unsubscribe automaticamente
         catchError(this.errorMgmt)
@@ -48,32 +47,27 @@ export class ApiCrudService<T> {
   }
 
   // Get all Data
-  //getAllData(): Observable<T[]> {
-    getAllData(): Observable<T[]> {
+  getAllData(): Observable<T[]> {
     console.log('URL: ', this.API_URL);
     return this.http.get<T[]>( `${this.API_URL}`).pipe(
       //delay(2000), //para remover em produção
       take(1), // com isso já não é preciso fazer unsubscribe
       catchError(this.errorMgmt)
     );
-    /*
-    .pipe(
-      tap(console.log)
-    );*/
   }
 
   // Get all Data by URL
   getDataByURL(url: string): Observable<T> {
-    return this.http.get<T>(url, {headers: this.headers}).pipe(
+    return this.http.get<T>(url, {'headers': this.headers}).pipe(
       take(1),
       catchError(this.errorMgmt)
     );
   }
 
-  // Get Data
+  // Get Data by Id
   getData(id: number): Observable<T> {
     let url = `${this.API_URL}/${id}`;
-    return this.http.get<T>(url, {headers: this.headers}).pipe(
+    return this.http.get<T>(url, {'headers': this.headers}).pipe(
       take(1),
       catchError(this.errorMgmt)
     );
@@ -83,7 +77,7 @@ export class ApiCrudService<T> {
   // Update Data
   updateData(id: number, record: T): Observable<T> {
     let url = `${this.API_URL}/${id}`;
-    return this.http.put<T>(url, record, { headers: this.headers }).pipe(
+    return this.http.put<T>(url, record, { 'headers': this.headers }).pipe(
       take(1),
       catchError(this.errorMgmt)
     );

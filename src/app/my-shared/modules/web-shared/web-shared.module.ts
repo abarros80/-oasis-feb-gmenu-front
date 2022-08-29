@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -18,9 +19,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    FlexLayoutModule
-
-
+    FlexLayoutModule,
+    RouterModule
   ]
+
 })
 export class WebSharedModule { }

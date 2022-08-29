@@ -9,8 +9,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginModule } from './modules/login/login.module';
+import { LoginModule } from './modules/admin/login/login.module';
 import { ComponentsSharedModule } from './my-shared/modules/components-shared/components-shared.module';
+
 
 
 
