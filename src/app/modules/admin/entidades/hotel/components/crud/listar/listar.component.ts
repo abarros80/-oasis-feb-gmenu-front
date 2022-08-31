@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
+import { MatSort, Sort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
 import {MatTableDataSource} from '@angular/material/table';
 import { PageEvent } from '@angular/material/paginator';
-import { MatSort, Sort } from '@angular/material/sort';
+
 
 import { IHotel } from '../../../interfaces/i-hotel';
 import { MyPages } from '../../../../../../../my-shared/interfaces-shared/my-pages';
@@ -16,6 +17,7 @@ import { HotelCrudService } from '../../../services/hotel-crud.service';
 import { IResponsePageableHotel } from '../../../interfaces/i-response-pageable-hotel';
 import { CriaralterarComponent } from '../criaralterar/criaralterar.component';
 import { DetalheComponent } from '../detalhe/detalhe.component';
+
 
 
 @Component({
@@ -79,6 +81,7 @@ export class ListarComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private router: Router,
     private hotelCrudService: HotelCrudService,
     private dialogService: DialogService,
     private dialog: MatDialog) { }
@@ -144,7 +147,31 @@ export class ListarComponent implements OnInit {
   }
 
   deleteHotel(row: IHotel){
-    this.dialogService.openSnack_botao_tempo_css("Sucesso delete hotel "+row.nome, "X", 6000, "green-snackbar");
+
+        this.hotelCrudService.deleteData(row.id).subscribe(
+              success => {
+                    this.dialogService.openSnack_botao_tempo_css("Sucesso Delete Hotel", "X", 6000, "green-snackbar");
+
+                    this.redirectTo('/oa-admin/gestao/entidades/hotel/listar');
+              },
+              error => {
+
+                    this.dialogService.alertDialogError(
+                      {
+                        message: error,
+                        buttonText: "Sair",
+                      }
+                    );
+              },
+
+              () => {
+                    console.log('DELETE HOTEL completo');
+                    this.requestCompleto = true;
+              }
+        );
+
+
+    //this.dialogService.openSnack_botao_tempo_css("Sucesso delete hotel "+row.nome, "X", 6000, "green-snackbar");
 
     //this.dialogService.openSnack_botao_tempo_css("Erro no delete","X", 3000, "red-snackbar")
 
@@ -153,8 +180,6 @@ export class ListarComponent implements OnInit {
   //ON_INIT
   ngOnInit(): void {
     this.readAll();
-
-
   }
 
 
@@ -263,6 +288,11 @@ export class ListarComponent implements OnInit {
             buttonText: "Sair",
           }
         );
+  }
+
+  redirectTo(uri:string){
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+    this.router.navigate([uri]));
   }
 
   //METODOS GETs

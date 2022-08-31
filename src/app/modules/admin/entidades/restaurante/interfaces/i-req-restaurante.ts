@@ -1,5 +1,4 @@
-import { ILog } from '../../../../../my-shared/interfaces-shared/i-log';
-export interface IRestaurante {
+export interface IReqRestaurante {
   id: number;
   nome: string;
   telefone: string;
@@ -7,7 +6,6 @@ export interface IRestaurante {
   horario: string;
   imagemCapa: string;
   activo: boolean;
+  idUser: number;
 
-  log: ILog;
-  _links: {};
 }

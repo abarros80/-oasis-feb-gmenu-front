@@ -5,6 +5,6 @@ export interface IReqHotel {
   email: string;
   imagemLogo: string;
   activo: boolean;
-  idUser: number,
+  idUser: number;
 
 }

@@ -175,11 +175,13 @@ export class CriaralterarComponent implements OnInit {
                       console.log('UPDATE HOTEL: sucesso', success);
                       this.hasErroMsg = false;
 
-                      this.dialogService.openSnack_botao_tempo("Hotel update", "X", 6000);
+                      this.dialogService.openSnack_botao_tempo_css("Hotel criado", "X", 6000, "green-snackbar");
+
+                      this.dialogService.openSnack_botao_tempo_css("Sucesso Delete Hotel", "X", 6000, "green-snackbar");
+
 
                       this.dialogRef.close("update");
 
-                      //this.router.navigate(['/oa-admin/gestao/entidades/hotel/listar']);
 
                       this.redirectTo('/oa-admin/gestao/entidades/hotel/listar');
                     },

@@ -85,11 +85,17 @@ export class ApiCrudService<T> {
 
   // Delete Data
   deleteData(id: number): Observable<void> {
+/*
+    const headers = new HttpHeaders()//.set('Content-Type', 'text/plain; charset=utf-8')
+    .set('content-type', 'application/json')
+    .set('Access-Control-Allow-Origin', '*');;
+*/
 
-    const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
+    //this.headers.set('Access-Control-Allow-Origin', '*');
+
     const requestOptions: Object = {
-      headers: headers,
-      responseType: 'text'
+      'headers': this.headers,
+      //'responseType': 'text'
     }
 
     let url = `${this.API_URL}/${id}`;
