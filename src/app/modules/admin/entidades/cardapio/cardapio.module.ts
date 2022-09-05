@@ -15,6 +15,8 @@ import { ListarComponent } from './components/crud/listar/listar.component';
 import { ApagarComponent } from './components/crud/apagar/apagar.component';
 import { CriaralterarComponent } from './components/crud/criaralterar/criaralterar.component';
 import { DetalheComponent } from './components/crud/detalhe/detalhe.component';
+import { GetHotelByUrlPipe } from './pipes/get-hotel-by-url.pipe';
+
 
 
 
@@ -25,7 +27,8 @@ import { DetalheComponent } from './components/crud/detalhe/detalhe.component';
     ListarComponent,
     ApagarComponent,
     CriaralterarComponent,
-    DetalheComponent
+    DetalheComponent,
+    GetHotelByUrlPipe
   ],
   imports: [
     WebSharedModule,

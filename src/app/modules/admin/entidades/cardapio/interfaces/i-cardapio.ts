@@ -8,5 +8,11 @@ export interface ICardapio {
   activo: boolean,
   imagem: string;
   log: ILog;
-  _links: {};
+  _links: {
+    self: { href: string };
+    cardapio: { href: string };
+    hotel: { href: string };
+    itemCardapio: { href: string };
+    restauranteCardapio: { href: string };
+  };
 }

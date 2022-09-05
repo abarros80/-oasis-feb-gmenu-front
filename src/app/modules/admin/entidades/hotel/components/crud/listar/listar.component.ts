@@ -266,6 +266,21 @@ export class ListarComponent implements OnInit {
         }
   }
 
+  disabledBotaoPesquisa: boolean = true;
+  ON_CHANCHE_HOTEL: boolean = false;
+
+  mudarEstadoBotaoPesquisa(){
+
+    if(this.formPesquisa.value.opcao === "Todos")
+      this.disabledBotaoPesquisa = false; //activar
+    else if(this.formPesquisa.value.opcao && this.formPesquisa.value.texto){
+      this.disabledBotaoPesquisa = false; //activar
+    }else {
+      this.disabledBotaoPesquisa = true; //desactivar
+    }
+
+  }
+
 
   //ONSUBMIT PESQUISA
   onSubmit() {

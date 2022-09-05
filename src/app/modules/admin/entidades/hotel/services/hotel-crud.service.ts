@@ -39,8 +39,17 @@ export class HotelCrudService  extends  ApiCrudService<IHotel> {
       );
   }
 
-  findById(id: number): Observable<IHotel> {
+  // Get all Data by URL
+  findDataByURL(url: string): Observable<IHotel> {
+    return this.http.get<IHotel>(url, {'headers': super.headers}).pipe(
+      delay(2000),
+      take(1),
+      catchError(this.errorMgmt));
+  }
 
+
+
+  findById(id: number): Observable<IHotel> {
     let url = `${super.getAPIURL}/${id}`;
     return this.http.get<IHotel>(url, {'headers': super.headers}).pipe(
       delay(2000),

@@ -9,4 +9,6 @@ export interface IReqCardapio {
   imagem: string;
   idUser: number;
 
+  hotel: string;
+
 }

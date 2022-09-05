@@ -6,6 +6,10 @@ export interface IReqRestaurante {
   horario: string;
   imagemCapa: string;
   activo: boolean;
+  hotel: string;
+
   idUser: number;
+
+
 
 }

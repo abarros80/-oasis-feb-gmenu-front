@@ -9,5 +9,10 @@ export interface IRestaurante {
   activo: boolean;
 
   log: ILog;
-  _links: {};
+  _links: {
+    self: { href: string };
+    restaurante: { href: string };
+    hotel: { href: string };
+    restauranteCardapio: { href: string };
+  };
 }

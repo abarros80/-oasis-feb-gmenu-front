@@ -19,7 +19,7 @@ export class CardapioCrudService extends  ApiCrudService<ICardapio> {
   }
 
   // Update
-  updateItemFromIReqHotel(record: IReqCardapio) {
+  updateFromIReqHotel(record: IReqCardapio) {
 
     let url = `${super.getAPIURL}/${record.id}`;
     return this.http.put<ICardapio>(url, record, { 'headers': this.headers }).pipe(
@@ -30,7 +30,7 @@ export class CardapioCrudService extends  ApiCrudService<ICardapio> {
   }
 
   // Create
-  createHotelFromIReqHotel(record: IReqCardapio) {
+  createFromIReqHotel(record: IReqCardapio) {
     let url = `${super.getAPIURL}`;
     return this.http.post(url, record,  {'headers': super.headers})
       .pipe(
@@ -59,6 +59,8 @@ export class CardapioCrudService extends  ApiCrudService<ICardapio> {
       catchError(this.errorMgmt));
   }
 
+  //ACTIVO
+
   findByActivo(activo: boolean, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableCardapio> {
     let myactivo = activo? 1: 0;
 
@@ -69,39 +71,129 @@ export class CardapioCrudService extends  ApiCrudService<ICardapio> {
 
   }
 
-  findByCodigoReduzidoContainingIgnoreCaseAndActivoOrderByCodigoReduzido(codigo: string, activo: boolean, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableCardapio> {
-    let myactivo = activo? 1: 0;
-    let url = `${super.getAPIURL}/search/findByCodigoReduzidoContainingIgnoreCaseAndActivoOrderByCodigoReduzido?codigo=${codigo}&activo=${myactivo}&page=${page}&size=${size}&sort=${sort},${ordem}`;
+  //HOTEL
+
+  findByHotelId(hid: string, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableCardapio> {
+
+    let url = `${super.getAPIURL}/search/findByHotelId?hid=${hid}&page=${page}&size=${size}&sort=${sort},${ordem}`;
     return this.http.get<IResponsePageableCardapio>(url, {'headers': super.headers}).pipe(
       take(1),
       catchError(this.errorMgmt));
   }
 
-  findByNomePtContainingIgnoreCaseAndActivoOrderByNomePt(nome: string, activo: boolean, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableCardapio> {
-
+  findByActivoAndHotelId(activo: boolean, hid: string, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableCardapio> {
     let myactivo = activo? 1: 0;
 
-    let url = `${super.getAPIURL}/search/findByNomePtContainingIgnoreCaseAndActivoOrderByNomePt?nome=${nome}&activo=${myactivo}&page=${page}&size=${size}&sort=${sort},${ordem}`;
+    let url = `${super.getAPIURL}/search/findByActivoAndHotelId?activo=${myactivo}&hid=${hid}&page=${page}&size=${size}&sort=${sort},${ordem}`;
     return this.http.get<IResponsePageableCardapio>(url, {'headers': super.headers}).pipe(
       take(1),
       catchError(this.errorMgmt));
   }
 
-  findByNomeIngContainingIgnoreCaseAndActivoOrderByNomeIng(nome: string, activo: boolean, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableCardapio> {
+  //USER
+  findByHotelUsersId(uid: string, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableCardapio> {
 
-    let myactivo = activo? 1: 0;
-
-    let url = `${super.getAPIURL}/search/findByNomeIngContainingIgnoreCaseAndActivoOrderByNomeIng?nome=${nome}&activo=${myactivo}&page=${page}&size=${size}&sort=${sort},${ordem}`;
+    let url = `${super.getAPIURL}/search/findByHotelUsersId?uid=${uid}&page=${page}&size=${size}&sort=${sort},${ordem}`;
     return this.http.get<IResponsePageableCardapio>(url, {'headers': super.headers}).pipe(
       take(1),
       catchError(this.errorMgmt));
   }
 
-  findByNomeFrContainingIgnoreCaseAndActivoOrderByNomeFr(nome: string, activo: boolean, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableCardapio> {
+  //HOTEl e RESTAURANTE
+  findByActivoAndHotelIdAndRestauranteCardapioRestauranteId(activo: boolean, hid: string, rid: string, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableCardapio> {
+    let myactivo = activo? 1: 0;
+
+    let url = `${super.getAPIURL}/search/findByActivoAndHotelIdAndRestauranteCardapioRestauranteId?activo=${myactivo}&hid=${hid}&rid=${rid}&page=${page}&size=${size}&sort=${sort},${ordem}`;
+    return this.http.get<IResponsePageableCardapio>(url, {'headers': super.headers}).pipe(
+      take(1),
+      catchError(this.errorMgmt));
+  }
+
+  findByHotelIdAndRestauranteCardapioRestauranteId(hid: string, rid: string, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableCardapio> {
+
+    let url = `${super.getAPIURL}/search/findByHotelIdAndRestauranteCardapioRestauranteId?hid=${hid}&rid=${rid}&page=${page}&size=${size}&sort=${sort},${ordem}`;
+    return this.http.get<IResponsePageableCardapio>(url, {'headers': super.headers}).pipe(
+      take(1),
+      catchError(this.errorMgmt));
+  }
+
+
+
+  //CODIGO_REDUZIDO
+  findByCodigoReduzidoContainingIgnoreCaseAndActivo(codigo: string, activo: boolean, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableCardapio> {
+    let myactivo = activo? 1: 0;
+    let url = `${super.getAPIURL}/search/findByCodigoReduzidoContainingIgnoreCaseAndActivo?codigo=${codigo}&activo=${myactivo}&page=${page}&size=${size}&sort=${sort},${ordem}`;
+    return this.http.get<IResponsePageableCardapio>(url, {'headers': super.headers}).pipe(
+      take(1),
+      catchError(this.errorMgmt));
+  }
+
+  findByCodigoReduzidoContainingIgnoreCaseAndActivoAndHotelIdAndRestauranteCardapioRestauranteId(codigo: string, activo: boolean, hid: string, rid: string, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableCardapio> {
+    let myactivo = activo? 1: 0;
+    let url = `${super.getAPIURL}/search/findByCodigoReduzidoContainingIgnoreCaseAndActivoAndHotelIdAndRestauranteCardapioRestauranteId?codigo=${codigo}&activo=${myactivo}&hid=${hid}&rid=${rid}&page=${page}&size=${size}&sort=${sort},${ordem}`;
+    return this.http.get<IResponsePageableCardapio>(url, {'headers': super.headers}).pipe(
+      take(1),
+      catchError(this.errorMgmt));
+  }
+
+  //NOME_PT
+  findByNomePtContainingIgnoreCaseAndActivo(nome: string, activo: boolean, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableCardapio> {
 
     let myactivo = activo? 1: 0;
 
-    let url = `${super.getAPIURL}/search/findByNomeFrContainingIgnoreCaseAndActivoOrderByNomeFr?nome=${nome}&activo=${myactivo}&page=${page}&size=${size}&sort=${sort},${ordem}`;
+    let url = `${super.getAPIURL}/search/findByNomePtContainingIgnoreCaseAndActivo?nome=${nome}&activo=${myactivo}&page=${page}&size=${size}&sort=${sort},${ordem}`;
+    return this.http.get<IResponsePageableCardapio>(url, {'headers': super.headers}).pipe(
+      take(1),
+      catchError(this.errorMgmt));
+  }
+
+  findByNomePtContainingIgnoreCaseAndActivoAndHotelIdAndRestauranteCardapioRestauranteId(nome: string, activo: boolean, hid: string, rid: string, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableCardapio> {
+
+    let myactivo = activo? 1: 0;
+
+    let url = `${super.getAPIURL}/search/findByNomePtContainingIgnoreCaseAndActivoAndHotelIdAndRestauranteCardapioRestauranteId?nome=${nome}&activo=${myactivo}&hid=${hid}&rid=${rid}&page=${page}&size=${size}&sort=${sort},${ordem}`;
+    return this.http.get<IResponsePageableCardapio>(url, {'headers': super.headers}).pipe(
+      take(1),
+      catchError(this.errorMgmt));
+  }
+
+  //NOME_ING
+  findByNomeIngContainingIgnoreCaseAndActivo(nome: string, activo: boolean, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableCardapio> {
+
+    let myactivo = activo? 1: 0;
+
+    let url = `${super.getAPIURL}/search/findByNomeIngContainingIgnoreCaseAndActivo?nome=${nome}&activo=${myactivo}&page=${page}&size=${size}&sort=${sort},${ordem}`;
+    return this.http.get<IResponsePageableCardapio>(url, {'headers': super.headers}).pipe(
+      take(1),
+      catchError(this.errorMgmt));
+  }
+
+  findByNomeIngContainingIgnoreCaseAndActivoAndHotelIdAndRestauranteCardapioRestauranteId(nome: string, activo: boolean, hid: string, rid: string, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableCardapio> {
+
+    let myactivo = activo? 1: 0;
+
+    let url = `${super.getAPIURL}/search/findByNomeIngContainingIgnoreCaseAndActivoAndHotelIdAndRestauranteCardapioRestauranteId?nome=${nome}&activo=${myactivo}&hid=${hid}&rid=${rid}&page=${page}&size=${size}&sort=${sort},${ordem}`;
+    return this.http.get<IResponsePageableCardapio>(url, {'headers': super.headers}).pipe(
+      take(1),
+      catchError(this.errorMgmt));
+  }
+
+  //NOME_FR
+  findByNomeFrContainingIgnoreCaseAndActivo(nome: string, activo: boolean, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableCardapio> {
+
+    let myactivo = activo? 1: 0;
+
+    let url = `${super.getAPIURL}/search/findByNomeFrContainingIgnoreCaseAndActivo?nome=${nome}&activo=${myactivo}&page=${page}&size=${size}&sort=${sort},${ordem}`;
+    return this.http.get<IResponsePageableCardapio>(url, {'headers': super.headers}).pipe(
+      take(1),
+      catchError(this.errorMgmt));
+  }
+
+  findByNomeFrContainingIgnoreCaseAndActivoAndHotelIdAndRestauranteCardapioRestauranteId(nome: string, activo: boolean, hid: string, rid: string, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableCardapio> {
+
+    let myactivo = activo? 1: 0;
+
+    let url = `${super.getAPIURL}/search/findByNomeFrContainingIgnoreCaseAndActivoAndHotelIdAndRestauranteCardapioRestauranteId?nome=${nome}&activo=${myactivo}&hid=${hid}&rid=${rid}&page=${page}&size=${size}&sort=${sort},${ordem}`;
     return this.http.get<IResponsePageableCardapio>(url, {'headers': super.headers}).pipe(
       take(1),
       catchError(this.errorMgmt));

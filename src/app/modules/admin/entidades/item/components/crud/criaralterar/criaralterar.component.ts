@@ -33,10 +33,12 @@ import { IFormCanDesactivate } from '../../../../../../../my-shared/interfaces-s
 })
 export class CriaralterarComponent implements OnInit, IFormCanDesactivate {
 
+  //DADOS HOTEIS
   disableHoteis = false;
   hoteis: IHotel[] = [];
   hotelID:number | undefined;
 
+  //DADOS TIPOITENS
   disableTipoItens = false;
   tipoItens: ITitem[] = [];
   tipoItemID:number | undefined;

@@ -23,7 +23,7 @@
               <!-- SELECT HOTEL-->
               <mat-form-field appearance="outline">
                 <mat-label>Opcao</mat-label>
-                <mat-select formControlName="opcao" >
+                <mat-select formControlName="opcao" (selectionChange)="mudarEstadoBotaoPesquisa()">
                   <mat-option>None</mat-option>
                   <mat-option  value="Todos">Todos</mat-option>
                   <mat-option  value="Nome">Nome</mat-option>
@@ -35,7 +35,7 @@
 
             <div class="item item-1" fxFlex="none" >
               <mat-form-field class="form-element" appearance="outline">
-                <input formControlName="texto" matInput  [placeholder]="getOpcao.value">
+                <input formControlName="texto" matInput  [placeholder]="getOpcao.value" (keyup)="mudarEstadoBotaoPesquisa()">
               </mat-form-field>
             </div>
 
@@ -44,8 +44,7 @@
             </div>
 
             <div class="item item-1"fxFlex="none">
-              <button (click)="onSubmit()" mat-raised-button color="primary" class="mybutton">Pesquisa</button>
-              <button mat-raised-button type="button" (click)="limparPesquisa()"  >Limpar</button>
+              <button (click)="onSubmit()" mat-raised-button color="primary" class="mybutton" [disabled]="disabledBotaoPesquisa">Pesquisa</button>
             </div>
             <div class="item item-1"fxFlex></div>
 

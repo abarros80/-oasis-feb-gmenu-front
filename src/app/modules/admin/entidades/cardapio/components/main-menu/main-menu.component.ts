@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { CriaralterarComponent } from '../crud/criaralterar/criaralterar.component';
 
 @Component({
   selector: 'app-main-menu',
@@ -7,9 +10,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainMenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private dialog: MatDialog) { }
+
+  isPopupOpened = true;
+
 
   ngOnInit(): void {
+  }
+
+  criarEntety() {
+    this.isPopupOpened = true;
+    const dialogRef = this.dialog.open(CriaralterarComponent, {
+      data: {},
+      disableClose: true
+    });
+
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.isPopupOpened = false;
+    });
+  }
+
+
+  navegarParaCriar(){
+    this.router.navigate(["./oa-admin/gestao/entidades/cardapio/criar"])
+  }
+
+  navegarParaListar(){
+    this.router.navigate(["./oa-admin/gestao/entidades/cardapio/listar"])
   }
 
 }
