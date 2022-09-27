@@ -5,34 +5,198 @@
 
   <div class="mat-elevation-z8 content-table">
 
-    <!-- FORM COM FILTRO DE PESQUISA -->
-    <form [formGroup]="formPesquisa" (ngSubmit)="onSubmit" class="form-container">
+    <!-- FORM PESQUISA -->
 
-      <div class="container"
+
+    <form [formGroup]="formPesquisa" (ngSubmit)="onSubmit" class="form-oa-oa-container">
+
+
+      <!-- ROW HOTEL-->
+      <div class="oa-oa-container"
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutAlign="start center"
+      fxLayoutGap="10px"
+      >
+            <div class="item item-1" fxFlex="none" >
+              <!-- SELECT HOTEL-->
+              <mat-form-field appearance="outline">
+                <mat-label>Hotel</mat-label>
+                <mat-select formControlName="hotel" required (selectionChange)="selectHotelChange()">
+                  <mat-option>None</mat-option>
+                  <mat-option *ngFor="let item of hoteis" [value]="item.id">
+                    {{item.nome}}
+                  </mat-option>
+                </mat-select>
+
+                <mat-error *ngIf="getHotel.errors?.required">
+                  <span>Seleciona Hotel</span>
+                </mat-error>
+
+              </mat-form-field>
+            </div>
+
+            <div class="item item-1" fxFlex="none" >
+              <!-- SELECT RESTAURANTE-->
+              <mat-form-field appearance="outline">
+                <mat-label>Restaurante</mat-label>
+                <mat-select formControlName="restaurante" required (selectionChange)="selectRestauranteChange()">
+                  <mat-option [value]="undefined">None</mat-option>
+                  <mat-option *ngFor="let item of restaurantes" [value]="item.id">
+                    {{item.nome}}
+                  </mat-option>
+                </mat-select>
+
+                <mat-error *ngIf="getRestaurante.errors?.required">
+                  <span>Seleciona Restaurante</span>
+                </mat-error>
+
+              </mat-form-field>
+            </div>
+
+            <div class="item item-1" fxFlex="none" >
+              <!-- SELECT CARDAPIO-->
+              <mat-form-field appearance="outline">
+                <mat-label>Cardapio</mat-label>
+                <mat-select formControlName="cardapio" required (selectionChange)="selectCardapioChange()">
+                  <mat-option>None</mat-option>
+                  <mat-option *ngFor="let item of cardapios" [value]="item.id">
+                    {{item.nomePt}}
+                  </mat-option>
+                </mat-select>
+
+                <mat-error *ngIf="getCardapio.errors?.required">
+                  <span>Seleciona Cardapio</span>
+                </mat-error>
+
+              </mat-form-field>
+            </div>
+
+            <div class="item item-1"fxFlex></div>
+      </div>
+
+
+      <!-- ROW T. ITEM-->
+      <div class="oa-oa-container"
       fxLayout="row"
       fxLayout.xs="column"
       fxLayoutAlign="start center"
       fxLayoutGap="10px"
       >
 
-          <div class="item item-1" fxFlex="none" >
-            <mat-form-field class="form-element" >
-              <input formControlName="nome" matInput  placeholder="Nome:">
-            </mat-form-field>
-          </div>
+            <div class="item item-1" fxFlex="none" >
+              <!-- SELECT OPCAO-->
+              <mat-form-field appearance="outline">
+                <mat-label>T. ITEM</mat-label>
+                <mat-select formControlName="titem" (selectionChange)="mudarEstadoBotaoPesquisa()">
+                  <mat-option  value="Todos" >Todos</mat-option>
+                  <mat-option *ngFor="let item of titens" [value]="item.id">
+                    {{item.nome}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
 
-          <div class="item item-1"fxFlex="none">
-            <mat-checkbox formControlName="activo">Ativo</mat-checkbox>
-          </div>
-
-          <div class="item item-1"fxFlex="none">
-            <button (click)="onSubmit()" mat-raised-button color="primary" class="mybutton">Pesquisa</button>
-            <button mat-raised-button type="button" (click)="limparPesquisa()"  >Limpar</button>
-          </div>
-          <div class="item item-1"fxFlex></div>
+            <div class="item item-1"fxFlex></div>
 
       </div>
+
+
+      <!-- ROW OPCAO-->
+      <div class="oa-oa-container"
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutAlign="start center"
+      fxLayoutGap="10px"
+      >
+
+            <div class="item item-1" fxFlex="none" >
+              <!-- SELECT OPCAO-->
+              <mat-form-field appearance="outline">
+                <mat-label>Opcao</mat-label>
+                <mat-select formControlName="opcao" (selectionChange)="mudarEstadoBotaoPesquisa()">
+                  <mat-option >None</mat-option>
+                  <mat-option  value="Todos">Todos</mat-option>
+                  <mat-option  value="NomePT">Nome PT</mat-option>
+                  <mat-option  value="NomeING">Nome ING</mat-option>
+                  <mat-option  value="NomeFR">Nome FR</mat-option>
+                  <mat-option  value="NomePT">Desc PT</mat-option>
+                  <mat-option  value="NomeING">Desc ING</mat-option>
+                  <mat-option  value="NomeFR">Desc FR</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <!-- TEXTO-->
+            <div class="item item-1" fxFlex="none" >
+              <mat-form-field class="form-element" appearance="outline">
+                <input formControlName="texto" matInput  [placeholder]="getOpcao.value" (keyup)="mudarEstadoBotaoPesquisa()">
+              </mat-form-field>
+            </div>
+
+            <!-- ACTIVO -->
+            <div class="item item-1"fxFlex="none">
+              <mat-checkbox formControlName="activo" >Ativo</mat-checkbox>
+            </div>
+
+            <!-- BOTOES -->
+            <div class="item item-1"fxFlex="none">
+              <button (click)="onSubmit()" mat-raised-button color="primary" class="mybutton" [disabled]="disabledBotaoPesquisa">Pesquisa</button>
+              <button mat-raised-button type="button" (click)="limparPesquisa()"  >Limpar</button>
+            </div>
+
+            <div class="item item-1"fxFlex></div>
+
+      </div>
+
+
+
+
+
     </form>
+
+      <!-- REFRESH BOTAO-->
+
+      <div class="oa-oa-container"
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutAlign="start center"
+        fxLayoutGap="10px"
+
+        style="margin: 0 10px;"
+      >
+              <div class="item item-1"fxFlex></div>
+
+              <div class="item item-1"fxFlex="none">
+                <button mat-icon-button color="primary" (click) = readAll()>
+                  <mat-icon>replay</mat-icon>
+                </button>
+              </div>
+    </div>
+
+      <!-- FILTRO DE PESQUISA -->
+
+      <div class="oa-oa-container"
+
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutAlign="start center"
+        fxLayoutGap="10px"
+
+        style="margin: 0 10px; width: 98%;"
+      >
+
+
+          <div class="item item-1"fxFlex>
+            <mat-form-field appearance="standard">
+              <mat-label>Filtrar: </mat-label>
+              <input matInput (keyup)="applyFilter($event)" placeholder="Ex. xpto" #input>
+            </mat-form-field>
+
+          </div>
+    </div>
+
+
 
 
 
@@ -44,31 +208,112 @@
             The actual rendered columns are set as a property on the row definition" -->
 
       <!-- ID -->
-      <ng-container matColumnDef="id">
+      <ng-oa-oa-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
         <td mat-cell *matCellDef="let row"> {{row.id}} </td>
-      </ng-container>
+      </ng-oa-oa-container>
 
-      <!-- NOME  -->
-      <ng-container matColumnDef="nome">
+      <!-- NOME PT -->
+      <ng-oa-oa-container matColumnDef="nomePt">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> NOME </th>
         <td mat-cell *matCellDef="let row"> {{row.nomePt}} </td>
-      </ng-container>
+      </ng-oa-oa-container>
+
+      <!-- NOME ING -->
+      <ng-oa-oa-container matColumnDef="nomeIng">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> NOME PT </th>
+        <td mat-cell *matCellDef="let row"> {{row.nomeIng}} </td>
+      </ng-oa-oa-container>
+
+      <!-- NOME FR -->
+      <ng-oa-oa-container matColumnDef="nomeFr">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> NOME FR </th>
+        <td mat-cell *matCellDef="let row"> {{row.nomeFr}} </td>
+      </ng-oa-oa-container>
+
+      <!-- DESC PT -->
+      <ng-oa-oa-container matColumnDef="descPt">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> DESC FR </th>
+        <td mat-cell *matCellDef="let row"> {{row.descPt}} </td>
+      </ng-oa-oa-container>
+
+      <!-- DESC ING -->
+      <ng-oa-oa-container matColumnDef="descIng">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> DESC ING </th>
+        <td mat-cell *matCellDef="let row"> {{row.descIng}} </td>
+      </ng-oa-oa-container>
+
+      <!-- DESC FR -->
+      <ng-oa-oa-container matColumnDef="descFr">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> DESC FR </th>
+        <td mat-cell *matCellDef="let row"> {{row.descFr}} </td>
+      </ng-oa-oa-container>
+
+      <!-- PRECO -->
+      <ng-oa-oa-container matColumnDef="preco">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> PREÇO </th>
+        <td mat-cell *matCellDef="let row"> {{row.preco}} </td>
+      </ng-oa-oa-container>
+
+      <!-- QUANTIDADE -->
+      <ng-oa-oa-container matColumnDef="quantidade">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Qt. </th>
+        <td mat-cell *matCellDef="let row"> {{row.quantidade}} </td>
+      </ng-oa-oa-container>
+
+      <!-- UNIDADE -->
+      <ng-oa-oa-container matColumnDef="unidadeMedida">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Un. </th>
+
+        <td mat-cell *matCellDef="let row" >
+          <p *ngIf="row.unidadeMedidaEnum == 'UNIDADE'">{{ myEnumUnidadeMedida.UNIDADE }}</p>
+
+        </td>
+      </ng-oa-oa-container>
+
+      <!-- T. ITEM -->
+      <ng-oa-oa-container matColumnDef="tipoItem">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> T. ITEM </th>
+
+        <td mat-cell *matCellDef="let row"> {{row.nometipoItem}} </td>
+      </ng-oa-oa-container>
 
       <!-- ESTADO -->
-      <ng-container matColumnDef="activo">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> ESTADO </th>
-        <td mat-cell *matCellDef="let row"> {{row.activo}} </td>
-      </ng-container>
+      <ng-oa-oa-container matColumnDef="activo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header >ESTADO </th>
+        <td mat-cell *matCellDef="let row" >
+
+
+          <mat-checkbox *ngIf="row.activo" class="example-margin" [disabled]="true" checked="true"></mat-checkbox>
+          <mat-checkbox *ngIf="!row.activo" class="example-margin" [disabled]="true"></mat-checkbox>
+
+        </td>
+      </ng-oa-oa-container>
 
       <!-- EDITAR -->
-      <ng-container matColumnDef="acoes">
-        <th class="mat-header" mat-header-cell *matHeaderCellDef> EDITAR </th>
-        <td mat-cell *matCellDef="let row">
-          <a class="edit" [routerLink]="['../'+row.id+'/editar']" routerLinkActive="active"><i class="material-icons">edit</i></a>
-          <a class="delete" [routerLink]="['../'+row.id+'/apagar']" routerLinkActive="active"><i class="material-icons">delete</i></a>
+      <ng-oa-oa-container matColumnDef="acoes">
+        <th class="mat-header" mat-header-cell *matHeaderCellDef style="text-align: center;"> ACCAO </th>
+        <td mat-cell *matCellDef="let row" style="text-align: center;">
+
+          <a class="edit" routerLinkActive="active" >
+            <button mat-icon-button color="primary" (click) = "editarEntety(row)">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </a>
+
+          <a class="edit" routerLinkActive="active" >
+            <button mat-icon-button color="accent" (click) = "verEntety(row)">
+              <mat-icon>visibility</mat-icon>
+            </button>
+          </a>
+
+          <a class="delete" routerLinkActive="active">
+            <button mat-icon-button color="warn" (click) = "deleteEntety(row)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </a>
         </td>
-      </ng-container>
+      </ng-oa-oa-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" [hidden]="carregando"></tr>

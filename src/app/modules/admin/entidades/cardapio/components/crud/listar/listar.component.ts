@@ -207,14 +207,15 @@ export class ListarComponent implements OnInit {
       else if(this.formPesquisa.value.opcao === "NomeFR" && this.formPesquisa.value.texto && this.submitted){
         myObservablePesquisa$ = this.cardapioCrudService.findByNomeFrContainingIgnoreCaseAndActivoAndHotelIdAndRestauranteCardapioRestauranteId(this.formPesquisa.value.texto, this.formPesquisa.value.activo, this.formPesquisa.value.hotel, this.formPesquisa.value.restaurante, pageIndex, pageSize, this.sort, this.direccaoOrdem);
       }
-      else
-      if(this.formPesquisa.value.opcao === "Codigo" && this.formPesquisa.value.texto && this.submitted){
-        myObservablePesquisa$ = this.cardapioCrudService.findByNomeFrContainingIgnoreCaseAndActivoAndHotelIdAndRestauranteCardapioRestauranteId(this.formPesquisa.value.texto, this.formPesquisa.value.activo, this.formPesquisa.value.hotel, this.formPesquisa.value.restaurante, pageIndex, pageSize, this.sort, this.direccaoOrdem);
+
+      else if(this.formPesquisa.value.opcao === "Codigo" && this.formPesquisa.value.texto && this.submitted){
+        myObservablePesquisa$ = this.cardapioCrudService.findByCodigoReduzidoContainingIgnoreCaseAndActivoAndHotelIdAndRestauranteCardapioRestauranteId(this.formPesquisa.value.texto, this.formPesquisa.value.activo, this.formPesquisa.value.hotel, this.formPesquisa.value.restaurante, pageIndex, pageSize, this.sort, this.direccaoOrdem);
       }
 
       else if(this.formPesquisa.value.opcao === "Todos" && this.submitted){
         myObservablePesquisa$ = this.cardapioCrudService.findByActivoAndHotelIdAndRestauranteCardapioRestauranteId(this.formPesquisa.value.activo, this.formPesquisa.value.hotel, this.formPesquisa.value.restaurante, pageIndex, pageSize, this.sort, this.direccaoOrdem);
       }
+
       else if(this.submitted){
         myObservablePesquisa$ = this.cardapioCrudService.findByActivoAndHotelIdAndRestauranteCardapioRestauranteId(this.formPesquisa.value.activo, this.formPesquisa.value.hotel, this.formPesquisa.value.restaurante, pageIndex, pageSize, this.sort, this.direccaoOrdem);
       }
@@ -237,8 +238,6 @@ export class ListarComponent implements OnInit {
 
   selectHotelChange(){
 
-
-
     if(this.formPesquisa.value.hotel){
       this.inicializarRestaurantes();
       this.formPesquisa.value.restaurante = undefined;
@@ -248,8 +247,6 @@ export class ListarComponent implements OnInit {
       this.restaurantes = [];
       this.disabledBotaoPesquisa = true; //desactivar
     }
-
-
 
   }
 

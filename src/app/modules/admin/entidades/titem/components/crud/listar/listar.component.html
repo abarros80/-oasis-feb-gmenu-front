@@ -1,1 +1,202 @@
-<p>listar works!</p>
+<div class="content">
+  <div class="title">
+    <h1>Listar</h1>
+  </div>
+
+  <div class="mat-elevation-z8 content-table">
+
+    <!-- FORM PESQUISA -->
+
+
+    <form [formGroup]="formPesquisa" (ngSubmit)="onSubmit" class="form-oa-container">
+
+
+      <!-- ROW OPCAO-->
+      <div class="oa-container"
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutAlign="start center"
+      fxLayoutGap="10px"
+      >
+
+            <div class="item item-1" fxFlex="none" >
+              <!-- SELECT OPCAO-->
+              <mat-form-field appearance="outline">
+                <mat-label>Opcao</mat-label>
+                <mat-select formControlName="opcao" (selectionChange)="mudarEstadoBotaoPesquisa()">
+                  <mat-option >None</mat-option>
+                  <mat-option  value="Todos">Todos</mat-option>
+                  <mat-option  value="Nome">Nome</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <!-- TEXTO-->
+            <div class="item item-1" fxFlex="none" >
+              <mat-form-field class="form-element" appearance="outline">
+                <input formControlName="texto" matInput  [placeholder]="getOpcao.value" (keyup)="mudarEstadoBotaoPesquisa()">
+              </mat-form-field>
+            </div>
+
+            <!-- ACTIVO -->
+            <div class="item item-1"fxFlex="none">
+              <mat-checkbox formControlName="activo" >Ativo</mat-checkbox>
+            </div>
+
+            <!-- BOTOES -->
+            <div class="item item-1"fxFlex="none">
+              <button (click)="onSubmit()" mat-raised-button color="primary" class="mybutton" [disabled]="disabledBotaoPesquisa">Pesquisa</button>
+              <button mat-raised-button type="button" (click)="limparPesquisa()"  >Limpar</button>
+            </div>
+
+            <div class="item item-1"fxFlex></div>
+
+      </div>
+
+
+
+
+
+    </form>
+
+      <!-- REFRESH BOTAO-->
+
+      <div class="oa-container"
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutAlign="start center"
+        fxLayoutGap="10px"
+
+        style="margin: 0 10px;"
+      >
+              <div class="item item-1"fxFlex></div>
+
+              <div class="item item-1"fxFlex="none">
+                <button mat-icon-button color="primary" (click) = readAll()>
+                  <mat-icon>replay</mat-icon>
+                </button>
+              </div>
+    </div>
+
+      <!-- FILTRO DE PESQUISA -->
+
+      <div class="oa-container"
+
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutAlign="start center"
+        fxLayoutGap="10px"
+
+        style="margin: 0 10px; width: 98%;"
+      >
+
+
+          <div class="item item-1"fxFlex>
+            <mat-form-field appearance="standard">
+              <mat-label>Filtrar: </mat-label>
+              <input matInput (keyup)="applyFilter($event)" placeholder="Ex. xpto" #input>
+            </mat-form-field>
+
+          </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- TABELA DOS ITENS -->
+    <table mat-table [dataSource]="dataSource" class="table mat-elevation-z8" matSort (matSortChange)="sortEvent = $event; readAll()" >
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- ID -->
+      <ng-oa-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+      </ng-oa-container>
+
+      <!-- NOME  -->
+      <ng-oa-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> NOME</th>
+        <td mat-cell *matCellDef="let row"> {{row.nome}} </td>
+      </ng-oa-container>
+
+
+      <!-- ESTADO -->
+      <ng-oa-container matColumnDef="activo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header >ESTADO </th>
+        <td mat-cell *matCellDef="let row" >
+
+
+          <mat-checkbox *ngIf="row.activo" class="example-margin" [disabled]="true" checked="true"></mat-checkbox>
+          <mat-checkbox *ngIf="!row.activo" class="example-margin" [disabled]="true"></mat-checkbox>
+
+        </td>
+      </ng-oa-container>
+
+      <!-- EDITAR -->
+      <ng-oa-container matColumnDef="acoes">
+        <th class="mat-header" mat-header-cell *matHeaderCellDef style="text-align: center;"> ACCAO </th>
+        <td mat-cell *matCellDef="let row" style="text-align: center;">
+
+          <a class="edit" routerLinkActive="active" >
+            <button mat-icon-button color="primary" (click) = "editarEntety(row)">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </a>
+
+          <a class="edit" routerLinkActive="active" >
+            <button mat-icon-button color="accent" (click) = "verEntety(row)">
+              <mat-icon>visibility</mat-icon>
+            </button>
+          </a>
+
+          <a class="delete" routerLinkActive="active">
+            <button mat-icon-button color="warn" (click) = "deleteEntety(row)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </a>
+        </td>
+      </ng-oa-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" [hidden]="carregando"></tr>
+
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">Filtro usado não apresenta Dados "{{input.value}}"</td>
+      </tr>
+
+    </table>
+
+    <!-- PAGINAÇÃO -->
+    <mat-paginator [length]="totalElements"
+               [pageSize]="sizeInicial"
+               [pageSizeOptions]="pageSizeOptions"
+               (page)="pageEvent = $event; readAll()"
+               aria-label="Select page">
+    </mat-paginator>
+
+    <!-- SPINNER - CARREGANDO -->
+    <div *ngIf="carregando" class="spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+    <div *ngIf="!carregando && totalElements === 0" class="spinner">
+      <p>Sem Dados...</p>
+    </div>
+
+
+  </div>
+
+</div>
+

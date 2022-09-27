@@ -1,4 +1,5 @@
 import { ILog } from '../../../../../my-shared/interfaces-shared/i-log';
+import { ILinksCardapio } from './i-links-cardapio';
 export interface ICardapio {
   id: number;
   nomePt: string;
@@ -8,11 +9,7 @@ export interface ICardapio {
   activo: boolean,
   imagem: string;
   log: ILog;
-  _links: {
-    self: { href: string };
-    cardapio: { href: string };
-    hotel: { href: string };
-    itemCardapio: { href: string };
-    restauranteCardapio: { href: string };
-  };
+
+  nomeHotel: string;
+  _links: ILinksCardapio;
 }

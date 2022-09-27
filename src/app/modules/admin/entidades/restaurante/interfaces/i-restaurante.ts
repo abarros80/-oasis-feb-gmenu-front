@@ -1,4 +1,5 @@
 import { ILog } from '../../../../../my-shared/interfaces-shared/i-log';
+import { ILinksRestaurante } from './i-links-restaurante';
 export interface IRestaurante {
   id: number;
   nome: string;
@@ -9,10 +10,8 @@ export interface IRestaurante {
   activo: boolean;
 
   log: ILog;
-  _links: {
-    self: { href: string };
-    restaurante: { href: string };
-    hotel: { href: string };
-    restauranteCardapio: { href: string };
-  };
+
+  nomeHotel: string;
+  _links: ILinksRestaurante;
+
 }

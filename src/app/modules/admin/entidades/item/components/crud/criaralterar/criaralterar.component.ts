@@ -102,7 +102,7 @@ export class CriaralterarComponent implements OnInit, IFormCanDesactivate {
    inicializarTipoItens(): void{
     //let idhotel = this.formItem?.get('hotel')?.value;
     //if(idhotel != null){ }
-    this.titemCrudService.findByActivoOrderByNomeLIST(true).subscribe(
+    this.titemCrudService.findByActivoOrderByNome(true).subscribe(
       success => {
         this.tipoItens = success._embedded.tipoitens;
       },

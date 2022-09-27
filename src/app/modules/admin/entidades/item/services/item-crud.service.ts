@@ -60,6 +60,15 @@ export class ItemCrudService extends  ApiCrudService<IItem> {
       catchError(this.errorMgmt));
   }
 
+  //USER
+  findByHotelUsersId(uid: string, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableItem> {
+
+    let url = `${super.getAPIURL}/search/findByHotelUsersId?uid=${uid}&page=${page}&size=${size}&sort=${sort},${ordem}`;
+    return this.http.get<IResponsePageableItem>(url, {'headers': super.headers}).pipe(
+      take(1),
+      catchError(this.errorMgmt));
+  }
+
   findByNomePtIgnoreCaseOrderByNomePt(nome: string): Observable<IItem> {
 
     let url = `${super.getAPIURL}/search/findByNomePtIgnoreCaseOrderByNomePt?nome=${nome}`;
@@ -82,6 +91,15 @@ export class ItemCrudService extends  ApiCrudService<IItem> {
     let myactivo = activo? 1: 0;
 
     let url = `${super.getAPIURL}/search/findByActivoOrderByNomePt?activo=${myactivo}&page=${page}&size=${size}&sort=${sort},${ordem}`;
+    return this.http.get<IResponsePageableItem>(url, {'headers': super.headers}).pipe(
+      take(1),
+      catchError(this.errorMgmt));
+
+  }
+
+  findByHotelIdAndItemCardapioCardapioId(hid: number, cid: number, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableItem> {
+
+    let url = `${super.getAPIURL}/search/findByHotelIdAndItemCardapioCardapioId?hid=${hid}&cid=${cid}&page=${page}&size=${size}&sort=${sort},${ordem}`;
     return this.http.get<IResponsePageableItem>(url, {'headers': super.headers}).pipe(
       take(1),
       catchError(this.errorMgmt));

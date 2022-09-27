@@ -1,1 +1,103 @@
-<p>criaralterar works!</p>
+<div class="oa-container" style="margin-bottom: 10px;">
+  <mat-toolbar color="primary">
+
+    <mat-card-title>{{ accao }}</mat-card-title>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon (click)="closeClick()">cancel</mat-icon>
+    </button>
+
+  </mat-toolbar>
+</div>
+
+
+<mat-card-content >
+  <div class="oa-container">
+
+
+    <form [formGroup]="formTitem" (ngSubmit)="onSubmit">
+
+      <div fxLayout="column" fxLayoutAlign="start stretch" >
+
+
+
+
+          <!-- NOME /TELEFONE-->
+          <div class="oa-container oa-container-contacto" fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="space-evenly stretch"   fxLayoutGap="10px"  >
+
+            <!-- NOME  -->
+            <div class="item-contacto item" fxLayout="column"  fxLayoutAlign="start stretch"  fxFlex  >
+
+              <mat-form-field appearance="outline">
+                <mat-label>Nome</mat-label>
+                <input matInput formControlName="nome" required>
+                <mat-error *ngIf="getNome.errors?.required">Introduz nome </mat-error>
+              </mat-form-field>
+
+            </div>
+
+
+          </div>
+
+
+
+
+
+          <!-- ATIVO -->
+          <div class="oa-container oa-container-contacto" fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="start  stretch"   fxLayoutGap="10px"  >
+
+            <div  fxLayoutAlign="start start" fxFlex="none" >
+                <mat-checkbox formControlName="activo" >Ativar</mat-checkbox >
+            </div>
+
+          </div>
+
+
+          <!-- BOTÃO -->
+          <div
+              fxLayout="row " fxLayoutAlign="start center" fxLayoutGap="10px grid"
+
+              fxLayoutGap.sm="5px grid"
+
+              fxLayout.lt-sm="column"
+              fxLayoutAlign.lt-sm="start"
+              fxLayoutGap.lt-sm="0px"
+          >
+
+            <div  fxLayoutAlign="start start" fxFlex="none" >
+
+              <mat-card-actions class="buttons">
+
+                <button (click)="onSubmit()" mat-raised-button color="primary" [disabled]="!formTitem.valid">{{ accao }}</button>
+                <button mat-raised-button color="warn" mat-dialog-close >Cancelar</button>
+
+
+
+
+              </mat-card-actions>
+
+            </div>
+
+          </div>
+
+
+      </div>
+    </form>
+
+  </div>
+</mat-card-content>
+
+
+
+<!-- PARA COMMENTAR NO FIM -->
+<div class="jumbotron">
+  <p>
+    Form Status: {{ formTitem.status }}
+  </p>
+</div>
+
+<div class="jumbotron">
+  <p>
+    Form Value: {{ formTitem.value | json }}
+  </p>
+</div>

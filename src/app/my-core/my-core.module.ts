@@ -9,6 +9,8 @@ import { AuthGuard } from './guards/auth.guard';
 import { DialogService } from './services/dialog.service';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { PaginatorPtIntl } from './services/paginator-pt-intl';
+import { OaPdfService } from './services/oa-pdf.service';
+import { OaFileUploadService } from './services/oa-file-upload.service';
 
 
 
@@ -29,7 +31,9 @@ import { PaginatorPtIntl } from './services/paginator-pt-intl';
     ApiCrudService,
     LoginService,
     DialogService,
-    AuthGuard
+    AuthGuard,
+    OaPdfService,
+    OaFileUploadService
 
   ]
 })

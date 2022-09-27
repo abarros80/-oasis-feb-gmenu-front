@@ -71,6 +71,8 @@ export class CardapioCrudService extends  ApiCrudService<ICardapio> {
 
   }
 
+
+
   //HOTEL
 
   findByHotelId(hid: string, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableCardapio> {
@@ -85,6 +87,15 @@ export class CardapioCrudService extends  ApiCrudService<ICardapio> {
     let myactivo = activo? 1: 0;
 
     let url = `${super.getAPIURL}/search/findByActivoAndHotelId?activo=${myactivo}&hid=${hid}&page=${page}&size=${size}&sort=${sort},${ordem}`;
+    return this.http.get<IResponsePageableCardapio>(url, {'headers': super.headers}).pipe(
+      take(1),
+      catchError(this.errorMgmt));
+  }
+
+  findByActivoAndHotelIdOrderByNomePt(activo: boolean, hid: string): Observable<IResponsePageableCardapio> {
+    let myactivo = activo? 1: 0;
+
+    let url = `${super.getAPIURL}/search/findByActivoAndHotelIdOrderByNomePt?activo=${myactivo}&hid=${hid}`;
     return this.http.get<IResponsePageableCardapio>(url, {'headers': super.headers}).pipe(
       take(1),
       catchError(this.errorMgmt));

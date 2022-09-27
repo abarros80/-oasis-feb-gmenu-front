@@ -21,7 +21,7 @@ export class TitemCrudService extends  ApiCrudService<ITitem> {
   }
 
   // Update
-  updateItemFromIReqHotel(record: IReqTitem) {
+  updateFromIReq(record: IReqTitem) {
 
     let url = `${super.getAPIURL}/${record.id}`;
     return this.http.put<ITitem>(url, record, { 'headers': this.headers }).pipe(
@@ -32,7 +32,7 @@ export class TitemCrudService extends  ApiCrudService<ITitem> {
   }
 
   // Create
-  createHotelFromIReqHotel(record: IReqTitem) {
+  createFromIReq(record: IReqTitem) {
     let url = `${super.getAPIURL}`;
     return this.http.post(url, record,  {'headers': super.headers})
       .pipe(
@@ -79,10 +79,42 @@ export class TitemCrudService extends  ApiCrudService<ITitem> {
       catchError(this.errorMgmt));
   }
 
-  findByActivoOrderByNomeLIST(activo: boolean): Observable<IResponsePageableTitem> {
+  findByNomeContainingIgnoreCaseAndActivo(nome: string, activo: boolean, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableTitem> {
+    let myactivo = activo? 1: 0;
+
+    let url = `${super.getAPIURL}/search/findByNomeContainingIgnoreCaseAndActivo?nome=${nome}&activo=${myactivo}&page=${page}&size=${size}&sort=${sort},${ordem}`;
+    return this.http.get<IResponsePageableTitem>(url, {'headers': super.headers}).pipe(
+      take(1),
+      catchError(this.errorMgmt));
+
+  }
+
+  //LIST
+  findByActivoOrderByNome(activo: boolean): Observable<IResponsePageableTitem> {
     let myactivo = activo? 1: 0;
 
     let url = `${super.getAPIURL}/search/findByActivoOrderByNome?activo=${myactivo}`;
+    return this.http.get<IResponsePageableTitem>(url, {'headers': super.headers}).pipe(
+      take(1),
+      catchError(this.errorMgmt));
+
+  }
+
+  findDistinctNomeByActivoAndItensHotelIdOrderByNome(activo: boolean, hid: number): Observable<IResponsePageableTitem> {
+    let myactivo = activo? 1: 0;
+
+    let url = `${super.getAPIURL}/search/findDistinctNomeByActivoAndItensHotelIdOrderByNome?hid=${hid}&activo=${myactivo}`;
+    return this.http.get<IResponsePageableTitem>(url, {'headers': super.headers}).pipe(
+      take(1),
+      catchError(this.errorMgmt));
+
+  }
+
+  //PAGE
+  findByActivo(activo: boolean, page: number, size: number, sort: string, ordem: string): Observable<IResponsePageableTitem> {
+    let myactivo = activo? 1: 0;
+
+    let url = `${super.getAPIURL}/search/findByActivo?activo=${myactivo}&page=${page}&size=${size}&sort=${sort},${ordem}`;
     return this.http.get<IResponsePageableTitem>(url, {'headers': super.headers}).pipe(
       take(1),
       catchError(this.errorMgmt));

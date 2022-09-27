@@ -8,6 +8,10 @@ import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 
+import { NgxChartsModule }from '@swimlane/ngx-charts';
+
+import { NgChartsModule } from 'ng2-charts';
+
 
 
 
@@ -20,7 +24,9 @@ import { RouterModule } from '@angular/router';
     ReactiveFormsModule,
     FormsModule,
     FlexLayoutModule,
-    RouterModule
+    RouterModule,
+    NgxChartsModule,
+    NgChartsModule
   ]
 
 })

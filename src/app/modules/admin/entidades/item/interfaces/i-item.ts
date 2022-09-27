@@ -1,4 +1,5 @@
 import { ILog } from '../../../../../my-shared/interfaces-shared/i-log';
+import { ILinksItem } from './i-links-item';
 export interface IItem {
   id: number;
   nomePt: string;
@@ -13,6 +14,9 @@ export interface IItem {
   quantidade: number;
   unidadeMedidaEnum: string;
 
+  nometipoItem: string;
+  nomeHotel: string;
+
   log: ILog;
-  _links: {};
+  _links: ILinksItem;
 }

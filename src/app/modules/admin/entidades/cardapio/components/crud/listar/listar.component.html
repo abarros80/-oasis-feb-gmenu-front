@@ -8,11 +8,11 @@
     <!-- FORM PESQUISA -->
 
 
-    <form [formGroup]="formPesquisa" (ngSubmit)="onSubmit" class="form-container">
+    <form [formGroup]="formPesquisa" (ngSubmit)="onSubmit" class="form-oa-container">
 
 
       <!-- ROW HOTEL-->
-      <div class="container"
+      <div class="oa-container"
       fxLayout="row"
       fxLayout.xs="column"
       fxLayoutAlign="start center"
@@ -37,7 +37,7 @@
             </div>
 
             <div class="item item-1" fxFlex="none" >
-              <!-- SELECT HOTEL-->
+              <!-- SELECT RESTAURANTE-->
               <mat-form-field appearance="outline">
                 <mat-label>Restaurante</mat-label>
                 <mat-select formControlName="restaurante" required (selectionChange)="selectRestauranteChange()">
@@ -59,7 +59,7 @@
 
 
       <!-- ROW OPCAO-->
-      <div class="container"
+      <div class="oa-container"
       fxLayout="row"
       fxLayout.xs="column"
       fxLayoutAlign="start center"
@@ -111,7 +111,7 @@
 
       <!-- REFRESH BOTAO-->
 
-      <div class="container"
+      <div class="oa-container"
         fxLayout="row"
         fxLayout.xs="column"
         fxLayoutAlign="start center"
@@ -130,7 +130,7 @@
 
       <!-- FILTRO DE PESQUISA -->
 
-      <div class="container"
+      <div class="oa-container"
 
         fxLayout="row"
         fxLayout.xs="column"
@@ -169,43 +169,43 @@
             The actual rendered columns are set as a property on the row definition" -->
 
       <!-- ID -->
-      <ng-container matColumnDef="id">
+      <ng-oa-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
         <td mat-cell *matCellDef="let row"> {{row.id}} </td>
-      </ng-container>
+      </ng-oa-container>
 
       <!-- NOME PT -->
-      <ng-container matColumnDef="nomePT">
+      <ng-oa-container matColumnDef="nomePT">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> NOME PT</th>
         <td mat-cell *matCellDef="let row"> {{row.nomePt}} </td>
-      </ng-container>
+      </ng-oa-container>
 
       <!-- NOME ING  -->
-      <ng-container matColumnDef="nomeING">
+      <ng-oa-container matColumnDef="nomeING">
         <th mat-header-cell *matHeaderCellDef mat-sort-header > NOME ING </th>
         <td mat-cell *matCellDef="let row"> {{row.nomeIng}} </td>
-      </ng-container>
+      </ng-oa-container>
 
       <!-- NOME FR  -->
-      <ng-container matColumnDef="nomeFR">
+      <ng-oa-container matColumnDef="nomeFR">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> NOME FR </th>
         <td mat-cell *matCellDef="let row"> {{row.nomeFr}} </td>
-      </ng-container>
+      </ng-oa-container>
 
       <!-- CODIGO  -->
-      <ng-container matColumnDef="codigo">
+      <ng-oa-container matColumnDef="codigo">
         <th mat-header-cell *matHeaderCellDef mat-sort-header > CODIGO </th>
         <td mat-cell *matCellDef="let row"> {{row.codigoReduzido}} </td>
-      </ng-container>
+      </ng-oa-container>
 
       <!-- HOTEL  -->
-      <ng-container matColumnDef="hotel">
+      <ng-oa-container matColumnDef="hotel">
         <th mat-header-cell *matHeaderCellDef mat-sort-header > HOTEL </th>
         <td mat-cell *matCellDef="let row"> {{ (row | getHotelByUrl | async)?.nome }}  </td>
-      </ng-container>
+      </ng-oa-container>
 
       <!-- ESTADO -->
-      <ng-container matColumnDef="activo">
+      <ng-oa-container matColumnDef="activo">
         <th mat-header-cell *matHeaderCellDef mat-sort-header >ESTADO </th>
         <td mat-cell *matCellDef="let row" >
 
@@ -214,10 +214,10 @@
           <mat-checkbox *ngIf="!row.activo" class="example-margin" [disabled]="true"></mat-checkbox>
 
         </td>
-      </ng-container>
+      </ng-oa-container>
 
       <!-- EDITAR -->
-      <ng-container matColumnDef="acoes">
+      <ng-oa-container matColumnDef="acoes">
         <th class="mat-header" mat-header-cell *matHeaderCellDef style="text-align: center;"> ACCAO </th>
         <td mat-cell *matCellDef="let row" style="text-align: center;">
 
@@ -239,7 +239,7 @@
             </button>
           </a>
         </td>
-      </ng-container>
+      </ng-oa-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" [hidden]="carregando"></tr>

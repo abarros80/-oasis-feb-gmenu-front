@@ -1,8 +1,13 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { WebSharedModule } from '../../../my-shared/modules/web-shared/web-shared.module';
+import { MaterialSharedModule } from '../../../my-shared/modules/material-shared/material-shared.module';
+import { ComponentsSharedModule } from '../../../my-shared/modules/components-shared/components-shared.module';
+
+
 
 import { ConsultaRoutingModule } from './consulta-routing.module';
 import { ConsultaComponent } from './consulta.component';
+
 
 
 @NgModule({
@@ -10,7 +15,9 @@ import { ConsultaComponent } from './consulta.component';
     ConsultaComponent
   ],
   imports: [
-    CommonModule,
+    WebSharedModule,
+    MaterialSharedModule,
+    ComponentsSharedModule,
     ConsultaRoutingModule
   ]
 })

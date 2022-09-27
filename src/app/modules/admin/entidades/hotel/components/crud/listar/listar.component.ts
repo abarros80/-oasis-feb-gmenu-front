@@ -93,7 +93,10 @@ export class ListarComponent implements OnInit {
           this.isPopupOpened = true;
           //const contact = this._contactService.getAllContacts().find(c => c.ID === id);
           const dialogRef = this.dialog.open(CriaralterarComponent, {
-            data: row
+            data: row,
+            maxWidth: '70vw',
+            maxHeight: '80vh',
+            disableClose: true
           });
 
           //ACCAO DEPOIS DE FECHAR DIALOG
@@ -113,7 +116,9 @@ export class ListarComponent implements OnInit {
         this.isPopupOpened = true;
 
         const dialogRef = this.dialog.open(DetalheComponent, {
-          data: row
+          data: row,
+          maxWidth: '70vw',
+          maxHeight: '80vh',
         });
 
         //ACCAO DEPOIS DE FECHAR DIALOG
@@ -267,7 +272,7 @@ export class ListarComponent implements OnInit {
   }
 
   disabledBotaoPesquisa: boolean = true;
-  ON_CHANCHE_HOTEL: boolean = false;
+  //ON_CHANCHE_HOTEL: boolean = false;
 
   mudarEstadoBotaoPesquisa(){
 
@@ -293,6 +298,7 @@ export class ListarComponent implements OnInit {
   //LIMPAR CAMPOS FORM
   limparPesquisa() {
         this.submitted = false;
+        this.disabledBotaoPesquisa = true; //desactivar
         this.formPesquisa.reset();
   }
 

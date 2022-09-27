@@ -27,10 +27,17 @@
               "src/assets"
             ],
             "styles": [
+
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/assets/css/my-styles.scss",
               "src/styles.scss"
+
             ],
-            "scripts": []
+            "scripts": [
+
+              "node_modules/pdfmake/build/pdfmake.min.js",
+							"node_modules/pdfmake/build/vfs_fonts.js"
+            ]
           },
           "configurations": {
             "production": {

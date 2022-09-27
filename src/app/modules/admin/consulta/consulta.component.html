@@ -1,1 +1,233 @@
-<p>consulta works!</p>
+
+
+<nav class="navbar navbar-expand navbar-light bg-primary">
+  <div class="nav navbar-nav">
+    <h5 class="nav-item nav-link active text-white">NGX-CHARTS DASHBOARD </h5>
+  </div>
+</nav>
+<div class="container-fluid">
+  <div class="row pt-2">
+    <div class="col-md-12">
+      <div class="card text-left">
+        <div class="card-body">
+          <h4 class="card-title border-bottom">Vertical Bar Charts</h4>
+          <ngx-charts-bar-vertical
+
+              [results]="saleData"
+              [xAxisLabel]="'Products'"
+              [legendTitle]="'Product Sale Chart'"
+              [yAxisLabel]="'Sale'"
+              [legend]="true"
+              [showXAxisLabel]="true"
+              [showYAxisLabel]="true"
+              [xAxis]="true"
+              [yAxis]="true"
+              [gradient]="true">
+          </ngx-charts-bar-vertical>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="card text-left">
+        <div class="card-body">
+          <h4 class="card-title border-bottom">Advanced Pie Charts</h4>
+          <ngx-charts-advanced-pie-chart
+                [results]="saleData"
+                [gradient]="true" >
+          </ngx-charts-advanced-pie-chart>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="card text-left">
+        <div class="card-body">
+          <h4 class="card-title border-bottom">Pie Grid Charts</h4>
+          <ngx-charts-pie-grid
+            [results]="saleData" >
+          </ngx-charts-pie-grid>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="card text-left">
+        <div class="card-body">
+          <h4 class="card-title border-bottom">Pie Charts</h4>
+          <ngx-charts-pie-chart
+              [results]="saleData"
+              [legend]="true"
+              [legendTitle]="'Product Sale Report'"
+              [labels]="true" >
+          </ngx-charts-pie-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<nav class="navbar navbar-expand navbar-dark bg-dark px-2">
+  <a class="navbar-brand" href="#">NG2-CHARTS DEMO</a>
+</nav>
+
+<div class="container">
+
+  <div class="card mt-2">
+    <div class="card-body">
+      <h4 class="card-title">Bar Chart</h4>
+      <canvas
+        baseChart
+        [data]="salesData"
+        [type]="'bar'"
+        [options]="chartOptions"
+      >
+      </canvas>
+    </div>
+  </div>
+
+  <div class="card mt-2">
+    <div class="card-body">
+      <h4 class="card-title">Line Chart</h4>
+      <canvas
+        baseChart
+        [data]="salesData"
+        [type]="'line'"
+        [options]="chartOptions"
+      >
+      </canvas>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+<div class="col-md-4">
+  <div class="shadow-sm card action-buttons">
+    <button (click)="generatePdf('open')"
+      class="btn btn-secondary d-flex align-items-center justify-content-center mb-1">
+      <i class="material-icons">
+        picture_as_pdf
+      </i> <span>&nbsp;Open PDF</span></button>
+    <button (click)="generatePdf('download')"
+      class="btn btn-secondary d-flex align-items-center justify-content-center  mb-1">
+      <i class="material-icons">
+        cloud_download
+      </i><span>&nbsp;Download PDF</span></button>
+    <button (click)="generatePdf('print')"
+      class="btn btn-secondary d-flex align-items-center justify-content-center  mb-1">
+      <i class="material-icons">
+        print
+      </i><span>&nbsp;Print PDF</span></button>
+
+    <button type='reset'
+      class="btn btn-secondary d-flex align-items-center justify-content-center  mb-1">
+      <i class="material-icons">
+        clear
+      </i><span>&nbsp;Reset</span></button>
+  </div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="col-md-4">
+
+
+  <form [formGroup]="formHotel" (ngSubmit)="onSubmit">
+
+    <div fxLayout="column" fxLayoutAlign="start stretch" >
+
+
+
+
+        <!-- NOME /IMAGEM-->
+        <div class="oa-container oa-container-contacto" fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="space-evenly stretch"   fxLayoutGap="10px"  >
+
+          <!-- NOME  -->
+          <div class="item-contacto item" fxLayout="column"  fxLayoutAlign="start stretch"  fxFlex  >
+
+            <mat-form-field appearance="outline">
+              <mat-label>Nome</mat-label>
+              <input matInput formControlName="nome" required>
+              <mat-error *ngIf="getNome.errors?.required">Introduz nome </mat-error>
+            </mat-form-field>
+
+          </div>
+
+          <!-- IMAGEM -->
+          <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start stretch" fxFlex >
+
+            <mat-form-field appearance="outline">
+
+
+              <mat-label>File matInput</mat-label>
+
+              <input [value]="fileName" readonly matInput formControlName="imagemLogo" >
+
+              <button mat-icon-button matPrefix (click)="f_input.click()">
+                <mat-icon>attach_file</mat-icon>
+              </button>
+
+              <input
+                type="file"
+                hidden
+                #f_input
+                id="fileInput"
+                (change)="selectFile($event)"
+                name="fileInput"
+              />
+
+              <mat-error *ngIf="getImagemLogo.errors?.required">Introduz imagem</mat-error>
+
+            </mat-form-field>
+
+          </div>
+
+
+        </div>
+
+
+
+
+
+        <!-- BOTÃO -->
+        <div
+            fxLayout="row " fxLayoutAlign="start center" fxLayoutGap="10px grid"
+
+            fxLayoutGap.sm="5px grid"
+
+            fxLayout.lt-sm="column"
+            fxLayoutAlign.lt-sm="start"
+            fxLayoutGap.lt-sm="0px"
+        >
+
+          <div  fxLayoutAlign="start start" fxFlex="none" >
+
+            <mat-card-actions class="buttons">
+
+              <button (click)="onSubmit()" mat-raised-button color="primary" [disabled]="!formHotel.valid">Criar</button>
+              <button mat-raised-button color="warn" mat-dialog-close >Cancelar</button>
+
+
+
+
+            </mat-card-actions>
+
+          </div>
+
+        </div>
+
+
+    </div>
+  </form>
+
+</div>

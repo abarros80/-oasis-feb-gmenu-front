@@ -1,4 +1,5 @@
 import { ILog } from '../../../../../my-shared/interfaces-shared/i-log';
+import { ILinksHotel } from './i-links-hotel';
 export interface IHotel {
   id: number;
   nome: string;
@@ -8,5 +9,5 @@ export interface IHotel {
   activo: true;
 
   log: ILog;
-  _links: {};
+  _links: ILinksHotel;
 }
