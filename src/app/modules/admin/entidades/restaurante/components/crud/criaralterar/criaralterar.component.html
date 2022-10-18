@@ -1,1 +1,172 @@
-<p>criaralterar works!</p>
+<div class="oa-container" style="margin-bottom: 10px;">
+  <mat-toolbar color="primary">
+
+    <mat-card-title>{{ accao }}</mat-card-title>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon (click)="closeClick()">cancel</mat-icon>
+    </button>
+
+  </mat-toolbar>
+</div>
+
+
+<mat-card-content >
+  <div class="oa-container">
+
+  <form [formGroup]="formRestaurante" (ngSubmit)="onSubmit">
+
+      <div fxLayout="column" fxLayoutAlign="start stretch" >
+
+      <!-- SELECT HOTEL/ACTIVO-->
+      <div  fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="start stretch"   fxLayoutGap="10px"  >
+
+        <div class="item-contacto item" fxLayout="column"  fxLayoutAlign="start stretch"  fxFlex >
+
+          <!-- SELECT HOTEL-->
+          <mat-form-field appearance="outline">
+            <mat-label>Hotel</mat-label>
+            <mat-select formControlName="hotel" required >
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let itemhotel of hoteis" [value]="itemhotel.id">
+                {{itemhotel.nome}}
+              </mat-option>
+            </mat-select>
+
+            <mat-error *ngIf="getHotel.errors?.required">
+              <span>Seleciona Hotel</span>
+            </mat-error>
+
+          </mat-form-field>
+
+        </div>
+
+        <!-- ACTIVO-->
+        <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start stretch" fxFlex >
+            <mat-checkbox formControlName="activo" >Ativar</mat-checkbox >
+        </div>
+
+      </div>
+
+
+      <!-- NOME /HORAIO-->
+      <div class="oa-oa-container oa-oa-container-contacto" fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="space-evenly stretch"   fxLayoutGap="10px"  >
+
+        <!-- NOME -->
+        <div class="item-contacto item" fxLayout="column"  fxLayoutAlign="start stretch"  fxFlex  >
+
+          <mat-form-field appearance="outline">
+            <mat-label>Nome </mat-label>
+            <input matInput formControlName="nome" required>
+            <mat-error *ngIf="getNome.errors?.required">Introduz nome </mat-error>
+          </mat-form-field>
+
+        </div>
+
+        <!-- HORAIO -->
+        <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start stretch" fxFlex >
+
+          <mat-form-field appearance="outline">
+            <mat-label>Horaio</mat-label>
+            <input matInput formControlName="horario" required>
+            <mat-error *ngIf="getHorario.errors?.required">Introduz horario</mat-error>
+          </mat-form-field>
+
+        </div>
+
+
+      </div>
+
+      <!-- IMAGEM CAPA -->
+      <div class="oa-oa-container oa-oa-container-contacto" fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="space-evenly stretch"    fxLayoutGap="10px"  >
+
+        <div  fxLayout="column" fxLayoutAlign="start stretch" fxFlex >
+          <mat-form-field appearance="outline">
+            <mat-label>Imagem Capa</mat-label>
+            <input matInput formControlName="imagemCapa" required>
+            <mat-error *ngIf="getImagemCapa.errors?.required">Introduz Imagem Capa</mat-error>
+          </mat-form-field>
+        </div>
+
+      </div>
+
+
+      <!-- TELEFONE /NUM INTERNO-->
+      <div class="oa-oa-container oa-oa-container-contacto" fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="space-evenly stretch"   fxLayoutGap="10px"  >
+
+        <!-- TELEFONE -->
+        <div class="item-contacto item" fxLayout="column"  fxLayoutAlign="start stretch"  fxFlex  >
+
+          <mat-form-field appearance="outline">
+            <mat-label>Telefone </mat-label>
+            <input matInput formControlName="telefone" required>
+            <mat-error *ngIf="getTelefone.errors?.required">Introduz telefone </mat-error>
+          </mat-form-field>
+
+        </div>
+
+        <!-- NUM INTERNO -->
+        <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start stretch" fxFlex >
+
+          <mat-form-field appearance="outline">
+            <mat-label>Num Interno</mat-label>
+            <input matInput formControlName="numeroInterno" required>
+            <mat-error *ngIf="getNumeroInterno.errors?.required">Introduz Num Interno</mat-error>
+          </mat-form-field>
+
+        </div>
+
+
+      </div>
+
+      <!-- BOTÃO -->
+      <div
+          fxLayout="row " fxLayoutAlign="start center" fxLayoutGap="10px grid"
+
+          fxLayoutGap.sm="5px grid"
+
+          fxLayout.lt-sm="column"
+          fxLayoutAlign.lt-sm="start"
+          fxLayoutGap.lt-sm="0px"
+      >
+
+        <div  fxLayoutAlign="start start" fxFlex="none" >
+
+          <mat-card-actions class="buttons">
+
+            <button (click)="onSubmit()" mat-raised-button color="primary" [disabled]="!formRestaurante.valid">{{ accao }}</button>
+            <button mat-raised-button color="warn" mat-dialog-close >Cancelar</button>
+
+          </mat-card-actions>
+
+        </div>
+
+      </div>
+
+
+</div>
+</form>
+
+</div>
+</mat-card-content>
+
+<!-- PARA COMMENTAR NO FIM
+
+
+  <div class="jumbotron">
+    <p>
+      Form Status: {{ formRestaurante.status }}
+    </p>
+  </div>
+
+  <div class="jumbotron">
+    <p>
+      Form Value: {{ formRestaurante.value | json }}
+    </p>
+  </div>
+
+
+-->
+
+
+

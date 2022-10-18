@@ -51,7 +51,7 @@ export class ListarComponent implements OnInit {
 
 
   totalElements: number =0;
-  sizeInicial: number =10;
+  sizeInicial: number =20;
   sort: string ="id";
   direccaoOrdem: string ="desc";
 
@@ -286,7 +286,13 @@ export class ListarComponent implements OnInit {
     this.isPopupOpened = true;
     //const contact = this._contactService.getAllContacts().find(c => c.ID === id);
     const dialogRef = this.dialog.open(CriaralterarComponent, {
-      data: row
+      data: row,
+      maxWidth: '70vw',
+      maxHeight: '80vh',
+
+      width: '70vw',
+
+      disableClose: true
     });
 
     //ACCAO DEPOIS DE FECHAR DIALOG
@@ -306,7 +312,11 @@ export class ListarComponent implements OnInit {
     this.isPopupOpened = true;
 
     const dialogRef = this.dialog.open(DetalheComponent, {
-      data: row
+      data: row,
+      maxWidth: '70vw',
+      maxHeight: '80vh',
+
+      width: '70vw',
     });
 
     //ACCAO DEPOIS DE FECHAR DIALOG

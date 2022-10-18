@@ -98,7 +98,7 @@ export class ListarComponent implements OnInit {
     private dialogService: DialogService,
     private dialog: MatDialog) { }
 
-        //CRIAR FORMULARIO PESQUISA
+  //CRIAR FORMULARIO PESQUISA
   formPesquisa: FormGroup = this.formBuilder.group({
     opcao: [null],
     texto: [null],
@@ -213,6 +213,9 @@ export class ListarComponent implements OnInit {
       data: row,
       maxWidth: '70vw',
       maxHeight: '80vh',
+
+      width: '70vw',
+
       disableClose: true
     });
 
@@ -235,7 +238,11 @@ export class ListarComponent implements OnInit {
     const dialogRef = this.dialog.open(DetalheComponent, {
       data: row,
       maxWidth: '70vw',
-      maxHeight: '80vh'
+      maxHeight: '80vh',
+
+      width: '70vw',
+
+
     });
 
     //ACCAO DEPOIS DE FECHAR DIALOG
@@ -244,6 +251,7 @@ export class ListarComponent implements OnInit {
           this.isPopupOpened = false;
       }
     );
+
   }
 
   //DIALOG CONFIRM DELETE
@@ -267,11 +275,13 @@ export class ListarComponent implements OnInit {
     });
   }
 
+  //REALIZAR DELETE
   deleteEntety(row: ITitem){
 
-    this.cardapioCrudService.deleteData(row.id).subscribe(
+    this.titemCrudService.deleteData(row.id).subscribe(
           success => {
-                this.dialogService.openSnack_botao_tempo_css("Sucesso Delete Titem", "X", 6000, "green-snackbar");
+
+                this.dialogService.openSnack_botao_tempo_css("Sucesso: T. Item Removido", "X", 6000, "green-snackbar");
 
                 this.redirectTo('/oa-admin/gestao/entidades/titem/listar');
           },
@@ -293,7 +303,7 @@ export class ListarComponent implements OnInit {
     }
 
 
-    //DIALOG ERRO
+  //DIALOG ERROR
   alertDialogError(msg: string){
     this.dialogService.alertDialogError(
       {
@@ -304,7 +314,7 @@ export class ListarComponent implements OnInit {
   }
 
 
-  //LIMPAR CAMPOS FORM
+  //LIMPAR CAMPOS FORM PESQUISA
   limparPesquisa() {
     this.submitted = false;
     this.disabledBotaoPesquisa = true; //desactivar
@@ -312,12 +322,13 @@ export class ListarComponent implements OnInit {
   }
 
 
+  //REDIRECT DEPOIS DE CRIAR OU EDITAR
   redirectTo(uri:string){
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
     this.router.navigate([uri]));
   }
 
-  //FILTER
+  //FILTER MAT TABLE
   applyFilter(event: Event){
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

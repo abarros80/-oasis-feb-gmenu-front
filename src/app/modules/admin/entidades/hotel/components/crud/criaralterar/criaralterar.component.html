@@ -89,7 +89,7 @@
           <div class="oa-container oa-container-contacto" fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="start  stretch"   fxLayoutGap="10px"  >
 
             <div  fxLayoutAlign="start start" fxFlex="none" >
-                <mat-checkbox formControlName="activo" >Ativar</mat-checkbox >
+                <mat-checkbox formControlName="activo">Ativar</mat-checkbox >
             </div>
 
           </div>
@@ -113,9 +113,6 @@
                 <button (click)="onSubmit()" mat-raised-button color="primary" [disabled]="!formHotel.valid">{{ accao }}</button>
                 <button mat-raised-button color="warn" mat-dialog-close >Cancelar</button>
 
-
-
-
               </mat-card-actions>
 
             </div>
@@ -136,8 +133,7 @@
 
 
 
-
-
+<!--
   <div class="jumbotron">
     <p>
       Form Status: {{ formHotel.status }}
@@ -150,6 +146,7 @@
     </p>
   </div>
 
+ -->
 
 
 

@@ -1,30 +1,28 @@
 <mat-sidenav-container class="oa-container">
-  <mat-sidenav mode="side" opened>
+  <mat-sidenav #oasidenav (closed)="logSideNav('close')" (opened)="logSideNav('open')" mode="side" [(opened)]="sideNavOpened">
 
 
-    <mat-card>
-      <mat-card-title>
-        <mat-icon>account_circle</mat-icon>
-      </mat-card-title>
-      <mat-card-subtitle>
-        {{ username }}
-      </mat-card-subtitle>
-      <mat-card-actions>
-        <app-logout mat-list-item></app-logout>
-      </mat-card-actions>
-    </mat-card>
+    <!-- AVATAR / NOME USER -->
+    <h4 class="iconuser">
+      <img src="./assets/img/avatar.png" alt="Avatar" class="avatar">
+   </h4>
 
+    <h4 class="nome">{{ username }}</h4>
+
+
+    <!-- MENU -->
     <mat-nav-list>
 
-      <i mat-list-item>
-
-
-      </i>
+      <!-- HOME -->
+      <mat-divider></mat-divider>
 
       <a routerLink="./" mat-list-item>
         <i class="material-icons">home</i>
         Home
       </a>
+
+      <!-- ENTIDADES -->
+      <mat-divider></mat-divider>
 
       <a mat-list-item
       [routerLink]="['./entidades/hotel']" routerLinkActive="active"
@@ -56,24 +54,67 @@
         Item
       </a>
 
+      <!-- RELATORIOS -->
+      <mat-divider></mat-divider>
+
       <a mat-list-item
       [routerLink]="['./consulta']" routerLinkActive="active"
       >
         Relatorios
       </a>
 
+      <!-- LOGOUT -->
+      <mat-divider></mat-divider>
 
-
+      <app-logout mat-list-item></app-logout>
 
     </mat-nav-list>
+
+
+    <!-- CLOSE MENU -->
+    <div class="menuclose"  *ngIf="sideNavOpened">
+      <button mat-flat-button color="primary" (click)="sideNavOpened=!sideNavOpened">
+        <mat-icon  >
+            keyboard_double_arrow_left
+        </mat-icon>
+      </button>
+    </div>
+
+
 
   </mat-sidenav>
 
 
+  <!-- CONTEUDO -->
   <mat-sidenav-content>
 
+    <div fxLayout="row" fxLayoutAlign="start stretch" class="oa-content">
 
-    <router-outlet></router-outlet>
+      <!-- OPEN MENU -->
+      <div class="menuopen" *ngIf="!sideNavOpened" >
+        <button mat-flat-button color="primary" (click)="sideNavOpened=!sideNavOpened">
+          <mat-icon >
+            menu
+          </mat-icon>
+
+        </button>
+
+        <!--
+        <button (click)="oasidenav.open()"> Open </button>
+
+        <button (click)="oasidenav.close()"> Close </button>
+
+        <button (click)="oasidenav.toggle()"> Toggle </button>
+          -->
+      </div>
+
+      <!-- CONTEUDO DINAMICO -->
+      <div fxFlexFill>
+        <router-outlet></router-outlet>
+      </div>
+
+    </div>
+
 
   </mat-sidenav-content>
 

@@ -1,3 +1,4 @@
+
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 
 
@@ -11,6 +12,7 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 import { PaginatorPtIntl } from './services/paginator-pt-intl';
 import { OaPdfService } from './services/oa-pdf.service';
 import { OaFileUploadService } from './services/oa-file-upload.service';
+import { OaExelService } from './services/oa-exel.service';
 
 
 
@@ -33,7 +35,8 @@ import { OaFileUploadService } from './services/oa-file-upload.service';
     DialogService,
     AuthGuard,
     OaPdfService,
-    OaFileUploadService
+    OaFileUploadService,
+    OaExelService
 
   ]
 })

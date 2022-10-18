@@ -19,7 +19,7 @@ export class CardapioCrudService extends  ApiCrudService<ICardapio> {
   }
 
   // Update
-  updateFromIReqHotel(record: IReqCardapio) {
+  updateFromIReq(record: IReqCardapio) {
 
     let url = `${super.getAPIURL}/${record.id}`;
     return this.http.put<ICardapio>(url, record, { 'headers': this.headers }).pipe(
@@ -30,7 +30,7 @@ export class CardapioCrudService extends  ApiCrudService<ICardapio> {
   }
 
   // Create
-  createFromIReqHotel(record: IReqCardapio) {
+  createFromIReq(record: IReqCardapio) {
     let url = `${super.getAPIURL}`;
     return this.http.post(url, record,  {'headers': super.headers})
       .pipe(

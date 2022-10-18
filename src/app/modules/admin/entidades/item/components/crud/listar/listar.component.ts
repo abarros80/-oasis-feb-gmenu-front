@@ -58,13 +58,13 @@ export class ListarComponent implements OnInit {
   //PAGINAÇÃO
   mypages?: MyPages;
 
-
   totalElements: number =0;
-  sizeInicial: number =3;
-  sort: string ="nome";
-  direccaoOrdem: string ="asc";
+  sizeInicial: number =20;
+  sort: string ="id";
+  direccaoOrdem: string ="desc";
 
   pageSizeOptions: number[] = [5, 10, 20, 30];
+
 
 
   setPageSizeOptions(setPageSizeOptionsInput: string) {
@@ -265,8 +265,8 @@ export class ListarComponent implements OnInit {
     let pageSize = this.pageEvent? this.pageEvent.pageSize: this.sizeInicial;
 
     //SORT
-    this.sort = this.sortEvent? this.sortEvent.active : "nomePt";
-    this.direccaoOrdem = this.sortEvent? this.sortEvent.direction : "asc";
+    this.sort = this.sortEvent? this.sortEvent.active : "id";
+    this.direccaoOrdem = this.sortEvent? this.sortEvent.direction : "desc";
 
     let myObservablePesquisa$: Observable<IResponsePageableItem>;//commentar
 
@@ -384,7 +384,13 @@ export class ListarComponent implements OnInit {
   editarEntety(row: IItem) {
     this.isPopupOpened = true;
     const dialogRef = this.dialog.open(CriaralterarComponent, {
-      data: row
+      data: row,
+      maxWidth: '70vw',
+      maxHeight: '80vh',
+
+      width: '70vw',
+
+      disableClose: true
     });
 
     //ACCAO DEPOIS DE FECHAR DIALOG
@@ -404,7 +410,12 @@ export class ListarComponent implements OnInit {
     this.isPopupOpened = true;
 
     const dialogRef = this.dialog.open(DetalheComponent, {
-      data: row
+      data: row,
+      maxWidth: '70vw',
+      maxHeight: '80vh',
+
+      width: '70vw',
+
     });
 
     //ACCAO DEPOIS DE FECHAR DIALOG

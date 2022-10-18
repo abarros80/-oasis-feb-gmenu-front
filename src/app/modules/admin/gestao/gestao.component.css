@@ -1,8 +1,119 @@
-.oa-container{
+mat-sidenav-container{
   background: #eee;
 
   margin: auto;
-  height: 100%;
+  height: 85%;
+}
+
+mat-sidenav-content {
+
+  padding-left: 16px;
+
+
+}
+
+mat-sidenav {
+
+  padding: 16px;
+  margin: 16px;
+
+  background-color: #999b9b;
+  color: white;
+  width: 200px;
+  border-right: none;
+  border-radius: 10px;
+
+
+}
+mat-divider {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  background-color: #eee;
+}
+
+.oa-content {
+
+  margin: 16px;
+  padding-bottom: 48px;
+
+
+  border-radius: 10px;
+
+}
+
+.iconuser, .nome {
+  display: flex;
+  justify-content: center;
+}
+
+.iconuser{
+  margin-top: 16px;
+  margin-bottom: 0px;
 }
 
 
+
+.menuopen{
+
+  position: absolute;
+  top: 16px;
+  left: 6px;
+  width: 14px;
+  height: 10px;
+
+
+  padding: 0px;
+  margin: 0px;
+
+
+}
+
+.menuopen button{
+
+  padding: 0px;
+  margin: 0px;
+  min-width: 10px;
+  background-color: #999b9b;
+
+}
+
+.menuopen button mat-icon{
+
+  color: #eee;
+
+}
+
+
+.menuclose{
+
+  position: absolute;
+
+  top: 0px;
+  right: 16px;
+
+  padding: 0px;
+  margin: 0px;
+
+  width: 14px;
+  height: 10px;
+
+}
+
+.menuclose button{
+
+  padding: 0px;
+  margin: 0px;
+  min-width: 10px;
+  background-color: #999b9b;
+
+}
+
+
+
+
+.avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}

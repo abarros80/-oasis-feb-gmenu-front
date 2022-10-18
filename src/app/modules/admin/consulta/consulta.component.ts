@@ -8,7 +8,15 @@ import { ChartData, ChartOptions } from 'chart.js';
 
 import { OaPdfService } from '../../../my-core/services/oa-pdf.service';
 import { OaFileUploadService } from '../../../my-core/services/oa-file-upload.service';
+import { OaExelService } from '../../../my-core/services/oa-exel.service';
 
+
+export interface PeriodicElement {
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
+}
 
 
 
@@ -26,6 +34,7 @@ export class ConsultaComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private oaPdfService: OaPdfService,
+    private oaExelService: OaExelService,
     private oaFileUploadService: OaFileUploadService
     ) { }
 
@@ -33,6 +42,7 @@ export class ConsultaComponent implements OnInit {
     this.incializarForm();
 
     this.fileInfos = this.oaFileUploadService.getFiles();
+
   }
 
   //CRIAR FORMULARIO
@@ -153,6 +163,56 @@ export class ConsultaComponent implements OnInit {
     }
     get getImagemLogo(): any {
       return this.formHotel?.get('imagemLogo');
+    }
+
+
+    // =========EXEL================
+
+    title = 'angular-exportexcel-example';
+
+    data: any = [{
+      eid: 'e101',
+      ename: 'ravi',
+      esal: 1000
+      },{
+      eid: 'e102',
+      ename: 'ram',
+      esal: 2000
+      },{
+      eid: 'e103',
+      ename: 'rajesh',
+      esal: 3000
+      }];
+
+
+
+      exportAsXLSX():void {
+      this.oaExelService.exportExcel(this.data, 'customers');
+    }
+
+
+    exportArrayToExcel():void {
+      this.oaExelService.exportArrayToExcel(this.data, 'customers');
+    }
+
+    ELEMENT_DATA: PeriodicElement[] = [
+      { position: 1, name: "Hydrogen", weight: 1.0079, symbol: "H" },
+      { position: 2, name: "Helium", weight: 4.0026, symbol: "He" },
+      { position: 3, name: "Lithium", weight: 6.941, symbol: "Li" },
+      { position: 4, name: "Beryllium", weight: 9.0122, symbol: "Be" },
+      { position: 5, name: "Boron", weight: 10.811, symbol: "B" },
+      { position: 6, name: "Carbon", weight: 12.0107, symbol: "C" },
+      { position: 7, name: "Nitrogen", weight: 14.0067, symbol: "N" },
+      { position: 8, name: "Oxygen", weight: 15.9994, symbol: "O" },
+      { position: 9, name: "Fluorine", weight: 18.9984, symbol: "F" },
+      { position: 10, name: "Neon", weight: 20.1797, symbol: "Ne" }
+    ];
+
+    displayedColumns: string[] = ["position", "name", "weight", "symbol"];
+    dataSource = this.ELEMENT_DATA;
+
+    exportTable() {
+      this.oaExelService.exportTableToExcel("ExampleMaterialTable");
     }
 
 

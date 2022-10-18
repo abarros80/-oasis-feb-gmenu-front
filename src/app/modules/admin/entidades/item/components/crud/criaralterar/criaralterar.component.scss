@@ -1,9 +1,30 @@
-.title {
-  text-align: center;
-  margin-bottom: 3rem;
+.example-spacer {
+  flex: 1 1 auto;
 }
 
-.title h1 {
-  font-size: 2rem;
-  color:darkgrey;
+mat-toolbar{
+  margin: 5 0px;
+}
+
+
+.green-snackbar {
+  background: #006068;
+  color: white;
+}
+
+.green-snackbar button {
+  background-color: #006068;
+  color: white;
+  border: none;
+}
+
+.red-snackbar {
+  background: #F44336;
+  color: white;
+}
+
+.red-snackbar button {
+  background-color: #F44336;
+  color: white !important;
+  border: none;
 }

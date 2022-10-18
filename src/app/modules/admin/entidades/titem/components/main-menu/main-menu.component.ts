@@ -26,6 +26,9 @@ export class MainMenuComponent implements OnInit {
       data: {},
       maxWidth: '70vw',
       maxHeight: '80vh',
+
+      width: '70vw',
+
       disableClose: true
     });
 

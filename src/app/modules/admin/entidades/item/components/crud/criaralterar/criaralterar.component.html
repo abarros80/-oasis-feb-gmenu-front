@@ -1,7 +1,19 @@
+<div class="oa-container" style="margin-bottom: 10px;">
+  <mat-toolbar color="primary">
 
-  <div class="title content">
-    <h1>{{ accao }}</h1>
-  </div>
+    <mat-card-title>{{ accao }}</mat-card-title>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon (click)="closeClick()">cancel</mat-icon>
+    </button>
+
+  </mat-toolbar>
+
+</div>
+
+<mat-card-content >
+  <div class="oa-container">
+
 
   <form [formGroup]="formItem" (ngSubmit)="onSubmit">
 
@@ -178,6 +190,19 @@
 
       </div>
 
+      <!-- IMAGEM CAPA -->
+      <div class="oa-oa-container oa-oa-container-contacto" fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="space-evenly stretch"    fxLayoutGap="10px"  >
+
+        <div  fxLayout="column" fxLayoutAlign="start stretch" fxFlex >
+          <mat-form-field appearance="outline">
+            <mat-label>Imagem</mat-label>
+            <input matInput formControlName="fotoPath" required>
+            <mat-error *ngIf="getFotoPath.errors?.required">Introduz Imagem </mat-error>
+          </mat-form-field>
+        </div>
+
+      </div>
+
       <!-- ATIVO -->
       <div class="oa-oa-container oa-oa-container-contacto" fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="start  stretch"   fxLayoutGap="10px"  >
 
@@ -204,10 +229,7 @@
           <mat-card-actions class="buttons">
 
             <button (click)="onSubmit()" mat-raised-button color="primary" [disabled]="!formItem.valid">{{ accao }}</button>
-            <button mat-raised-button type="button" routerLink="../listar" *ngIf="accao == 'Criar'">Cancelar</button>
-            <button mat-raised-button type="button" routerLink="../../listar" *ngIf="accao == 'Editar'">Cancelar</button>
-
-
+            <button mat-raised-button color="warn" mat-dialog-close >Cancelar</button>
 
           </mat-card-actions>
 
@@ -218,6 +240,15 @@
 
 </div>
 </form>
+
+</div>
+</mat-card-content>
+
+
+
+
+
+<!--
 
 <div class="jumbotron">
   <p>
@@ -234,8 +265,9 @@
   </p>
 </div>
 
+-->
 
-
+ <!--
   <div class="jumbotron">
     <p>
       Form Status: {{ formItem.status }}
@@ -248,7 +280,7 @@
     </p>
   </div>
 
-
+-->
 
 
 

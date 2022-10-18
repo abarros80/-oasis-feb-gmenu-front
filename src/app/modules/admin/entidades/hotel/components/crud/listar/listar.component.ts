@@ -96,6 +96,9 @@ export class ListarComponent implements OnInit {
             data: row,
             maxWidth: '70vw',
             maxHeight: '80vh',
+
+            width: '70vw',
+
             disableClose: true
           });
 
@@ -119,6 +122,9 @@ export class ListarComponent implements OnInit {
           data: row,
           maxWidth: '70vw',
           maxHeight: '80vh',
+
+          width: '70vw',
+
         });
 
         //ACCAO DEPOIS DE FECHAR DIALOG
@@ -155,7 +161,7 @@ export class ListarComponent implements OnInit {
 
         this.hotelCrudService.deleteData(row.id).subscribe(
               success => {
-                    this.dialogService.openSnack_botao_tempo_css("Sucesso Delete Hotel", "X", 6000, "green-snackbar");
+                    this.dialogService.openSnack_botao_tempo_css("Sucesso: Hotel Removido", "X", 6000, "green-snackbar");
 
                     this.redirectTo('/oa-admin/gestao/entidades/hotel/listar');
               },

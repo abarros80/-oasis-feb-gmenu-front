@@ -24,6 +24,10 @@ export class MainMenuComponent implements OnInit {
     this.isPopupOpened = true;
     const dialogRef = this.dialog.open(CriaralterarComponent, {
       data: {},
+      maxWidth: '70vw',
+      maxHeight: '80vh',
+
+      width: '70vw',
       disableClose: true
     });
 

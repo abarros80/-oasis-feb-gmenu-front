@@ -51,7 +51,7 @@ export class CriaralterarComponent implements OnInit {
     ngOnInit(): void {
       console.log("COMPONENTE CRIAR/ALTERAR: ngOnInit ===============================");
       this.preencherFormulario();
- }
+    }
 
 
 
@@ -119,8 +119,8 @@ incializarForm(): void {
   this.formTitem = this.formBuilder.group({
 
     id: [null],
-    nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
-    activo: [false],
+    nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+    activo: [true],
     idUser: [this.USERID, Validators.required],
 
   });
@@ -166,9 +166,9 @@ onSubmit() {
                     console.log('UPDATE : sucesso', success);
                     this.hasErroMsg = false;
 
-                    this.dialogService.openSnack_botao_tempo_css("T. Item criado", "X", 6000, "green-snackbar");
+                    //this.dialogService.openSnack_botao_tempo_css("T. Item criado", "X", 6000, "green-snackbar");
 
-                    this.dialogService.openSnack_botao_tempo_css("Sucesso Delete T. Item", "X", 6000, "green-snackbar");
+                    this.dialogService.openSnack_botao_tempo_css("Sucesso: T. Item Editado", "X", 6000, "green-snackbar");
 
 
                     this.dialogRef.close("update");
@@ -215,7 +215,7 @@ onSubmit() {
                     console.log('CRIADO: sucesso');
                     this.hasErroMsg = false;
 
-                    this.dialogService.openSnack_botao_tempo("T. Item criado", "X", 6000);
+                    this.dialogService.openSnack_botao_tempo_css("Sucesso: T. Item Criado", "X", 6000, "green-snackbar");
 
                     this.dialogRef.close("criar");
 

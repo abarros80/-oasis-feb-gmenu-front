@@ -1,20 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject  } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Observable, zip } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { ItemCrudService } from '../../../services/item-crud.service';
-
-import { LoginService } from '../../../../../../../my-core/services/login.service';
-import { HotelCrudService } from '../../../../hotel/services/hotel-crud.service';
-import { TitemCrudService } from '../../../../titem/services/titem-crud.service';
+import {  MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { DialogService } from '../../../../../../../my-core/services/dialog.service';
 
-import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { Observable, zip } from 'rxjs';
+
+import { LoginService } from '../../../../../../../my-core/services/login.service';
+
+
+import { ItemCrudService } from '../../../services/item-crud.service';
+import { HotelCrudService } from '../../../../hotel/services/hotel-crud.service';
+import { TitemCrudService } from '../../../../titem/services/titem-crud.service';
+
+
+
 import { IItem } from '../../../interfaces/i-item';
 import { UnidadeMedidaEnum } from '../../../enums/unidade-medida-enum';
 
@@ -69,7 +76,9 @@ export class CriaralterarComponent implements OnInit, IFormCanDesactivate {
     private hotelCrudService: HotelCrudService,
     private titemCrudService: TitemCrudService,
     private router: Router,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private dialogRef: MatDialogRef<CriaralterarComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: IHotel,
   ) {}
 
 
@@ -114,20 +123,13 @@ export class CriaralterarComponent implements OnInit, IFormCanDesactivate {
 
    preencherFormulario(): void {
 
-     //LER DADOS URL: SABER ID e ACCAO
-     this.route.params.subscribe((params: any) =>{
+      let id = this.data.id;
 
-       console.log("COMPONENTE CRIAR/ALTERAR - PARAMS URL",params);
-
-       const id = params['id'];
-
-       if(id){
-        this.preencherFormularioUpdate(id);
-       }else{
-         this.preencherFormularioCreate();
-       }
-
-     });
+      if(id){
+      this.preencherFormularioUpdate(id);
+      }else{
+        this.preencherFormularioCreate();
+      }
 
    }
 
@@ -149,6 +151,8 @@ export class CriaralterarComponent implements OnInit, IFormCanDesactivate {
 
     console.log("CRIAR/ALTERAR ITEM - preencherFormularioUpdate");
 
+    this.accao="Editar";
+
     this.incializarFormItem();
 
     this.itemCrudService.findById(id).subscribe(
@@ -163,21 +167,8 @@ export class CriaralterarComponent implements OnInit, IFormCanDesactivate {
       }
 
 
-      );
-    //SABER ACCAO
-    this.route.url.subscribe((url: any) =>{
-      console.log("URL: ",url);
-      url.forEach((value: {path: any}) =>{
-        if(value.path=="ver"){
-          this.accao="Ver";
-          console.log("ACCAO: ", this.accao);
-        }
-        if(value.path=="editar"){
-          this.accao="Editar";
-          console.log("ACCAO: ", this.accao);
-        }
-      } )
-    });
+    );
+
 
   }
 
@@ -186,15 +177,15 @@ export class CriaralterarComponent implements OnInit, IFormCanDesactivate {
 
       id: [null],
 
-      nomePt: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
-      nomeIng: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
-      nomeFr: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
-      activo: [null],
-      fotoPath: ["..."],
-      descPt: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
-      descFr: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
-      descIng: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
-      preco: [null],
+      nomePt: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
+      nomeIng: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
+      nomeFr: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
+      activo: [true],
+      fotoPath: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(300)]],
+      descPt: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(300)]],
+      descFr: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(300)]],
+      descIng: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(300)]],
+      preco: [null, Validators.required],
       quantidade: [null],
       unidadeMedidaEnum: [null, Validators.required],
       idUser: [this.USERID, Validators.required],
@@ -253,18 +244,6 @@ export class CriaralterarComponent implements OnInit, IFormCanDesactivate {
 
     });
 
-
-
-
-
-
-
-
-
-
-
-
-
   }
 
 
@@ -293,16 +272,35 @@ export class CriaralterarComponent implements OnInit, IFormCanDesactivate {
          this.itemCrudService.updateItemFromIReqItem(this.crearObjectoFromFROM()).subscribe(
            success => {
              this.hasErroMsg = false;
-             this.msgSnackBar("ITEM update");
+             //this.msgSnackBar("ITEM update");
              console.log('UPDATE ITEM: sucesso', success);
-             this.router.navigate(['/oa-admin/gestao/entidades/item/listar']);
+             //this.router.navigate(['/oa-admin/gestao/entidades/item/listar']);
+
+             this.dialogService.openSnack_botao_tempo_css("Sucesso: Item Editado", "X", 6000, "green-snackbar");
+
+
+             this.dialogRef.close("update");
+
+
+            this.redirectTo('/oa-admin/gestao/entidades/item/listar');
+
+
+
            },
            error => {
              this.hasErroMsg = true;
              this.erroMsg = "UPDATE ITEM: Erro no Update Item \n"+error;
              this.requestCompleto = false;
              console.log(this.erroMsg);
-             alert(this.erroMsg);
+
+
+             this.dialogService.alertDialogError(
+              {
+                message: error,
+                buttonText: "Sair",
+              }
+            );
+
            },
 
            () => {
@@ -350,16 +348,32 @@ export class CriaralterarComponent implements OnInit, IFormCanDesactivate {
          this.itemCrudService.createItemFromIReqItem(this.crearObjectoFromFROM()).subscribe(
            success => {
              this.hasErroMsg = false;
-             this.msgSnackBar("ITEM criado");
+             //this.msgSnackBar("ITEM criado");
              console.log('CRIADO ITEM: sucesso');
-             this.router.navigate(['/oa-admin/gestao/entidades/item/listar']);
+             //this.router.navigate(['/oa-admin/gestao/entidades/item/listar']);
+
+             this.dialogService.openSnack_botao_tempo_css("Sucesso: Item Criado", "X", 6000, "green-snackbar");
+
+            this.dialogRef.close("criar");
+
+            this.redirectTo('/oa-admin/gestao/entidades/item/listar');
+
            },
            error => {
              this.hasErroMsg = true;
              this.erroMsg = "CRIADO ITEM: Erro no Create Item \n"+error;
              this.requestCompleto = false;
              console.log(this.erroMsg);
-             alert(this.erroMsg);
+
+
+             this.dialogService.alertDialogError(
+              {
+                message: error,
+                buttonText: "Sair",
+              }
+            );
+
+
            },
 
            () => {
@@ -384,6 +398,16 @@ export class CriaralterarComponent implements OnInit, IFormCanDesactivate {
        this.erroMsg = "formulario invalido";
        this.requestCompleto = false;
        console.log(this.erroMsg);
+
+
+
+       this.dialogService.alertDialogError(
+        {
+          message: this.erroMsg,
+          buttonText: "Sair",
+        }
+      );
+
 
        //Quando o formulario não é valido obriga marcar os campos para aparecer o erro
        if(this.formItem)
@@ -445,6 +469,17 @@ export class CriaralterarComponent implements OnInit, IFormCanDesactivate {
        "tipoItem": "/tipoitens/"+this.formItem?.value.tipoItem,
        "hotel": "/hotels/"+this.formItem?.value.hotel,
      }
+   }
+
+   redirectTo(uri:string){
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+    this.router.navigate([uri]));
+  }
+
+
+
+  closeClick(): void {
+    this.dialogRef.close();
    }
 
    //RESET FORMULARIO

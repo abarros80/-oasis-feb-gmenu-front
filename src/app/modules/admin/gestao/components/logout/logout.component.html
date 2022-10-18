@@ -1,6 +1,5 @@
-<a *ngIf="isLoggedIn" class="nav-link" (click)=handleLogout()>
-
-  <mat-icon class="icon">logout</mat-icon>Logout
-
-
-</a>
+<p>
+  <button mat-button *ngIf="isLoggedIn" class="nav-link" (click)=handleLogout()>
+    Sair <mat-icon class="icon">logout</mat-icon>
+  </button>
+</p>

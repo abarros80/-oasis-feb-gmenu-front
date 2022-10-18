@@ -273,7 +273,13 @@ editarRestaurante(row: IRestaurante) {
   this.isPopupOpened = true;
   //const contact = this._contactService.getAllContacts().find(c => c.ID === id);
   const dialogRef = this.dialog.open(CriaralterarComponent, {
-    data: row
+    data: row,
+    maxWidth: '70vw',
+    maxHeight: '80vh',
+
+    width: '70vw',
+
+    disableClose: true
   });
 
   //ACCAO DEPOIS DE FECHAR DIALOG
@@ -293,7 +299,11 @@ verRestaurante(row: IRestaurante) {
   this.isPopupOpened = true;
 
   const dialogRef = this.dialog.open(DetalheComponent, {
-    data: row
+    data: row,
+    maxWidth: '70vw',
+    maxHeight: '80vh',
+
+    width: '70vw'
   });
 
   //ACCAO DEPOIS DE FECHAR DIALOG

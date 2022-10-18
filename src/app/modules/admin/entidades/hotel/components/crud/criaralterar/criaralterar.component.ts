@@ -122,11 +122,11 @@ export class CriaralterarComponent implements OnInit {
     this.formHotel = this.formBuilder.group({
 
       id: [null],
-      nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
-      activo: [false],
-      email: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
-      telefone: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
-      imagemLogo: ["..."],
+      nome: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
+      activo: [true],
+      email: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
+      telefone: [null, [Validators.required, Validators.minLength(7), Validators.maxLength(11)]],
+      imagemLogo: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(300)]],
       idUser: [this.USERID, Validators.required],
 
     });
@@ -175,9 +175,7 @@ export class CriaralterarComponent implements OnInit {
                       console.log('UPDATE HOTEL: sucesso', success);
                       this.hasErroMsg = false;
 
-                      this.dialogService.openSnack_botao_tempo_css("Hotel criado", "X", 6000, "green-snackbar");
-
-                      this.dialogService.openSnack_botao_tempo_css("Sucesso Delete Hotel", "X", 6000, "green-snackbar");
+                      this.dialogService.openSnack_botao_tempo_css("Sucesso: Hotel Editado", "X", 6000, "green-snackbar");
 
 
                       this.dialogRef.close("update");
@@ -224,11 +222,9 @@ export class CriaralterarComponent implements OnInit {
                       console.log('CRIADO HOTEL: sucesso');
                       this.hasErroMsg = false;
 
-                      this.dialogService.openSnack_botao_tempo("Hotel criado", "X", 6000);
+                      this.dialogService.openSnack_botao_tempo_css("Sucesso: Hotel Criado", "X", 6000, "green-snackbar");
 
                       this.dialogRef.close("criar");
-
-                      //this.router.navigate(['/oa-admin/gestao/entidades/hotel/listar']);
 
                       this.redirectTo('/oa-admin/gestao/entidades/hotel/listar');
 

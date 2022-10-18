@@ -1,1 +1,177 @@
-<p>criaralterar works!</p>
+<div class="oa-container" style="margin-bottom: 10px;">
+  <mat-toolbar color="primary">
+
+    <mat-card-title>{{ accao }}</mat-card-title>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon (click)="closeClick()">cancel</mat-icon>
+    </button>
+
+  </mat-toolbar>
+</div>
+
+
+<mat-card-content >
+  <div class="oa-container">
+
+  <form [formGroup]="formCardapio" (ngSubmit)="onSubmit">
+
+      <div fxLayout="column" fxLayoutAlign="start stretch" >
+
+      <!-- SELECT HOTEL/ACTIVO-->
+      <div  fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="start stretch"   fxLayoutGap="10px"  >
+
+        <div class="item-contacto item" fxLayout="column"  fxLayoutAlign="start stretch"  fxFlex >
+
+          <!-- SELECT HOTEL-->
+          <mat-form-field appearance="outline">
+            <mat-label>Hotel</mat-label>
+            <mat-select formControlName="hotel" required >
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let itemhotel of hoteis" [value]="itemhotel.id">
+                {{itemhotel.nome}}
+              </mat-option>
+            </mat-select>
+
+            <mat-error *ngIf="getHotel.errors?.required">
+              <span>Seleciona Hotel</span>
+            </mat-error>
+
+          </mat-form-field>
+
+        </div>
+
+        <!-- ACTIVO-->
+        <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start stretch" fxFlex >
+            <mat-checkbox formControlName="activo" >Ativar</mat-checkbox >
+        </div>
+
+      </div>
+
+
+      <!-- NOME_PT /NOME_ING -->
+      <div class="oa-oa-container oa-oa-container-contacto" fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="space-evenly stretch"   fxLayoutGap="10px"  >
+
+        <!-- NOME_PT -->
+        <div class="item-contacto item" fxLayout="column"  fxLayoutAlign="start stretch"  fxFlex  >
+
+          <mat-form-field appearance="outline">
+            <mat-label>Nome PT </mat-label>
+            <input matInput formControlName="nomePt" required>
+            <mat-error *ngIf="getNomePt.errors?.required">Introduz nome PT </mat-error>
+          </mat-form-field>
+
+        </div>
+
+        <!-- NOME_ING -->
+        <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start stretch" fxFlex >
+
+          <mat-form-field appearance="outline">
+            <mat-label>Nome ING </mat-label>
+            <input matInput formControlName="nomeIng" required>
+            <mat-error *ngIf="getNomePt.errors?.required">Introduz nome ING </mat-error>
+          </mat-form-field>
+
+        </div>
+
+
+      </div>
+
+      <!-- NOME_FR -->
+      <div class="oa-oa-container oa-oa-container-contacto" fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="space-evenly stretch"   fxLayoutGap="10px"  >
+
+        <!-- NOME_FR -->
+        <div class="item-contacto item" fxLayout="column"  fxLayoutAlign="start stretch"  fxFlex  >
+
+          <mat-form-field appearance="outline">
+            <mat-label>Nome FR </mat-label>
+            <input matInput formControlName="nomeFr" required>
+            <mat-error *ngIf="getNomeFr.errors?.required">Introduz nome FR </mat-error>
+          </mat-form-field>
+
+        </div>
+
+      </div>
+
+      <!-- IMAGEM CAPA -->
+      <div class="oa-oa-container oa-oa-container-contacto" fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="space-evenly stretch"    fxLayoutGap="10px"  >
+
+        <div  fxLayout="column" fxLayoutAlign="start stretch" fxFlex >
+          <mat-form-field appearance="outline">
+            <mat-label>Imagem</mat-label>
+            <input matInput formControlName="imagemPath" required>
+            <mat-error *ngIf="getImagemPath.errors?.required">Introduz Imagem</mat-error>
+          </mat-form-field>
+        </div>
+
+      </div>
+
+
+      <!-- Codigo Reduzido-->
+      <div class="oa-oa-container oa-oa-container-contacto" fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="space-evenly stretch"   fxLayoutGap="10px"  >
+
+        <!-- TELEFONE -->
+        <div class="item-contacto item" fxLayout="column"  fxLayoutAlign="start stretch"  fxFlex  >
+
+          <mat-form-field appearance="outline">
+            <mat-label>Codigo</mat-label>
+            <input matInput formControlName="codigoReduzido" required>
+            <mat-error *ngIf="getCodigoReduzido.errors?.required">Introduz Codigo Reduzido </mat-error>
+          </mat-form-field>
+
+        </div>
+
+
+      </div>
+
+      <!-- BOTÃO -->
+      <div
+          fxLayout="row " fxLayoutAlign="start center" fxLayoutGap="10px grid"
+
+          fxLayoutGap.sm="5px grid"
+
+          fxLayout.lt-sm="column"
+          fxLayoutAlign.lt-sm="start"
+          fxLayoutGap.lt-sm="0px"
+      >
+
+        <div  fxLayoutAlign="start start" fxFlex="none" >
+
+          <mat-card-actions class="buttons">
+
+            <button (click)="onSubmit()" mat-raised-button color="primary" [disabled]="!formCardapio.valid">{{ accao }}</button>
+            <button mat-raised-button color="warn" mat-dialog-close >Cancelar</button>
+
+          </mat-card-actions>
+
+        </div>
+
+      </div>
+
+
+</div>
+</form>
+
+</div>
+</mat-card-content>
+
+<!-- PARA COMMENTAR NO FIM
+
+
+  <div class="jumbotron">
+    <p>
+      Form Status: {{ formCardapio.status }}
+    </p>
+  </div>
+
+  <div class="jumbotron">
+    <p>
+      Form Value: {{ formCardapio.value | json }}
+    </p>
+  </div>
+
+
+-->
+
+
+

@@ -19,7 +19,7 @@ export class RestauranteCrudService extends  ApiCrudService<IRestaurante> {
   }
 
   // Update
-  updateFromIReqHotel(record: IReqRestaurante) {
+  updateFromIReq(record: IReqRestaurante) {
 
     let url = `${super.getAPIURL}/${record.id}`;
     return this.http.put<IRestaurante>(url, record, { 'headers': this.headers }).pipe(
@@ -30,7 +30,7 @@ export class RestauranteCrudService extends  ApiCrudService<IRestaurante> {
   }
 
   // Create
-  createFromIReqHotel(record: IReqRestaurante) {
+  createFromIReq(record: IReqRestaurante) {
     let url = `${super.getAPIURL}`;
     return this.http.post(url, record,  {'headers': super.headers})
       .pipe(
