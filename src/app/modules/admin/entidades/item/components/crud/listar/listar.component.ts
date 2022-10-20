@@ -431,7 +431,7 @@ export class ListarComponent implements OnInit {
 
     let dialogRef$ = this.dialogService.confirmDialog(
       {
-        title: "Remover Titem?",
+        title: "Remover Item?",
         message: "Nome: "+row.nomePt,
         confirmText: "Sim",
         cancelText: "Não",
@@ -449,9 +449,9 @@ export class ListarComponent implements OnInit {
 
   deleteEntety(row: IItem){
 
-    this.cardapioCrudService.deleteData(row.id).subscribe(
+    this.itemCrudService.deleteData(row.id).subscribe(
           success => {
-                this.dialogService.openSnack_botao_tempo_css("Sucesso Delete Titem", "X", 6000, "green-snackbar");
+                this.dialogService.openSnack_botao_tempo_css("Sucesso Delete Item", "X", 6000, "green-snackbar");
 
                 this.redirectTo('/oa-admin/gestao/entidades/item/listar');
           },

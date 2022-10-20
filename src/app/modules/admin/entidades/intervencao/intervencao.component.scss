@@ -1,0 +1,25 @@
+.home{
+  width: 100%;
+  margin: 1rem 0;
+}
+@media(max-width: 450px){
+  .home{
+    width: 70%;
+
+  }
+}
+
+@media(max-width: 770px){
+  .home{
+    width: 90%;
+
+  }
+}
+
+mat-toolbar{
+
+  background-color:rgb(56, 54, 54);
+  color: aliceblue;
+  border-radius: 10px;
+
+}

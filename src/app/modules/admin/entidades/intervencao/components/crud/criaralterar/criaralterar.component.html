@@ -1,0 +1,344 @@
+<div class="oa-container" style="margin-bottom: 10px;">
+  <mat-toolbar color="primary">
+
+    <mat-card-title>{{ accao }}</mat-card-title>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon (click)="closeClick()">cancel</mat-icon>
+    </button>
+
+  </mat-toolbar>
+
+</div>
+
+<mat-card-content >
+  <div class="oa-container">
+
+
+  <form [formGroup]="intervencaoForm" (ngSubmit)="onSubmit">
+      <div fxLayout="column" fxLayoutAlign="start stretch" >
+
+        <!-- SELECT HOTEL / AREA -->
+      <div  fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="start stretch"   fxLayoutGap="10px"  >
+
+          <div class="item-contacto item" fxLayout="column"  fxLayoutAlign="start stretch"  fxFlex >
+
+            <!-- SELECT HOTEL-->
+            <mat-form-field appearance="outline">
+              <mat-label>Hotel</mat-label>
+              <mat-select formControlName="hotel" required >
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let itemhotel of listHoteis" [value]="itemhotel.id">
+                  {{itemhotel.nome}}
+                </mat-option>
+              </mat-select>
+
+              <mat-error *ngIf="hotel.errors?.required">
+                <p *ngIf="hotel.errors.required">Seleciona Hotel</p>
+              </mat-error>
+
+            </mat-form-field>
+
+          </div>
+
+          <!-- SELECT AREA-->
+          <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start stretch" fxFlex >
+
+            <mat-form-field appearance="outline">
+              <mat-label>Area</mat-label>
+              <mat-select formControlName="area" required >
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let _areaItem of listaAreas" [value]="_areaItem.id">
+                  {{_areaItem.nome}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="area.errors?.required">
+                <span>Seleciona Area</span>
+              </mat-error>
+            </mat-form-field>
+
+          </div>
+
+      </div>
+
+
+        <!-- SELECT ESPAÇO / EQUIPAMENTO -->
+        <div  fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="start stretch"   fxLayoutGap="10px"  >
+
+          <div class="item-contacto item" fxLayout="column"  fxLayoutAlign="start stretch"  fxFlex >
+
+            <!-- SELECT ESPAÇO -->
+            <mat-form-field appearance="outline">
+              <mat-label>Espaço</mat-label>
+              <mat-select formControlName="espaco" required >
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let itemEspaco of listaEspacos" [value]="itemEspaco.id">
+                  {{itemEspaco.nome}}
+                </mat-option>
+              </mat-select>
+
+              <mat-error *ngIf="espaco.errors?.required">
+                <p *ngIf="espaco.errors.required">Seleciona Espaço</p>
+              </mat-error>
+
+            </mat-form-field>
+
+          </div>
+
+          <!-- SELECT EQUIPAMENTO -->
+          <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start stretch" fxFlex >
+
+            <mat-form-field appearance="outline">
+              <mat-label>Equipamento</mat-label>
+              <mat-select formControlName="equipamento" required >
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let _equipamentoItem of listaEquipamentos" [value]="_equipamentoItem.id">
+                  {{_equipamentoItem.nome}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="equipamento.errors?.required">
+                <span>Seleciona Equipamento</span>
+              </mat-error>
+            </mat-form-field>
+
+          </div>
+
+      </div>
+
+
+
+        <!-- SELECT TECNICO / DATA_HORA -->
+        <div  fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="start stretch"   fxLayoutGap="10px"  >
+
+          <div class="item-contacto item" fxLayout="column"  fxLayoutAlign="start stretch"  fxFlex >
+
+            <!-- SELECT TECNICO -->
+            <mat-form-field appearance="outline">
+              <mat-label>Tecnico</mat-label>
+              <mat-select formControlName="tecnico" required >
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let itemTecnico of listaTecnicos" [value]="itemTecnico.id">
+                  {{itemTecnico.nome}}
+                </mat-option>
+              </mat-select>
+
+              <mat-error *ngIf="tecnico.errors?.required">
+                <p *ngIf="tecnico.errors.required">Seleciona Tecnico</p>
+              </mat-error>
+
+            </mat-form-field>
+
+          </div>
+
+          <!-- SELECT DATA -->
+          <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start stretch" fxFlex >
+
+
+            <mat-form-field appearance="outline">
+              <mat-label>Data-Hora</mat-label>
+              <input matInput   formControlName="dataHora"
+                [disabled]="true"
+                [matDatepicker]="dp3"
+                (click)="dp3.open()"
+                [min]="minDate"
+                [max]="maxDate"
+              >
+              <mat-datepicker-toggle matSuffix [for]="dp3" [disabled]="false">
+                <mat-icon matDatepickerToggleIcon>
+                  calendar_month
+                </mat-icon>
+              </mat-datepicker-toggle>
+              <mat-datepicker #dp3 [disabled]="false" ></mat-datepicker>
+              <mat-hint>DD/MM/YYYY</mat-hint>
+
+            </mat-form-field>
+
+          </div>
+
+      </div>
+
+       <!-- ACÇÕES -->
+       <div formArrayName="accoes"  fxLayout="column" fxLayoutGap.lt-md="5px" fxLayoutAlign="start stretch"   fxLayoutGap="10px"  >
+
+        <div *ngFor="let itemAccao of accoes.controls; let ai=index"  fxLayout="column" fxLayoutGap.lt-md="5px" fxLayoutAlign="start stretch"   fxLayoutGap="10px" >
+
+          <div [formGroupName]="ai"  fxLayout.lt-md="column" fxLayoutGap.lt-md="5px" fxLayout="row" fxLayoutAlign="start stretch"   fxLayoutGap="10px">
+
+            <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start stretch" fxFlex >
+            <!-- SELECT ACCAO -->
+            <mat-form-field appearance="outline">
+              <mat-label>Accao</mat-label>
+              <mat-select formControlName="accao" required >
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let itemAccao of listaAccoes" [value]="itemAccao.id">
+                  {{itemAccao.nome}}
+                </mat-option>
+              </mat-select>
+
+              <mat-error *ngIf="accaoIntervencao(ai).errors?.required">
+                <p *ngIf="accaoIntervencao(ai).errors.required">Seleciona Accao</p>
+              </mat-error>
+
+            </mat-form-field>
+
+          </div>
+
+          <!--  DURACAO -->
+          <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start stretch" fxFlex >
+
+            <mat-form-field appearance="outline">
+              <mat-label>Duracao</mat-label>
+              <input matInput formControlName="duracao" required>
+              <mat-error *ngIf="duracaoIntervencao(ai).errors?.required">Introduz Duracao</mat-error>
+            </mat-form-field>
+
+          </div>
+
+          <!--  OBSERVACAO -->
+          <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start stretch" fxFlex >
+
+            <mat-form-field appearance="outline">
+              <mat-label>Observacao</mat-label>
+              <input matInput formControlName="observacao" required>
+              <mat-error *ngIf="observacaoIntervencao(ai).errors?.required">Introduz Observação</mat-error>
+            </mat-form-field>
+
+          </div>
+          <!--  REMOVER -->
+          <div  class="item-contacto item" fxLayout="column" fxLayoutAlign="start stretch" fxFlex >
+
+            <button mat-icon-button color="warn" aria-label="Example icon button with a menu icon" *ngIf="ai > 0" (click)="removeAccao(ai)">
+              <mat-icon>delete_forever</mat-icon>
+            </button>
+
+          </div>
+
+
+          </div>
+
+        </div>
+
+
+
+
+       </div>
+
+       <!-- MAIS ACCAO -->
+      <div  fxLayoutAlign="end start" fxFlex="none" >
+
+        <button type="button" mat-mini-fab color="primary" aria-label="Example icon button with a plus one icon" (click)="addAccao()">
+          <mat-icon>plus_one</mat-icon>
+        </button>
+
+      </div>
+
+      <!-- SUBMIT-->
+      <div  fxLayoutAlign="start start" fxFlex="none" >
+
+        <mat-card-actions class="buttons">
+
+          <button (click)="onSubmit()" mat-raised-button color="primary" [disabled]="!intervencaoForm.valid">{{ accao }}</button>
+          <button mat-raised-button color="warn" mat-dialog-close >Cancelar</button>
+
+        </mat-card-actions>
+
+      </div>
+
+
+
+       <!--
+        <div formArrayName="teachers">
+
+          <div *ngFor="let teacher of teachers().controls; let ti=index">
+
+            <div [formGroupName]="ti"
+              style="border: 1px solid blue; padding: 10px; width: 100%; display: inline-block; margin: 5px;">
+              Teachers Name :
+              <input type="text" formControlName="name">
+              <button (click)="removeTeacher(ti)">Remove</button>
+              <button type="button" (click)="addBatch(ti)">Add Batch</button>
+
+              <div formArrayName="batches">
+
+                <div *ngFor="let batch of batches(ti).controls; let bi=index">
+
+                  <div [formGroupName]="bi" style="border: 1px solid red; padding: 10px; margin: 5px; float:left">
+
+                    Batch Name :
+                    <input type="text" formControlName="name">
+                    <button (click)="removeBatch(ti,bi)">Remove Batch</button>
+                    <button (click)="addStudent(ti,bi)">Add Student</button>
+
+                    <div formArrayName="students">
+
+                      <div *ngFor="let batch of students(ti,bi).controls; let si=index">
+                        <div [formGroupName]="si" style="border: 1px solid blue; padding: 2px; ">
+                          Student Name :
+                          <input type="text" formControlName="name">
+                          <button (click)="removeStudent(ti,bi,si)">Remove student</button>
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <p>
+          <button type="button" (click)="addTeacher()">Add Teacher</button>
+        </p>
+
+        -->
+
+
+      </div>
+  </form>
+
+</div>
+</mat-card-content>
+
+
+
+
+
+
+
+
+
+
+  <div style="float: right; width:50%;">
+
+    <h3>Form Status</h3>
+    <b>status : </b>{{intervencaoForm.status}}
+    <b>valid : </b>{{intervencaoForm.valid}}
+    <b>invalid : </b>{{intervencaoForm.invalid}}
+    <b>touched : </b>{{intervencaoForm.touched}}
+    <b>untouched : </b>{{intervencaoForm.untouched}}
+    <b>pristine : </b>{{intervencaoForm.pristine}}
+    <b>dirty : </b>{{intervencaoForm.dirty}}
+    <b>disabled : </b>{{intervencaoForm.disabled}}
+    <b>enabled : </b>{{intervencaoForm.enabled}}
+
+    <h3>Form Value</h3>
+    {{intervencaoForm.value |json}}
+
+  </div>
+
+
+
+
+
+
+
+
+
+

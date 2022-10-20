@@ -215,13 +215,13 @@ export class CriaralterarComponent implements OnInit, IFormCanDesactivate {
     let getHotelFromItem$: Observable<IHotel>  = this.hotelCrudService.getDataByURL(link.hotel.href);
 
     //Juntar os pedidos de forma a aguardar a conclusão dos mesmos
-    const example = zip(
+    const aguardarPedidos$ = zip(
       getTipoItemFromItem$,
       getHotelFromItem$
 
     );
 
-    example.subscribe(val => {
+    aguardarPedidos$ .subscribe(val => {
       this.formItem?.patchValue({
 
         id: item.id,

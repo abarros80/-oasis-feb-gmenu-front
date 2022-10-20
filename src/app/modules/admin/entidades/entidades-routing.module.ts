@@ -12,7 +12,8 @@ const routes: Routes = [
   { path: 'cardapio', loadChildren: () => import('./cardapio/cardapio.module').then(m => m.CardapioModule) },
   { path: 'titem', loadChildren: () => import('./titem/titem.module').then(m => m.TitemModule) },
   { path: 'user', loadChildren: () => import('./user/user.module').then(m => m.UserModule) },
-  { path: 'role', loadChildren: () => import('./role/role.module').then(m => m.RoleModule) }
+  { path: 'role', loadChildren: () => import('./role/role.module').then(m => m.RoleModule) },
+  { path: 'intervencao', loadChildren: () => import('./intervencao/intervencao.module').then(m => m.IntervencaoModule) }
 ];
 
 @NgModule({

@@ -13,6 +13,7 @@ import { PaginatorPtIntl } from './services/paginator-pt-intl';
 import { OaPdfService } from './services/oa-pdf.service';
 import { OaFileUploadService } from './services/oa-file-upload.service';
 import { OaExelService } from './services/oa-exel.service';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 
 
@@ -20,6 +21,7 @@ import { OaExelService } from './services/oa-exel.service';
 
 @NgModule({
   providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
 
     {
       provide: HTTP_INTERCEPTORS,
